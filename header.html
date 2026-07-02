@@ -1,14 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head >
-        <meta charset="UTF-8">
-        <label for ="menu-toggle" class="menu-icon">&#9776;</label>
-        <nav class="nav">
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="Voltix.html">Voltix</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-    </head>
+<header class="site-header">
+    <div class="logo">
+        <a href="index.html"><img src="https://i.ibb.co/HfFjJhnh/voltix.jpg" alt="Logo Voltix"></a>
+    </div>
 
-</html>
+    <input type="search" placeholder="🔎 Buscar">
+
+    <label for="menu-toggle" class="menu-icon" onclick="document.querySelector('.nav').classList.toggle('open')">&#9776;</label>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="Voltix.html">Voltix</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="categorias-bar">
+    <h2>Categorías</h2>
+    <ul>
+        <li>Componentes electrónicos</li>
+        <li>Herramientas</li>
+        <li>Kits educativos</li>
+        <li>Cables</li>
+        <li>Sensores</li>
+    </ul>
+</div>

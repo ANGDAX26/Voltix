@@ -1,0 +1,263 @@
+/* ============ Voltix — estilos generales ============ */
+:root{
+  --azul: #0142ac;
+  --azul-oscuro: #0e219f;
+  --azul-claro: #eaf1ff;
+  --gris-texto: #4a4f5c;
+  --borde: #e2e5ee;
+  --paper: #f7f8fb;
+  --radius: 10px;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: #1c2333;
+  background: var(--paper);
+  line-height: 1.5;
+}
+
+a{ text-decoration: none; color: inherit; }
+ul{ list-style: none; margin: 0; padding: 0; }
+img{ max-width: 100%; display: block; }
+
+/* ============ Header ============ */
+#header-placeholder{
+  background: #fff;
+  border-bottom: 1px solid var(--borde);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.site-header{
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: .9rem 2rem;
+  flex-wrap: wrap;
+}
+
+.site-header .logo img{
+  height: 42px;
+  width: auto;
+  border-radius: 6px;
+}
+
+.site-header input[type="search"]{
+  flex: 1;
+  min-width: 200px;
+  padding: .65rem 1rem;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  font-size: .9rem;
+  background: var(--paper);
+}
+.site-header input[type="search"]:focus{
+  outline: 2px solid var(--azul);
+  outline-offset: 1px;
+}
+
+.menu-icon{
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--azul);
+}
+
+.site-header .nav ul{
+  display: flex;
+  gap: 1.6rem;
+}
+.site-header .nav a{
+  font-weight: 600;
+  font-size: .92rem;
+  color: #2a2f3d;
+  padding: .3rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color .15s, color .15s;
+}
+.site-header .nav a:hover{
+  color: var(--azul);
+  border-color: var(--azul);
+}
+
+/* Categorías bar */
+.categorias-bar{
+  background: var(--azul-claro);
+  padding: .7rem 2rem;
+  border-top: 1px solid var(--borde);
+}
+.categorias-bar h2{
+  display: none; /* título oculto visualmente, se usa la lista como menú */
+}
+.categorias-bar ul{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+}
+.categorias-bar li{
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--azul-oscuro);
+  cursor: pointer;
+  padding: .2rem 0;
+}
+.categorias-bar li:hover{
+  text-decoration: underline;
+}
+
+/* ============ Hero / banners ============ */
+h1{
+  color: #fff;
+  text-align: center;
+  padding: 1.6rem 1rem;
+  margin: 2rem 2rem 1.5rem;
+  border-radius: var(--radius);
+  font-size: 1.5rem;
+  letter-spacing: .03em;
+  box-shadow: 0 10px 24px -14px rgba(1,66,172,.5);
+}
+
+/* ============ Product grid ============ */
+main{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+}
+
+.productos{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.producto-card{
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .7rem;
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.producto-card:hover{
+  box-shadow: 0 12px 26px -14px rgba(27,35,64,.25);
+  transform: translateY(-3px);
+}
+
+.producto-card img{
+  width: 100%;
+  height: 190px;
+  object-fit: contain;
+  background: var(--paper);
+  border-radius: 6px;
+}
+
+.producto-card h3{
+  margin: 0;
+  font-size: 1rem;
+  color: var(--azul-oscuro);
+}
+
+.producto-card button{
+  background: var(--azul);
+  color: #fff;
+  border: none;
+  padding: .6rem 1rem;
+  border-radius: 6px;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background .15s;
+}
+.producto-card button:hover{
+  background: var(--azul-oscuro);
+}
+
+/* ============ ¿Por qué elegir Voltix? ============ */
+.por-que{
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: var(--radius);
+  padding: 1.6rem 2rem;
+  margin-top: 2.5rem;
+}
+.por-que h2{
+  color: var(--azul-oscuro);
+  margin-bottom: .8rem;
+}
+.por-que ul li{
+  padding: .4rem 0;
+  padding-left: 1.4rem;
+  position: relative;
+  color: var(--gris-texto);
+  font-size: .92rem;
+}
+.por-que ul li::before{
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--azul);
+  font-weight: 700;
+}
+
+/* ============ Footer ============ */
+#footer-placeholder{
+  background: #101a33;
+  color: #cfd5e8;
+  margin-top: 3rem;
+}
+.footer-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 1.5rem;
+}
+.footer-inner h2{
+  color: #fff;
+  font-size: 1.15rem;
+  margin-bottom: .6rem;
+}
+.footer-inner p{
+  font-size: .9rem;
+  color: #b6bcd4;
+  max-width: 640px;
+}
+footer{
+  border-top: 1px solid #263255;
+  margin-top: 1.6rem;
+  padding-top: 1.2rem;
+  font-size: .82rem;
+  color: #9aa2c0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem 1.6rem;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 720px){
+  .site-header{ padding: .8rem 1rem; }
+  .menu-icon{ display: block; margin-left: auto; }
+  .site-header .nav{
+    flex-basis: 100%;
+    order: 3;
+    display: none;
+  }
+  .site-header .nav.open{ display: block; }
+  .site-header .nav ul{
+    flex-direction: column;
+    gap: .2rem;
+    padding-top: .6rem;
+  }
+  .categorias-bar{ padding: .7rem 1rem; }
+  main{ padding: 0 1rem 2rem; }
+  h1{ margin: 1.5rem 1rem 1.2rem; font-size: 1.2rem; }
+  .footer-inner{ padding: 2rem 1rem 1.2rem; }
+}
