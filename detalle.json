@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sensor de Proximidad",
+    "precio": 699,
+    "categoria": "Sensores",
+    "descripcion": "Sensor infrarrojo para detección de objetos.",
+    "imagen": "img/sensor1.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Kit de Sensores Arduino",
+    "precio": 999,
+    "categoria": "Sensores",
+    "descripcion": "Kit con múltiples sensores para proyectos educativos.",
+    "imagen": "img/sensor2.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Sensor Óptico",
+    "precio": 1239,
+    "categoria": "Sensores",
+    "descripcion": "Sensor óptico de alta precisión.",
+    "imagen": "img/sensor3.jpg"
+  }
+]

@@ -112,7 +112,7 @@ img{ max-width: 100%; display: block; }
 .categorias-bar li{
   color: #C8D0D8;
 }
-/* ============ Hero / banners ============ */
+/* Hero / banners  */
 h1{
   color: #40F2FE;
   text-align: center;
@@ -123,8 +123,63 @@ h1{
   letter-spacing: .03em;
   box-shadow: 0 10px 24px -14px rgba(1,66,172,.5);
 }
+.hero{
+    position:relative;
+    width:100%;
+    height:450px;
+    overflow:hidden;
+}
 
-/* ============ Product grid ============ */
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:opacity .8s ease;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.texto{
+    position:absolute;
+    top:50%;
+    left:10%;
+    transform:translateY(-50%);
+    color:white;
+    background:rgba(0,0,0,.5);
+    padding:20px;
+    border-radius:10px;
+}
+
+.prev,
+.next{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:30px;
+    border:none;
+    cursor:pointer;
+    padding:10px;
+    z-index:10;
+}
+
+.prev{
+    left:20px;
+}
+
+.next{
+    right:20px;
+}
+
+/* Product grid */
 main{
   max-width: 1200px;
   margin: 0 auto;
@@ -171,7 +226,7 @@ main{
   box-shadow: 0 0 15px rgba(0,245,255,.8);
 }
 
-/* ============ ¿Por qué elegir Voltix? ============ */
+/*  ¿Por qué elegir Voltix? */
 .por-que{
   background: var(--card);
   border: 1px solid var(--azul);
@@ -192,7 +247,7 @@ main{
   color: #C8D0D8;
 }
 
-/* ============ Footer ============ */
+/*  Footer  */
 #footer-placeholder{
   background: #05070F;
   border-top: 1px solid var(--azul);

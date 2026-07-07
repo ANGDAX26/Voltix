@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voltix - Sensores</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <script>
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(e => {
+                console.error('Error cargando header:', e);
+                document.getElementById('header-placeholder').innerHTML = '<!-- header no cargado -->';
+            });
+    </script>
+
+    <h1 style="background-color: rgb(1, 66, 172);">
+        LO ULTIMO DE SENSORES
+    </h1>
+    <div class="productos" id="productos"></div>
+
+    <script src="js/productos.js"></script>
+
+   
+
+    <main>
+
+        <h1 style="background-color: rgb(14, 33, 159);">
+            LLEVATE UN DESCUENTO EN TU PRIMER PEDIDO AL REGIRSTRAR TU CUENTA 
+        </h1>
+
+        <div class="por-que">
+            <h2>¿Por qué elegir Voltix?</h2>
+            <ul>
+                <li>Kits con instrucciones</li>
+                <li>Precios accesibles</li>
+                <li>Envíos a todo México</li>
+                <li>Quejas y sugerencias disponibles</li>
+            </ul>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        fetch('footer.html')
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(e => {
+                console.error('Error cargando footer:', e);
+                document.getElementById('footer-placeholder').innerHTML = '<!-- footer no cargado -->';
+            });
+    </script>
+
+
+</body>
+
+</html>
