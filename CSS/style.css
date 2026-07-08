@@ -1,0 +1,414 @@
+/* ============ Voltix — estilo "Steren" ============ */
+:root{
+  --naranja: #F26E22;       /* naranja principal Steren */
+  --naranja-oscuro: #D85A12;
+  --naranja-claro: #FFF1E6;
+
+  --negro: #1A1A1A;
+  --gris-texto: #5B5B5B;
+  --borde: #E2E2E2;
+
+  --paper: #F5F5F5;
+  --card: #FFFFFF;
+
+  --texto: #262626;
+
+  --oferta: #E30613;        /* rojo para ofertas/descuentos */
+
+  --radius: 6px;
+}
+
+*{ box-sizing: border-box; }
+
+body{
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--texto);
+  background: var(--paper);
+  line-height: 1.5;
+}
+
+a{ text-decoration: none; color: inherit; }
+ul{ list-style: none; margin: 0; padding: 0; }
+img{ max-width: 100%; display: block; }
+
+/* ============ Header ============ */
+#header-placeholder{
+  background: #FFFFFF;
+  border-bottom: 3px solid var(--naranja);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.site-header{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .8rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.site-header input[type="search"]{
+  flex: 1;
+  min-width: 200px;
+  padding: .65rem 1rem;
+  border: 1px solid var(--borde);
+  border-radius: 30px;
+  font-size: .9rem;
+  background: #FFFFFF;
+  color: var(--texto);
+  box-shadow: none;
+}
+.site-header input[type="search"]:focus{
+  outline: none;
+  border-color: var(--naranja);
+  box-shadow: 0 0 0 3px rgba(242,110,34,.15);
+}
+
+.site-header .nav a{
+  color: var(--negro);
+}
+
+.menu-icon{
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--naranja);
+}
+
+.site-header .nav ul{
+  display: flex;
+  gap: 1.6rem;
+}
+.site-header .nav a{
+  font-weight: 600;
+  font-size: .92rem;
+  color: var(--negro);
+  padding: .3rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color .15s, color .15s;
+}
+.site-header .nav a:hover{
+  color: var(--naranja);
+  border-color: var(--naranja);
+}
+
+/* Categorías bar */
+.categorias-bar{
+  background: var(--naranja);
+  border-top: none;
+}
+.categorias-bar h2{
+  display: none; /* título oculto visualmente, se usa la lista como menú */
+}
+.categorias-bar ul{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.6rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: .7rem 2rem;
+}
+.categorias-bar li{
+  font-size: .85rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: .2rem 0;
+}
+.categorias-bar li:hover{
+  text-decoration: underline;
+}
+
+/* Hero / banners  */
+h1{
+  color: #FFFFFF;
+  background: var(--negro);
+  text-align: center;
+  padding: 1.6rem 1rem;
+  margin: 2rem auto 1.5rem;
+  max-width: 1160px;
+  border-radius: var(--radius);
+  font-size: 1.5rem;
+  letter-spacing: .03em;
+  box-shadow: none;
+}
+.hero{
+    position:relative;
+    width:100%;
+    height:450px;
+    overflow:hidden;
+}
+
+.slide{
+    position:absolute;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:opacity .8s ease;
+}
+
+.slide.active{
+    opacity:1;
+}
+
+.slide img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.texto{
+    position:absolute;
+    top:50%;
+    left:10%;
+    transform:translateY(-50%);
+    color:white;
+    background:rgba(0,0,0,.55);
+    padding:20px;
+    border-radius:10px;
+}
+
+.prev,
+.next{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:30px;
+    border:none;
+    cursor:pointer;
+    padding:10px;
+    z-index:10;
+    background: rgba(255,255,255,.85);
+    color: var(--naranja);
+    border-radius: 50%;
+}
+
+.prev{
+    left:20px;
+}
+
+.next{
+    right:20px;
+}
+
+/* Product grid */
+main{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+}
+
+.productos{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.producto-card{
+  background: var(--card);
+  border: 1px solid var(--borde);
+  color: var(--texto);
+  border-radius: var(--radius);
+  padding: 1rem;
+  transition: box-shadow .15s, transform .15s;
+}
+.producto-card:hover{
+  box-shadow: 0 6px 16px rgba(0,0,0,.1);
+  transform: translateY(-3px);
+  border-color: var(--naranja);
+}
+.producto-card img{
+  width: 100%;
+  height: 190px;
+  object-fit: contain;
+  background: var(--paper);
+  border-radius: 6px;
+}
+
+.producto-card h3{
+  margin: .6rem 0 0;
+  font-size: 1rem;
+  color: var(--negro);
+}
+
+.producto-card .precio{
+  color: var(--naranja-oscuro);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.producto-card .oferta{
+  color: var(--oferta);
+  font-weight: 700;
+}
+
+.producto-card button{
+  background: var(--naranja);
+  color: #FFFFFF;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  padding: .6rem 1.2rem;
+  cursor: pointer;
+  transition: background .15s;
+}
+.producto-card button:hover{
+  background: var(--naranja-oscuro);
+  box-shadow: none;
+}
+
+/* Detalle de producto */
+.detalle{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  background: var(--card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-top: 1rem;
+}
+.detalle img{
+  flex: 1 1 320px;
+  max-width: 400px;
+  background: var(--paper);
+  border-radius: var(--radius);
+  object-fit: contain;
+}
+.detalle-info{
+  flex: 1 1 320px;
+}
+.detalle-categoria{
+  color: var(--naranja);
+  font-weight: 700;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin: 0 0 .3rem;
+}
+.detalle h1{
+  color: var(--negro);
+  background: none;
+  text-align: left;
+  padding: 0;
+  margin: 0 0 .8rem;
+  max-width: none;
+  border-radius: 0;
+  font-size: 1.6rem;
+}
+.detalle .precio{
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+}
+.detalle-descripcion{
+  color: var(--gris-texto);
+  margin-bottom: 1.5rem;
+}
+.detalle button{
+  background: var(--naranja);
+  color: #FFFFFF;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  padding: .7rem 1.6rem;
+  cursor: pointer;
+  font-size: .95rem;
+}
+.detalle button:hover{
+  background: var(--naranja-oscuro);
+}
+.detalle a{
+  color: var(--naranja-oscuro);
+  font-weight: 600;
+  display: inline-block;
+  margin-top: 1rem;
+}
+.detalle a:hover{
+  text-decoration: underline;
+}
+
+/*  ¿Por qué elegir Voltix? */
+.por-que{
+  background: var(--card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.por-que h2{
+  color: var(--negro);
+  margin-bottom: .8rem;
+}
+.por-que ul li{
+  padding: .4rem 0;
+  padding-left: 1.4rem;
+  position: relative;
+  color: var(--gris-texto);
+  font-size: .92rem;
+}
+.por-que ul li::before{
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--naranja);
+  font-weight: bold;
+}
+
+/*  Footer  */
+#footer-placeholder{
+  background: var(--negro);
+  border-top: 3px solid var(--naranja);
+}
+.footer-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem 1.5rem;
+}
+.footer-inner h2{
+  color: #fff;
+  font-size: 1.15rem;
+  margin-bottom: .6rem;
+}
+.footer-inner p{
+  font-size: .9rem;
+  color: #C9C9C9;
+  max-width: 640px;
+}
+footer{
+  border-top: 1px solid #333333;
+  margin-top: 1.6rem;
+  padding-top: 1.2rem;
+  font-size: .82rem;
+  color: #B0B0B0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem 1.6rem;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 720px){
+  .site-header{ padding: .8rem 1rem; }
+  .menu-icon{ display: block; margin-left: auto; }
+  .site-header .nav{
+    flex-basis: 100%;
+    order: 3;
+    display: none;
+  }
+  .site-header .nav.open{ display: block; }
+  .site-header .nav ul{
+    flex-direction: column;
+    gap: .2rem;
+    padding-top: .6rem;
+  }
+  .categorias-bar{ padding: .7rem 1rem; }
+  main{ padding: 0 1rem 2rem; }
+  h1{
+    background: var(--negro);
+    color: #FFFFFF;
+    box-shadow: none;
+  }
+}

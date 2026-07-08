@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "nombre": "Sensor de Proximidad Infrarrojo",
+    "precio": 699,
+    "categoria": "Sensores",
+    "descripcion": "Sensor infrarrojo para detección de objetos. Ideal para proyectos de robótica y automatización con Arduino.",
+    "imagen": "https://imgs.search.brave.com/JGbh4GzNhifV-bztNc48-N9hw4CyifItySVe_xVc1QE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFSb2k4bXJnS0wuanBn"
+  },
+  {
+    "id": 2,
+    "nombre": "Kit de Sensores para Arduino",
+    "precio": 999,
+    "categoria": "Kits educativos",
+    "descripcion": "Kit con múltiples sensores para proyectos educativos: temperatura, movimiento, luz y más.",
+    "imagen": "https://imgs.search.brave.com/Nt6XTR6Y70C8Gr3OYBKD8l4OKhlfj1ErOfuwLapaF84/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFkR0dnZkszQkwuanBn"
+  },
+  {
+    "id": 3,
+    "nombre": "Sensor Óptico de Alta Precisión",
+    "precio": 1239,
+    "categoria": "Sensores",
+    "descripcion": "Sensor óptico de alta precisión para lectura de distancia y detección de color.",
+    "imagen": "https://imgs.search.brave.com/6kWatdQc4jiWpjJhq9UnDYCoPIQTEFh_hbK4EkzUI4A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hZS1waWMtYTEuYWxpZXhwcmVzcy1tZWRpYS5jb20va2YvUzdjMTE1NDc3YWQxZTRlOWRiYThiOTIyMmY2Yzc4ZWFmNC5qcGdfNDgweDQ4MHE3NS5qcGdfLndlYnA"
+  },
+  {
+    "id": 4,
+    "nombre": "Paquete de Resistencias de Colores",
+    "precio": 9,
+    "categoria": "Componentes electrónicos",
+    "descripcion": "Paquete de resistencias de distintos valores, indispensables para cualquier proyecto electrónico.",
+    "imagen": "https://imgs.search.brave.com/TRSuwZCwiiCEc1yNIZ0svthA21AfbfT7-b6fip4ZJ-c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRwMi5tbHN0YXRpYy5jb20vRF9RX05QXzJYXzgxODkwNy1DQlQ4MDQwNzMxODc3M18xMTIwMjQtVC53ZWJw"
+  },
+  {
+    "id": 5,
+    "nombre": "Módulo Sensor de Movimiento PIR",
+    "precio": 299.99,
+    "categoria": "Sensores",
+    "descripcion": "Sensor de movimiento por infrarrojo pasivo (PIR), perfecto para sistemas de seguridad y automatización.",
+    "imagen": "https://imgs.search.brave.com/RRo667eX1VpIYjubMGCOa6WFfBw1ndgGOOWxh1NI8Rk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFjU2ZqWmtHakwuanBn"
+  },
+  {
+    "id": 5,
+    "nombre": "Módulo Sensor de Movimiento ultrasonico", 
+    "precio": 150.99,
+    "categoria": "Sensores",
+    "descripcion": "Sensor de movimiento por vibraciones ultrazonicas pasivo (PIR), perfecto para sistemas de seguridad y automatización.",
+    "imagen": "https://imgs.search.brave.com/RRo667eX1VpIYjubMGCOa6WFfBw1ndgGOOWxh1NI8Rk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFjU2ZqWmtHakwuanBn"
+  }
+
+  
+]
