@@ -8,7 +8,7 @@ async function cargarProductos() {
     const categoria = contenedor.dataset.categoria;
 
     try {
-        const respuesta = await fetch('productos.json');
+        const respuesta = await fetch('../JSON/productos.json');
         if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
 
         const productos = await respuesta.json();

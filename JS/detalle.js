@@ -5,7 +5,7 @@ async function cargarDetalle() {
     const id = Number(params.get('id'));
 
     try {
-        const respuesta = await fetch('productos.json');
+        const respuesta = await fetch('../JSON/productos.json');
         if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
 
         const productos = await respuesta.json();
@@ -42,7 +42,7 @@ async function cargarDetalle() {
 
     } catch (e) {
         console.error('Error cargando el producto:', e);
-        contenedor.innerHTML = '<h1>No se pudo cargar el producto.</h1>';
+        contenedor.innerHTML = `<h1>No se pudo cargar el producto.</h1><p style="color:red;font-size:12px;">${e.name}: ${e.message}</p><pre style="font-size:10px;text-align:left;">${e.stack}</pre>`;
     }
 }
 

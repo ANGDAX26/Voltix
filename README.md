@@ -10,6 +10,6 @@ python3 -m http.server 8000
 
 Luego abre en el navegador:
 
-http://localhost:8000/Voltix.html
+http://localhost:8000/HTML/Voltix.html
 
 Motivo: los navegadores bloquean peticiones `fetch` cuando se sirven archivos desde el sistema de archivos (`file://`) por razones de seguridad. Servir por HTTP permite que `fetch('header.html')` y `fetch('footer.html')` funcionen.
