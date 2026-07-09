@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de compras</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0f172a;
+            color: white;
+            padding: 18px;
+            text-align: center;
+        }
+
+        nav {
+            background-color: #1e293b;
+            padding: 12px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 12px;
+            font-weight: bold;
+        }
+
+        .contenedor {
+            max-width: 900px;
+            margin: 30px auto;
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+        }
+
+        h1 {
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .descripcion {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .producto-carrito {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 0;
+        }
+
+        .producto-info h3 {
+            margin: 0;
+            color: #111827;
+        }
+
+        .producto-info p {
+            margin: 6px 0 0;
+            color: #64748b;
+        }
+
+        .cantidad {
+            width: 60px;
+            padding: 6px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .precio {
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .resumen {
+            margin-top: 25px;
+            text-align: right;
+        }
+
+        .total {
+            font-size: 22px;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .botones {
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-secundario {
+            background-color: #e5e7eb;
+            color: #111827;
+        }
+
+        .btn-principal {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 18px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Voltix</h1>
+        <p>Componentes electrónicos y tecnología</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="Voltix.html">Voltix</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="iniciosesion.html">Iniciar sesión</a>
+    </nav>
+
+    <main class="contenedor">
+        <h1>Carrito de compras</h1>
+        <p class="descripcion">Aquí aparecerán los productos que el usuario agregue al carrito.</p>
+
+        <section class="producto-carrito">
+            <div class="producto-info">
+                <h3>Producto de ejemplo</h3>
+                <p>Descripción breve del producto</p>
+            </div>
+
+            <input class="cantidad" type="number" value="1" min="1">
+
+            <p class="precio">$000.00</p>
+        </section>
+
+        <section class="producto-carrito">
+            <div class="producto-info">
+                <h3>Producto de ejemplo</h3>
+                <p>Descripción breve del producto</p>
+            </div>
+
+            <input class="cantidad" type="number" value="1" min="1">
+
+            <p class="precio">$000.00</p>
+        </section>
+
+        <section class="resumen">
+            <p>Subtotal: $000.00</p>
+            <p>Envío: $000.00</p>
+            <p class="total">Total: $000.00</p>
+        </section>
+
+        <div class="botones">
+            <a href="Voltix.html" class="btn btn-secundario">Seguir comprando</a>
+            <button class="btn btn-principal">Finalizar compra</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Voltix. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
