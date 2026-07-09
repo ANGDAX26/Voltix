@@ -16,7 +16,7 @@
         header {
             background-color: #0f172a;
             color: white;
-            padding: 18px;
+            padding: 20px;
             text-align: center;
         }
 
@@ -29,7 +29,7 @@
         nav a {
             color: white;
             text-decoration: none;
-            margin: 0 12px;
+            margin: 0 15px;
             font-weight: bold;
         }
 
@@ -37,18 +37,19 @@
             max-width: 900px;
             margin: 30px auto;
             background: white;
-            padding: 28px;
             border-radius: 14px;
             box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+            padding: 30px;
         }
 
         h1 {
+            text-align: center;
             color: #111827;
-            margin-bottom: 8px;
         }
 
         .descripcion {
-            color: #64748b;
+            text-align: center;
+            color: #6b7280;
             margin-bottom: 25px;
         }
 
@@ -56,8 +57,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 16px 0;
+            padding: 18px 0;
+            border-bottom: 1px solid #d1d5db;
         }
 
         .producto-info h3 {
@@ -66,20 +67,21 @@
         }
 
         .producto-info p {
-            margin: 6px 0 0;
-            color: #64748b;
+            margin: 5px 0;
+            color: #6b7280;
         }
 
         .cantidad {
             width: 60px;
-            padding: 6px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            text-align: center;
         }
 
         .precio {
             font-weight: bold;
-            color: #0f172a;
+            color: #111827;
         }
 
         .resumen {
@@ -93,25 +95,67 @@
             color: #111827;
         }
 
+        .direccion-envio,
+        .metodo-pago {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            background-color: #f8fafc;
+        }
+
+        .direccion-envio h2,
+        .metodo-pago h2 {
+            margin-top: 0;
+            color: #111827;
+        }
+
+        .direccion-envio label,
+        .metodo-pago label {
+            display: block;
+            margin-top: 12px;
+            color: #374151;
+        }
+
+        .direccion-envio input,
+        .direccion-envio textarea,
+        .direccion-envio select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        .direccion-envio textarea {
+            resize: none;
+            height: 70px;
+        }
+
+        .metodo-pago input {
+            margin-right: 8px;
+        }
+
         .botones {
-            margin-top: 25px;
+            margin-top: 30px;
             display: flex;
             justify-content: space-between;
-            gap: 12px;
         }
 
         .btn {
-            padding: 12px 18px;
+            padding: 12px 22px;
             border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: bold;
+            border-radius: 6px;
             text-decoration: none;
-            text-align: center;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
         }
 
         .btn-secundario {
-            background-color: #e5e7eb;
+            background-color: #d1d5db;
             color: #111827;
         }
 
@@ -122,8 +166,8 @@
 
         footer {
             text-align: center;
-            padding: 18px;
-            color: #64748b;
+            padding: 20px;
+            color: #6b7280;
         }
     </style>
 </head>
@@ -137,19 +181,23 @@
 
     <nav>
         <a href="index.html">Inicio</a>
-        <a href="Voltix.html">Voltix</a>
-        <a href="contacto.html">Contacto</a>
+        <a href="Voltix.html">Productos</a>
+        <a href="carrito.html">Carrito</a>
         <a href="iniciosesion.html">Iniciar sesión</a>
     </nav>
 
     <main class="contenedor">
+
         <h1>Carrito de compras</h1>
-        <p class="descripcion">Aquí aparecerán los productos que el usuario agregue al carrito.</p>
+
+        <p class="descripcion">
+            Aquí aparecerán los productos agregados por el usuario.
+        </p>
 
         <section class="producto-carrito">
             <div class="producto-info">
                 <h3>Producto de ejemplo</h3>
-                <p>Descripción breve del producto</p>
+                <p>Descripción breve del producto.</p>
             </div>
 
             <input class="cantidad" type="number" value="1" min="1">
@@ -160,7 +208,7 @@
         <section class="producto-carrito">
             <div class="producto-info">
                 <h3>Producto de ejemplo</h3>
-                <p>Descripción breve del producto</p>
+                <p>Descripción breve del producto.</p>
             </div>
 
             <input class="cantidad" type="number" value="1" min="1">
@@ -174,10 +222,52 @@
             <p class="total">Total: $000.00</p>
         </section>
 
+        <section class="direccion-envio">
+            <h2>Dirección de envío</h2>
+
+            <label for="calle">Calle y número</label>
+            <input type="text" id="calle" name="calle" placeholder="Ejemplo: Av. Principal #123">
+
+            <label for="colonia">Colonia</label>
+            <input type="text" id="colonia" name="colonia" placeholder="Ejemplo: Centro">
+
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" placeholder="Ejemplo: Cuernavaca">
+
+            <label for="estado">Estado</label>
+            <input type="text" id="estado" name="estado" placeholder="Ejemplo: Morelos">
+
+            <label for="cp">Código postal</label>
+            <input type="text" id="cp" name="cp" placeholder="Ejemplo: 62000">
+
+            <label for="referencias">Referencias de entrega</label>
+            <textarea id="referencias" name="referencias" placeholder="Ejemplo: Casa color blanco, cerca de la tienda"></textarea>
+        </section>
+
+        <section class="metodo-pago">
+            <h2>Método de pago</h2>
+
+            <label>
+                <input type="radio" name="pago">
+                Tarjeta de crédito o débito
+            </label>
+
+            <label>
+                <input type="radio" name="pago">
+                Transferencia bancaria
+            </label>
+
+            <label>
+                <input type="radio" name="pago">
+                Pago en efectivo al recibir
+            </label>
+        </section>
+
         <div class="botones">
             <a href="Voltix.html" class="btn btn-secundario">Seguir comprando</a>
             <button class="btn btn-principal">Finalizar compra</button>
         </div>
+
     </main>
 
     <footer>
