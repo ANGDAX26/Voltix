@@ -1,0 +1,210 @@
+/* ============ Voltix — Panel de administración ============ */
+
+.admin-main{
+  padding-bottom: 4rem;
+}
+
+.admin-nota{
+  background: var(--naranja-claro);
+  border: 1px solid var(--naranja);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  font-size: .9rem;
+  color: var(--texto);
+  margin-bottom: 1.5rem;
+}
+
+.admin-aviso{
+  background: #E7F6EC;
+  border: 1px solid #2FA84F;
+  color: #1E7A38;
+  padding: .8rem 1.1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1.2rem;
+  font-size: .9rem;
+}
+.admin-aviso-error{
+  background: #FDECEC;
+  border-color: var(--oferta);
+  color: var(--oferta);
+}
+
+.admin-panel{
+  background: var(--card);
+  border: 1px solid var(--borde);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.admin-panel h2{
+  color: var(--negro);
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.admin-form-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.admin-form label{
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--negro);
+}
+
+.admin-form-full{
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--negro);
+  margin-bottom: 1rem;
+}
+
+.admin-form input,
+.admin-form textarea{
+  font-family: inherit;
+  font-size: .9rem;
+  font-weight: 400;
+  padding: .6rem .8rem;
+  border: 1px solid var(--borde);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--texto);
+}
+.admin-form input:focus,
+.admin-form textarea:focus{
+  outline: none;
+  border-color: var(--naranja);
+  box-shadow: 0 0 0 3px rgba(242,110,34,.15);
+}
+
+.admin-form-botones{
+  display: flex;
+  gap: .8rem;
+}
+
+.btn-guardar,
+.btn-cancelar,
+.btn-descargar,
+.btn-restablecer,
+.btn-editar,
+.btn-eliminar{
+  border: none;
+  border-radius: 30px;
+  padding: .6rem 1.3rem;
+  font-weight: 700;
+  font-size: .85rem;
+  cursor: pointer;
+  transition: background .15s, opacity .15s;
+}
+
+.btn-guardar{
+  background: var(--naranja);
+  color: #FFFFFF;
+}
+.btn-guardar:hover{ background: var(--naranja-oscuro); }
+
+.btn-cancelar{
+  background: #FFFFFF;
+  color: var(--negro);
+  border: 1px solid var(--borde);
+}
+.btn-cancelar:hover{ border-color: var(--negro); }
+
+.admin-tabla-header{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.admin-tabla-botones{
+  display: flex;
+  gap: .7rem;
+  flex-wrap: wrap;
+}
+
+.btn-descargar{
+  background: var(--negro);
+  color: #FFFFFF;
+}
+.btn-descargar:hover{ background: #333333; }
+
+.btn-restablecer{
+  background: #FFFFFF;
+  color: var(--oferta);
+  border: 1px solid var(--oferta);
+}
+.btn-restablecer:hover{ background: #FDECEC; }
+
+.admin-tabla-wrap{
+  overflow-x: auto;
+}
+
+.admin-tabla{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .88rem;
+}
+.admin-tabla th,
+.admin-tabla td{
+  text-align: left;
+  padding: .7rem .6rem;
+  border-bottom: 1px solid var(--borde);
+  vertical-align: middle;
+}
+.admin-tabla th{
+  color: var(--gris-texto);
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+.admin-col-img img{
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  background: var(--paper);
+  border-radius: 4px;
+}
+
+.admin-col-acciones{
+  display: flex;
+  gap: .5rem;
+  white-space: nowrap;
+}
+
+.btn-editar{
+  background: var(--negro);
+  color: #FFFFFF;
+}
+.btn-editar:hover{ opacity: .85; }
+
+.btn-eliminar{
+  background: #FFFFFF;
+  color: var(--oferta);
+  border: 1px solid var(--oferta);
+}
+.btn-eliminar:hover{ background: #FDECEC; }
+
+.admin-vacio{
+  text-align: center;
+  color: var(--gris-texto);
+  padding: 2rem 1rem !important;
+}
+
+@media (max-width: 720px){
+  .admin-tabla-header{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

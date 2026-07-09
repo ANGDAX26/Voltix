@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voltix - Panel de Administración</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/admin.css">
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <script>
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(e => {
+                console.error('Error cargando header:', e);
+                document.getElementById('header-placeholder').innerHTML = '<!-- header no cargado -->';
+            });
+    </script>
+
+    <main class="admin-main">
+
+        <h1>PANEL DE ADMINISTRACIÓN</h1>
+
+        <div class="admin-nota">
+            <strong>Nota:</strong> este sitio no tiene servidor ni base de datos, así que los cambios
+            se guardan solo en este navegador. Cuando termines, usa <strong>"Descargar productos.json"</strong>
+            y reemplaza el archivo del proyecto para que los cambios se vean en la tienda para todos.
+        </div>
+
+        <div id="admin-aviso" class="admin-aviso" style="display:none;"></div>
+
+        <section class="admin-panel">
+            <h2 id="form-titulo">Agregar producto</h2>
+
+            <form id="form-producto" class="admin-form">
+                <div class="admin-form-grid">
+                    <label>
+                        Nombre
+                        <input type="text" id="input-nombre" required>
+                    </label>
+
+                    <label>
+                        Precio (MXN)
+                        <input type="number" id="input-precio" step="0.01" min="0" required>
+                    </label>
+
+                    <label>
+                        Categoría
+                        <input type="text" id="input-categoria" list="lista-categorias" required placeholder="Ej. Sensores">
+                        <datalist id="lista-categorias">
+                            <option value="Sensores">
+                            <option value="Kits educativos">
+                            <option value="Componentes electrónicos">
+                            <option value="Herramientas">
+                            <option value="Cables">
+                        </datalist>
+                    </label>
+
+                    <label>
+                        URL de imagen
+                        <input type="url" id="input-imagen" required placeholder="https://...">
+                    </label>
+                </div>
+
+                <label class="admin-form-full">
+                    Descripción
+                    <textarea id="input-descripcion" rows="3"></textarea>
+                </label>
+
+                <div class="admin-form-botones">
+                    <button type="submit" class="btn-guardar">Guardar producto</button>
+                    <button type="button" id="btn-cancelar-edicion" style="display:none;" class="btn-cancelar">Cancelar edición</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="admin-panel">
+            <div class="admin-tabla-header">
+                <h2>Productos (<span id="contador-productos"></span>)</h2>
+                <div class="admin-tabla-botones">
+                    <button id="btn-descargar" class="btn-descargar">Descargar productos.json</button>
+                    <button id="btn-restablecer" class="btn-restablecer">Restablecer original</button>
+                </div>
+            </div>
+
+            <div class="admin-tabla-wrap">
+                <table class="admin-tabla">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Precio</th>
+                            <th>ID</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-productos-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        fetch('footera.html')
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(e => {
+                console.error('Error cargando footer:', e);
+                document.getElementById('footer-placeholder').innerHTML = '<!-- footer no cargado -->';
+            });
+    </script>
+
+    <script src="/JS/admin.js"></script>
+
+</body>
+
+</html>
