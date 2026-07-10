@@ -5,7 +5,7 @@
     "precio": 699,
     "categoria": "Sensores",
     "descripcion": "Sensor infrarrojo para detección de objetos. Ideal para proyectos de robótica y automatización con Arduino.",
-    "imagen": "https://imgs.search.brave.com/JGbh4GzNhifV-bztNc48-N9hw4CyifItySVe_xVc1QE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFSb2k4bXJnS0wuanBn"
+    "imagen": "https://i.ibb.co/YT0PCvTp/image.png"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "precio": 999,
     "categoria": "Kits educativos",
     "descripcion": "Kit con múltiples sensores para proyectos educativos: temperatura, movimiento, luz y más.",
-    "imagen": "https://ibb.co/99nDdxJn"
+    "imagen": "https://i.ibb.co/C3vzLjvp/image.png"
   },
   {
     "id": 3,
@@ -21,7 +21,7 @@
     "precio": 1239,
     "categoria": "Sensores",
     "descripcion": "Sensor óptico de alta precisión para lectura de distancia y detección de color.",
-    "imagen": "https://imgs.search.brave.com/6kWatdQc4jiWpjJhq9UnDYCoPIQTEFh_hbK4EkzUI4A/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hZS1waWMtYTEuYWxpZXhwcmVzcy1tZWRpYS5jb20va2YvUzdjMTE1NDc3YWQxZTRlOWRiYThiOTIyMmY2Yzc4ZWFmNC5qcGdfNDgweDQ4MHE3NS5qcGdfLndlYnA"
+    "imagen": "https://i.ibb.co/FkwZ098F/image.png"
   },
   {
     "id": 4,
@@ -29,7 +29,7 @@
     "precio": 9,
     "categoria": "Componentes electrónicos",
     "descripcion": "Paquete de resistencias de distintos valores, indispensables para cualquier proyecto electrónico.",
-    "imagen": "https://imgs.search.brave.com/TRSuwZCwiiCEc1yNIZ0svthA21AfbfT7-b6fip4ZJ-c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9odHRwMi5tbHN0YXRpYy5jb20vRF9RX05QXzJYXzgxODkwNy1DQlQ4MDQwNzMxODc3M18xMTIwMjQtVC53ZWJw"
+    "imagen": "https://i.ibb.co/4RkvCNw5/image.png"
   },
   {
     "id": 5,
@@ -37,7 +37,7 @@
     "precio": 299.99,
     "categoria": "Sensores",
     "descripcion": "Sensor de movimiento por infrarrojo pasivo (PIR), perfecto para sistemas de seguridad y automatización.",
-    "imagen": "https://imgs.search.brave.com/RRo667eX1VpIYjubMGCOa6WFfBw1ndgGOOWxh1NI8Rk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFjU2ZqWmtHakwuanBn"
+    "imagen": "https://i.ibb.co/cSGP5F7h/image.png"
   },
   {
     "id": 6,
@@ -45,8 +45,8 @@
     "precio": 150.99,
     "categoria": "Sensores",
     "descripcion": "Sensor de movimiento por vibraciones ultrazonicas pasivo (PIR), perfecto para sistemas de seguridad y automatización.",
-    "imagen": "https://imgs.search.brave.com/RRo667eX1VpIYjubMGCOa6WFfBw1ndgGOOWxh1NI8Rk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFjU2ZqWmtHakwuanBn"
-  },
+    "imagen": "https://i.ibb.co/QjcpXdcR/image.png"
+    },
   {
   "id":7,
     "nombre": "pinzas pelacable",
