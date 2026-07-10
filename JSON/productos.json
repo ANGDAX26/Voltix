@@ -46,7 +46,125 @@
     "categoria": "Sensores",
     "descripcion": "Sensor de movimiento por vibraciones ultrazonicas pasivo (PIR), perfecto para sistemas de seguridad y automatización.",
     "imagen": "https://imgs.search.brave.com/RRo667eX1VpIYjubMGCOa6WFfBw1ndgGOOWxh1NI8Rk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1lZGlhLWFtYXpvbi5jb20vaW1hZ2VzL0kvNzFjU2ZqWmtHakwuanBn"
+  },
+  {
+  "id":7,
+    "nombre": "pinzas pelacable",
+    "precio":300.50,
+    "categoria": "Herramientas",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/cKg726jK/PINZASPELACABLES.webp"
+
+  },
+  {
+    "id":8,
+    "nombre": "alicates",
+    "precio":300.50,
+    "categoria": "Herramientas",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/ZzmvSNhT/CAUTIN.webp"
+
+  },
+  {
+    "id":9,
+    "nombre": "cautin",
+    "precio":300.50,
+    "categoria": "Herramientas",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen": "https://i.ibb.co/397rP3W2/KITSOLDAR.webp"
+
+  },
+  {
+    "id":10,
+    "nombre": "kit soldar",
+    "precio":300.50,
+    "categoria": "Herramientas",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/cKg726jK/PINZASPELACABLES.webp"
+
+  },
+  {
+    "id":11,
+    "nombre": "alicates",
+    "precio":300.50,
+    "categoria": "Herramientas",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/j9hhx8Jy/alicates-electronica-corte-diagonal-247x247.webp"
+
+  },
+   {
+    "id":12,
+    "nombre": "kitA",
+    "precio":300.50,
+    "categoria": "Kits educativos",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/FfhF9cV/kit-A.webp"
+
+  },
+  {
+    "id":13,
+    "nombre": "kitB",
+    "precio":300.50,
+    "categoria": "Kits educativos",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/sJM2WjRz/kitb.webp"
+
+  },
+  {
+    "id":14,
+    "nombre": "kitC",
+    "precio":300.50,
+    "categoria": "Kits educativos",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/nMtNHhkF/kitc.webp"
+
+  },
+  {
+    "id":15,
+    "nombre": "kitD",
+    "precio":300.50,
+    "categoria": "Kits educativos",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/nMtNHhkF/kitc.webp"
+
+  },  {
+    "id":16,
+    "nombre": "cables1",
+    "precio":300.50,
+    "categoria": "Cables",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/ds6nWCDq/image.png"
+
+  },
+    {
+    "id":17,
+    "nombre": "cables2",
+    "precio":300.50,
+    "categoria": "Cables",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/kVt1Bw89/image.png"
+
+  },
+    {
+    "id":18,
+    "nombre": "cables3",
+    "precio":300.50,
+    "categoria": "Cables",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/MX4CCrp/image.png"
+
+  },
+    {
+    "id":19,
+    "nombre": "cables4",
+    "precio":300.50,
+    "categoria": "Cables",
+    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "imagen":"https://i.ibb.co/rRxsW7KD/image.png"
+
   }
+  
+  
   
 
   
