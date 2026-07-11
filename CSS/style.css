@@ -390,25 +390,398 @@ footer{
 }
 
 /*Diseño responsivo */
-@media (max-width: 720px){
-  .site-header{ padding: .8rem 1rem; }
-  .menu-icon{ display: block; margin-left: auto; }
+@media (max-width: 1024px){
+  .site-header{
+    flex-wrap: wrap;
+    padding: .8rem 1.2rem;
+  }
+  .site-header input[type="search"]{
+    flex: 1 1 100%;
+    min-width: 0;
+    order: 2;
+    margin-top: .75rem;
+  }
+  .menu-icon{
+    display: block;
+    margin-left: auto;
+  }
   .site-header .nav{
     flex-basis: 100%;
     order: 3;
     display: none;
+    width: 100%;
+  }
+  .site-header .nav.open{ display: block; }
+  .site-header .nav ul{
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: .6rem;
+  }
+  .site-header .nav a{
+    font-size: .9rem;
+  }
+  .categorias-bar ul{
+    padding: .7rem 1rem;
+    gap: 1rem;
+  }
+  .categorias-bar li{
+    font-size: .82rem;
+  }
+  main{
+    padding: 0 1.5rem 2.5rem;
+  }
+  .productos, .promo-grid{
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .benefit-list{
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .preguntas-main{
+    padding: 2.5rem 1.5rem;
+  }
+  .preguntas-header{
+    padding: 2.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 720px){
+  .site-header{
+    padding: .8rem 1rem;
+  }
+  .site-header input[type="search"]{
+    width: 100%;
+    order: 2;
+    margin-top: .75rem;
+  }
+  .site-header .nav{
+    display: none;
+    width: 100%;
   }
   .site-header .nav.open{ display: block; }
   .site-header .nav ul{
     flex-direction: column;
-    gap: .2rem;
-    padding-top: .6rem;
+    gap: .8rem;
+    padding-top: .75rem;
   }
-  .categorias-bar{ padding: .7rem 1rem; }
-  main{ padding: 0 1rem 2rem; }
+  .categorias-bar ul{
+    flex-direction: column;
+    gap: .8rem;
+    padding: .85rem 1rem;
+  }
+  .categorias-bar li{
+    font-size: .82rem;
+  }
   h1{
-    background: var(--negro);
-    color: #FFFFFF;
-    box-shadow: none;
+    margin: 1.2rem auto 1rem;
+    font-size: 1.35rem;
+    padding: 1.2rem .8rem;
+  }
+  main{
+    padding: 0 1rem 2rem;
+  }
+  .promo-hero{
+    padding: 2rem 1rem;
+  }
+  .promo-card,
+  .producto-card{
+    padding: 1rem;
+  }
+  .promo-card img{
+    height: 150px;
+  }
+  .producto-card img{
+    height: 160px;
+  }
+  .benefit-item{
+    padding: 1.2rem;
+  }
+  .por-que{
+    padding: 1.2rem;
+  }
+  .preguntas-container{
+    grid-template-columns: 1fr;
+  }
+  .pregunta-item{
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px){
+  .site-header{
+    padding: .75rem .75rem;
+    gap: .75rem;
+  }
+  .menu-icon{
+    font-size: 1.4rem;
+  }
+  .site-header input[type="search"]{
+    padding: .65rem .9rem;
+  }
+  .categorias-bar ul{
+    padding: .7rem .8rem;
+    gap: .6rem;
+  }
+  .categorias-bar li{
+    font-size: .78rem;
+  }
+  .promo-hero h1{
+    font-size: 1.8rem;
+  }
+  .promo-hero p,
+  .promo-about p,
+  .por-que ul li{
+    font-size: .95rem;
+  }
+  .promo-card img,
+  .producto-card img{
+    height: 140px;
+  }
+  .benefit-item{
+    padding: 1rem;
+  }
+  .promo-grid,
+  .productos{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============ Preguntas Frecuentes ============ */
+.preguntas-main{
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.preguntas-header{
+  text-align: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(135deg, var(--naranja), var(--naranja-oscuro));
+  color: #FFFFFF;
+  padding: 3rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(242, 110, 34, 0.2);
+}
+
+.preguntas-header h1{
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.preguntas-header .subtitle{
+  margin: 1rem 0 0;
+  font-size: 1.1rem;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.preguntas-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.pregunta-item{
+  background: #FFFFFF;
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--naranja);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pregunta-item:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(242, 110, 34, 0.15);
+}
+
+.pregunta-item h3{
+  color: var(--naranja);
+  font-size: 1.1rem;
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+
+.pregunta-item p{
+  color: var(--gris-texto);
+  margin: 0;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 600px){
+  .preguntas-main{
+    padding: 2rem 1rem;
+  }
+  
+  .preguntas-header{
+    padding: 2rem 1.5rem;
+  }
+  
+  .preguntas-header h1{
+    font-size: 1.8rem;
+  }
+  
+  .preguntas-header .subtitle{
+    font-size: 1rem;
+  }
+  
+  .preguntas-container{
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .pregunta-item{
+    padding: 1.5rem;
+  }
+}
+
+/* ============ Promociones ============ */
+.promociones-main{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+.promo-hero{
+  background: linear-gradient(135deg, #FB8B24, #EF5D1D);
+  color: #FFFFFF;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 18px 40px rgba(242, 110, 34, 0.15);
+}
+
+.promo-hero .eyebrow{
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-weight: 700;
+  opacity: 0.9;
+  margin-bottom: .8rem;
+}
+
+.promo-hero h1{
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.promo-hero p{
+  max-width: 720px;
+  margin: 1rem 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+}
+
+.promo-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.promo-card{
+  background: #FFFFFF;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  padding: 1.5rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.promo-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.12);
+}
+
+.promo-card img{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.promo-card h2{
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--negro);
+}
+
+.price-old{
+  margin: 0;
+  color: var(--gris-texto);
+  text-decoration: line-through;
+}
+
+.price-new{
+  margin: 0;
+  color: var(--naranja);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.promo-card button{
+  background: var(--naranja);
+  border: none;
+  color: #FFFFFF;
+  padding: .95rem 1.25rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background-color .2s ease;
+}
+
+.promo-card button:hover{
+  background: var(--naranja-oscuro);
+}
+
+.promo-benefits{
+  margin-bottom: 2.5rem;
+}
+
+.promo-benefits h2,
+.promo-about h2{
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.benefit-list{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.benefit-item{
+  background: #FFFFFF;
+  border: 1px solid #E8E8E8;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+}
+
+.benefit-item h3{
+  margin-top: 0;
+  color: var(--naranja);
+}
+
+.promo-about p{
+  max-width: 860px;
+  line-height: 1.8;
+  color: var(--gris-texto);
+}
+
+@media (max-width: 720px){
+  .promociones-main{
+    padding: 2rem 1rem;
+  }
+
+  .promo-hero{
+    padding: 2.5rem 1.5rem;
+  }
+
+  .promo-card img{
+    height: 160px;
   }
 }
