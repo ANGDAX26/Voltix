@@ -11,31 +11,16 @@
 
 <body>
 
-    <div id="header-placeholder"></div>
+   
 
-    <script>
-        fetch('header.html')
-            .then(response => {
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            })
-            .catch(e => {
-                console.error('Error cargando header:', e);
-                document.getElementById('header-placeholder').innerHTML = '<!-- header no cargado -->';
-            });
-    </script>
 
     <main class="admin-main">
 
         <h1>PANEL DE ADMINISTRACIÓN</h1>
 
         <div class="admin-nota">
-            <strong>Nota:</strong> este sitio no tiene servidor ni base de datos, así que los cambios
-            se guardan solo en este navegador. Cuando termines, usa <strong>"Descargar productos.json"</strong>
-            y reemplaza el archivo del proyecto para que los cambios se vean en la tienda para todos.
+            <strong>Nota:</strong> <strong>"Descargar productos.json"</strong>
+            
         </div>
 
         <div id="admin-aviso" class="admin-aviso" style="display:none;"></div>

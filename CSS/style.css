@@ -389,7 +389,7 @@ footer{
   gap: .3rem 1.6rem;
 }
 
-/* ============ Responsive ============ */
+/*Diseño responsivo */
 @media (max-width: 720px){
   .site-header{ padding: .8rem 1rem; }
   .menu-icon{ display: block; margin-left: auto; }
