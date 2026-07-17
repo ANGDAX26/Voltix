@@ -1,12 +1,22 @@
 
 body {
+    min-height: 100vh;
+    background: linear-gradient(
+        135deg,
+        var(--naranja-claro) 0%,
+        var(--paper) 100%
+    );
+    margin: 0;
+}
+
+/* Contenedor exclusivo para centrar el formulario */
+.auth-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--naranja-claro) 0%, var(--paper) 100%);
-    padding: 1rem;
-    margin: 0;
+    min-height: calc(100vh - 140px);
+    padding: 2rem 1rem;
+    box-sizing: border-box;
 }
 
 .login-container,
@@ -18,6 +28,7 @@ body {
     width: 100%;
     max-width: 420px;
     border-left: 4px solid var(--naranja);
+    box-sizing: border-box;
 }
 
 .login-container h1,
@@ -56,7 +67,7 @@ body {
     border-radius: var(--radius);
     font-size: 0.95rem;
     color: var(--texto);
-    background: #FAFAFA;
+    background: #fafafa;
     transition: border-color 0.2s, background 0.2s;
     box-sizing: border-box;
 }
@@ -65,7 +76,7 @@ body {
 .register-container input:focus {
     outline: none;
     border-color: var(--naranja);
-    background: #FFFFFF;
+    background: #ffffff;
     box-shadow: 0 0 0 3px rgba(242, 110, 34, 0.1);
 }
 
@@ -75,7 +86,11 @@ body {
     padding: 0.9rem;
     border: none;
     border-radius: var(--radius);
-    background: linear-gradient(135deg, var(--naranja) 0%, var(--naranja-oscuro) 100%);
+    background: linear-gradient(
+        135deg,
+        var(--naranja) 0%,
+        var(--naranja-oscuro) 100%
+    );
     color: white;
     font-size: 1rem;
     font-weight: 600;
@@ -156,19 +171,23 @@ body {
 }
 
 .alert.error {
-    background: #FEE2E2;
-    color: #991B1B;
-    border-left: 4px solid #DC2626;
+    background: #fee2e2;
+    color: #991b1b;
+    border-left: 4px solid #dc2626;
 }
 
 .alert.success {
-    background: #DCFCE7;
+    background: #dcfce7;
     color: #166534;
-    border-left: 4px solid #22C55E;
+    border-left: 4px solid #22c55e;
 }
 
-/* ============ Responsive ============ */
+/* Responsive */
 @media (max-width: 480px) {
+    .auth-page {
+        padding: 1.5rem 1rem;
+    }
+
     .login-container,
     .register-container {
         padding: 1.8rem 1.2rem;

@@ -8,6 +8,23 @@
     <link rel="stylesheet" href="../CSS/auth.css">
 </head>
 <body>
+     <div id="header-placeholder"></div>
+
+    <script>
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(e => {
+                console.error('Error cargando header:', e);
+                document.getElementById('header-placeholder').innerHTML = '<!-- header no cargado -->';
+            });
+    </script>
+    <br>
     <main class="login-container">
         <h1 align="center">Iniciar sesión</h1>
         <form action="#" method="post">
@@ -24,5 +41,23 @@
             ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
         </div>
     </main>
+    <br>
+    <div id="footer-placeholder"></div>
+
+    <script>
+        fetch('footer.html')
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(e => {
+                console.error('Error cargando footer:', e);
+                document.getElementById('footer-placeholder').innerHTML = '<!-- footer no cargado -->';
+            });
+    </script>
+
 </body>
 </html>
