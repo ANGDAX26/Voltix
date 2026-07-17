@@ -58,11 +58,12 @@
   },
  
   {
+   {
     "id":9,
     "nombre": "cautin",
     "precio":300.50,
     "categoria": "Herramientas",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Cautín eléctrico ideal para soldadura de componentes electrónicos. Mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y punta de calentamiento rápido para soldaduras precisas en tus proyectos con Arduino y ESP32.",
     "imagen": "https://i.ibb.co/ZzmvSNhT/CAUTIN.webp"
 
   },
@@ -71,7 +72,7 @@
     "nombre": "kit soldar",
     "precio":300.50,
     "categoria": "Herramientas",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Kit completo para soldar con todo lo esencial: cautín, estaño, base soporte y accesorios. Perfecto para armar, reparar y prototipar circuitos electrónicos de principio a fin.",
     "imagen":"https://i.ibb.co/397rP3W2/KITSOLDAR.webp"
 
   },
@@ -80,7 +81,7 @@
     "nombre": "alicates",
     "precio":300.50,
     "categoria": "Herramientas",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Alicates de corte diagonal de alta precisión. La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos: cortes limpios y pelado de cables de diferentes calibres sin dañar los filamentos internos.",
     "imagen":"https://i.ibb.co/j9hhx8Jy/alicates-electronica-corte-diagonal-247x247.webp"
 
   },
@@ -89,7 +90,7 @@
     "nombre": "kitA",
     "precio":300.50,
     "categoria": "Kits educativos",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Kit educativo A, pensado para introducir a estudiantes en los fundamentos de la electrónica y la programación con Arduino. Incluye componentes básicos y guía de proyectos paso a paso.",
     "imagen":"https://i.ibb.co/FfhF9cV/kit-A.webp"
 
   },
@@ -98,7 +99,7 @@
     "nombre": "kitB",
     "precio":300.50,
     "categoria": "Kits educativos",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Kit educativo B, con componentes intermedios para avanzar en proyectos de robótica y automatización. Ideal para quienes ya dominan lo básico y buscan retos más completos.",
     "imagen":"https://i.ibb.co/sJM2WjRz/kitb.webp"
 
   },
@@ -107,7 +108,7 @@
     "nombre": "kitC",
     "precio":300.50,
     "categoria": "Kits educativos",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Kit educativo C, orientado a proyectos de sensores e IoT. Incluye módulos para conectar tus circuitos a internet y monitorear datos en tiempo real.",
     "imagen":"https://i.ibb.co/nMtNHhkF/kitc.webp"
 
   },
@@ -116,7 +117,7 @@
     "nombre": "kitD",
     "precio":300.50,
     "categoria": "Kits educativos",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Kit educativo D, enfocado en proyectos avanzados de automatización y control. Trae los componentes necesarios para llevar tus prototipos al siguiente nivel.",
     "imagen":"https://i.ibb.co/nMtNHhkF/kitc.webp"
 
   },  {
@@ -124,7 +125,7 @@
     "nombre": "cables1",
     "precio":300.50,
     "categoria": "Cables",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Set de cables jumper macho-macho, esenciales para armar conexiones rápidas y confiables en protoboard. Compatibles con Arduino, ESP32 y Raspberry Pi.",
     "imagen":"https://i.ibb.co/ds6nWCDq/image.png"
 
   },
@@ -133,7 +134,7 @@
     "nombre": "cables2",
     "precio":300.50,
     "categoria": "Cables",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Set de cables jumper macho-hembra, ideales para conectar sensores y módulos directamente a tu placa sin necesidad de protoboard.",
     "imagen":"https://i.ibb.co/kVt1Bw89/image.png"
 
   },
@@ -142,7 +143,7 @@
     "nombre": "cables3",
     "precio":300.50,
     "categoria": "Cables",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Set de cables jumper hembra-hembra, perfectos para unir dos módulos o placas entre sí en tus proyectos de electrónica y robótica.",
     "imagen":"https://i.ibb.co/MX4CCrp/image.png"
 
   },
@@ -151,13 +152,7 @@
     "nombre": "cables4",
     "precio":300.50,
     "categoria": "Cables",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
+    "descripcion":"Cable USB de alimentación y datos, indispensable para programar y alimentar tus placas Arduino y ESP32 desde la computadora.",
     "imagen":"https://i.ibb.co/rRxsW7KD/image.png"
 
   }
-  
-  
-  
-
-  
-]
