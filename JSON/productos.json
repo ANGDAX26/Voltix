@@ -56,22 +56,14 @@
     "imagen":"https://i.ibb.co/cKg726jK/PINZASPELACABLES.webp"
 
   },
-  {
-    "id":8,
-    "nombre": "alicates",
-    "precio":300.50,
-    "categoria": "Herramientas",
-    "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
-    "imagen":"https://i.ibb.co/ZzmvSNhT/CAUTIN.webp"
-
-  },
+ 
   {
     "id":9,
     "nombre": "cautin",
     "precio":300.50,
     "categoria": "Herramientas",
     "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
-    "imagen": "https://i.ibb.co/397rP3W2/KITSOLDAR.webp"
+    "imagen": "https://i.ibb.co/ZzmvSNhT/CAUTIN.webp"
 
   },
   {
@@ -80,7 +72,7 @@
     "precio":300.50,
     "categoria": "Herramientas",
     "descripcion":"Pinzas Pelacables de Alta Precisión La herramienta indispensable para cualquier laboratorio de electrónica o proyecto de circuitos. Diseñadas para realizar cortes limpios y pelar cables de diferentes calibres sin dañar los filamentos internos. Cuentan con un mango ergonómico antideslizante que reduce la fatiga durante largas jornadas de trabajo y un mecanismo de resorte para un retorno rápido y suave. Ideales para optimizar el armado de tus prototipos.",
-    "imagen":"https://i.ibb.co/cKg726jK/PINZASPELACABLES.webp"
+    "imagen":"https://i.ibb.co/397rP3W2/KITSOLDAR.webp"
 
   },
   {
