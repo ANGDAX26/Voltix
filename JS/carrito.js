@@ -1,4 +1,4 @@
-// ============ Gestor de Carrito con localStorage ============
+
 
 class Carrito {
     constructor() {
@@ -196,40 +196,60 @@ class Carrito {
 
     conectarBotones() {
         document.addEventListener('click', async (e) => {
-            if (e.target.textContent.trim() === 'Agregar al carrito') {
-                e.preventDefault();
+            const isAddBtn = e.target.matches('.add-to-cart') || e.target.textContent.trim() === 'Agregar al carrito';
+            if (!isAddBtn) return;
 
-                // Si es desde la página de detalle, el producto ya está disponible
-                const detalleInfo = document.querySelector('.detalle-info');
-                if (detalleInfo) {
-                    const producto = this.obtenerProductoDelDetalle();
-                    if (producto) {
-                        this.agregarProducto(producto);
-                        return;
-                    }
+            e.preventDefault();
+
+            // Si es desde la página de detalle, el producto ya está disponible
+            const detalleInfo = document.querySelector('.detalle-info');
+            if (detalleInfo && e.target.matches('.add-to-cart') === false) {
+                const producto = this.obtenerProductoDelDetalle();
+                if (producto) {
+                    this.agregarProducto(producto);
+                    return;
                 }
+            }
 
-                // Si es desde la lista de productos, obtener datos del card
-                const card = e.target.closest('.producto-card');
-                if (card) {
-                    const nombre = card.querySelector('h3 a').textContent;
-                    const precio = parseFloat(card.querySelector('.precio').textContent.replace('$', '').replace(' MXN', ''));
-                    const imagen = card.querySelector('img').src;
-
-                    // Extraer ID de la URL
-                    const href = card.querySelector('a').href;
-                    const url = new URL(href);
-                    const id = Number(url.searchParams.get('id'));
-
+            // Priorizar data- atributos si vienen en el botón
+            const btn = e.target.closest('button');
+            if (btn) {
+                const did = btn.dataset.id;
+                if (did) {
                     const producto = {
-                        id,
-                        nombre,
-                        precio,
-                        imagen
+                        id: Number(did),
+                        nombre: btn.dataset.nombre || btn.dataset.name || btn.getAttribute('data-nombre') || '' ,
+                        precio: parseFloat(btn.dataset.precio) || parseFloat(btn.getAttribute('data-precio')) || 0,
+                        imagen: btn.dataset.img || btn.getAttribute('data-img') || ''
                     };
 
                     this.agregarProducto(producto);
+                    return;
                 }
+            }
+
+            // Si es desde la lista de productos, obtener datos del card
+            const card = e.target.closest('.producto-card');
+            if (card) {
+                const nombreEl = card.querySelector('h3 a');
+                const nombre = nombreEl ? nombreEl.textContent : (card.dataset.nombre || '');
+                const precioText = card.querySelector('.precio') ? card.querySelector('.precio').textContent : (card.dataset.precio || '0');
+                const precio = parseFloat(String(precioText).replace('$', '').replace(' MXN', '')) || Number(card.dataset.precio) || 0;
+                const imagen = card.querySelector('img') ? card.querySelector('img').src : (card.dataset.img || '');
+                const id = Number(card.dataset.id) || (function(){
+                    const a = card.querySelector('a');
+                    if (!a) return NaN;
+                    try { return Number(new URL(a.href, window.location.origin).searchParams.get('id')) } catch { return NaN }
+                })();
+
+                const producto = {
+                    id,
+                    nombre,
+                    precio,
+                    imagen
+                };
+
+                this.agregarProducto(producto);
             }
         });
     }

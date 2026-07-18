@@ -33,7 +33,7 @@ async function cargarDetalle() {
                     <h1>${producto.nombre}</h1>
                     <p class="precio">$${producto.precio.toFixed(2)} MXN</p>
                     <p class="detalle-descripcion">${producto.descripcion}</p>
-                    <button>Agregar al carrito</button>
+                    <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-img="${producto.imagen}">Agregar al carrito</button>
                     <p><a href="Voltix.html">&larr; Volver a la tienda</a></p>
                 </div>
 

@@ -79,6 +79,14 @@
   background: var(--paper);
   color: var(--texto);
 }
+.admin-form input[type=file] {
+  padding: .5rem .75rem;
+}
+.admin-ayuda {
+  font-size: .85rem;
+  color: var(--gris-texto);
+  margin-top: .8rem;
+}
 .admin-form input:focus,
 .admin-form textarea:focus{
   outline: none;

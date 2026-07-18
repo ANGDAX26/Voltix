@@ -5,33 +5,37 @@
 
     <input type="search" placeholder="🔎 Buscar">
 
-    <label for="menu-toggle" class="menu-icon"
-        onclick="document.querySelector('.nav').classList.toggle('open')">&#9776;</label>
-
     <nav class="nav">
         <ul>
             <li>
-                <a href="Voltix.html">
+                <a href="Voltix.html" aria-label="Inicio">
                  🏠
-                    
-                </a>
-            </li>
-            <li><a href="preguntasvol.html">📧</a></li>
-        
-            <li>
-                <a href="iniciosesion.html">
-               👥
                 </a>
             </li>
             <li>
-                <a href="carrito.html">
-                   🛒
+                <a href="Voltix.html" aria-label="Productos">
+                 🛍️
                 </a>
             </li>
             <li>
-                <a href="perfil.html">
+                <a href="preguntasvol.html" aria-label="Preguntas frecuentes">
+                 ❓
+                </a>
+            </li>
+            <li>
+                <a href="iniciosesion.html" aria-label="Iniciar sesión">
+                 🔑
+                </a>
+            </li>
+            <li>
+              <a href="carrito.html" class="carrito-link" aria-label="Ver carrito">
+                 🛒 <span data-carrito-count class="badge bg-danger" style="display:none;">0</span>
+              </a>
+            </li>
+            <li>
+                <a href="perfil.html" aria-label="Perfil">
                    👤
-                    </a>
+                </a>
             </li>
         </ul>
     </nav>
