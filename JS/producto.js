@@ -23,7 +23,7 @@ async function cargarProductos() {
         }
 
         contenedor.innerHTML = listaAMostrar.map(producto => `
-            <div class="producto-card">
+            <div class="producto-card" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-img="${producto.imagen}">
 
                 <a href="producto.html?id=${producto.id}">
                     <img src="${producto.imagen}"
@@ -34,7 +34,7 @@ async function cargarProductos() {
 
                 <p class="precio">$${producto.precio.toFixed(2)} MXN</p>
 
-                <button>Agregar al carrito</button>
+                <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-img="${producto.imagen}">Agregar al carrito</button>
 
             </div>
         `).join('');

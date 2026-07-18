@@ -7,6 +7,7 @@
     <title>Voltix - Panel de Administración</title>
     <link rel="stylesheet" href="/CSS/style.css">
     <link rel="stylesheet" href="/CSS/admin.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
@@ -71,6 +72,21 @@
         </section>
 
         <section class="admin-panel">
+            <h2>Importar y reportar</h2>
+            <div class="admin-form-grid">
+                <label>
+                    Subir archivo Excel / CSV
+                    <input type="file" id="input-archivo-excel" accept=".xlsx,.xls,.csv">
+                </label>
+            </div>
+            <div class="admin-form-botones">
+                <button type="button" id="btn-importar-excel" class="btn-guardar">Importar desde archivo</button>
+                <button type="button" id="btn-descargar-reporte" class="btn-descargar">Descargar reporte CSV</button>
+            </div>
+            <p class="admin-ayuda">El archivo debe contener columnas: <strong>nombre</strong>, <strong>precio</strong>, <strong>categoria</strong>, <strong>imagen</strong>, <strong>descripcion</strong> e <strong>id</strong> (opcional).</p>
+        </section>
+
+        <section class="admin-panel">
             <div class="admin-tabla-header">
                 <h2>Productos (<span id="contador-productos"></span>)</h2>
                 <div class="admin-tabla-botones">
@@ -115,6 +131,8 @@
             });
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="/JS/admin.js"></script>
 
 </body>

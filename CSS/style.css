@@ -160,20 +160,29 @@ img{ max-width: 100%; display: block; }
 
 .site-header .nav ul{
   display: flex;
-  gap: 1.6rem;
-}
-.site-header .nav a{
-  font-weight: 600;
-  font-size: .92rem;
-  color: var(--negro);
-  padding: .3rem 0;
-  border-bottom: 2px solid transparent;
-  transition: border-color .15s, color .15s;
-}
-.site-header .nav a:hover{
-  color: var(--naranja);
-  border-color: var(--naranja);
-}
+    gap: 1rem;
+    align-items: center;
+  }
+  .site-header .nav a{
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--negro);
+    padding: .5rem;
+    min-width: 2.4rem;
+    width: auto;
+    height: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: background .2s, transform .2s, color .2s;
+  }
+  .site-header .nav a:hover{
+    color: var(--naranja);
+    background: rgba(242,110,34,.12);
+    transform: translateY(-1px);
+  }
 
 /* Categorías bar */
 .categorias-bar{
@@ -181,7 +190,7 @@ img{ max-width: 100%; display: block; }
   border-top: none;
 }
 .categorias-bar h2{
-  display: none; /* título oculto visualmente, se usa la lista como menú */
+  display: none; 
 }
 .categorias-bar ul{
   display: flex;
@@ -198,14 +207,21 @@ img{ max-width: 100%; display: block; }
   cursor: pointer;
   padding: .2rem 0;
 }
+.categorias-bar a{
+  color: #FFFFFF !important;
+}
+.categorias-bar a:hover{
+  color: #FFFFFF !important;
+  text-decoration: underline;
+}
 .categorias-bar li:hover{
   text-decoration: underline;
 }
 
 /* Hero / banners  */
-h1{
-  color: #FFFFFF;
-  background: var(--negro);
+h1, .page-heading{
+  color: #FFFFFF !important;
+  background: var(--negro) !important;
   text-align: center;
   padding: 1.6rem 1rem;
   margin: 2rem auto 1.5rem;
@@ -214,6 +230,12 @@ h1{
   font-size: 1.5rem;
   letter-spacing: .03em;
   box-shadow: none;
+}
+
+.section-title,
+.page-heading{
+  color: #FFFFFF !important;
+  background: var(--negro) !important;
 }
 .hero{
     position:relative;
@@ -249,6 +271,29 @@ h1{
     background:rgba(0,0,0,.55);
     padding:20px;
     border-radius:10px;
+}
+
+.slide-link{
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.hero-cta{
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.1rem;
+    border-radius: 999px;
+    background: rgba(242,110,34,0.95);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.hero-cta:hover{
+    background: rgba(242,110,34,1);
 }
 
 .prev,
@@ -498,7 +543,10 @@ footer{
     padding-top: .6rem;
   }
   .site-header .nav a{
-    font-size: .9rem;
+    font-size: 1rem;
+    width: auto;
+    height: auto;
+    padding: .45rem .7rem;
   }
   .categorias-bar ul{
     padding: .7rem 1rem;
@@ -762,6 +810,7 @@ footer{
 
 .promo-card{
   background: #FFFFFF;
+  border: 1px solid var(--borde);
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
@@ -769,6 +818,20 @@ footer{
   padding: 1.5rem;
   display: grid;
   gap: 1rem;
+}
+.promociones-main .promo-card{
+  background: #FFFFFF;
+  border: 1px solid var(--borde);
+  color: var(--texto);
+}
+.promociones-main .promo-card h2,
+.promociones-main .promo-card .price-new,
+.promociones-main .promo-card .price-old,
+.promociones-main .promo-card p{
+  color: var(--texto);
+}
+.promociones-main .promo-card .price-old{
+  color: var(--gris-texto);
 }
 
 .promo-card:hover{
@@ -786,7 +849,7 @@ footer{
 .promo-card h2{
   margin: 0;
   font-size: 1.2rem;
-  color: var(--negro);
+  color: white;
 }
 
 .price-old{
