@@ -88,6 +88,55 @@
             </p>
         </div>
     </div>
+    <div style="text-align:center; margin:30px 0;">
+    <h2>¡Prueba tu suerte!</h2>
+
+    <h1 id="contador">0</h1>
+
+    <button onclick="iniciar()">Iniciar</button>
+    <button onclick="detener()">Detener</button>
+
+    <p id="mensaje" style="font-size:20px; font-weight:bold;"></p>
+</div>
+<script>
+let contador = 0;
+let intervalo;
+
+function iniciar() {
+
+    if (intervalo) return;
+
+    intervalo = setInterval(function () {
+
+        contador++;
+
+        document.getElementById("contador").textContent = contador;
+
+        if (contador >= 100) {
+            contador = 0;
+        }
+
+    }, 0); 
+
+}
+
+function detener() {
+
+    clearInterval(intervalo);
+    intervalo = null;
+
+    if (contador == 100) {
+        document.getElementById("mensaje").innerHTML =
+            "🎉 ¡Felicidades! Ganaste un 20% de descuento.";
+    } else {
+
+        document.getElementById("mensaje").innerHTML =
+            "No obtuviste descuento. Inténtalo otra vez.";
+
+    }
+
+}
+</script>
 </main>
 
 <div id="footer-placeholder"></div>
