@@ -1,0 +1,55 @@
+<header class="site-header">
+    <div class="logo">
+        <a href="Voltix.html"><img src="https://i.ibb.co/HfFjJhnh/voltix.jpg" alt="Logo Voltix"></a>
+    </div>
+<div class="buscador-contenedor">
+    <input type="search" id="buscador-input" placeholder="🔎 Buscar" autocomplete="off">
+    <div id="buscador-resultados" class="buscador-resultados"></div>
+</div>
+
+    <nav class="nav">
+        <ul>
+            <li>
+                <a href="Voltix.html" aria-label="Inicio">
+                 🏠
+                </a>
+            </li>
+            <li>
+                <a href="Voltix.html" aria-label="Productos">
+                 🛍️
+                </a>
+            </li>
+            <li>
+                <a href="preguntasvol.html" aria-label="Preguntas frecuentes">
+                 ❓
+                </a>
+            </li>
+            <li>
+                <a href="iniciosesion.html" aria-label="Iniciar sesión">
+                 🔑
+                </a>
+            </li>
+            <li>
+              <a href="carrito.html" class="carrito-link" aria-label="Ver carrito">
+                 🛒 <span data-carrito-count class="badge bg-danger" style="display:none;">0</span>
+              </a>
+            </li>
+            <li>
+                <a href="perfil.html" aria-label="Perfil">
+                   👤
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div class="categorias-bar">
+    <h2>Categorías</h2>
+    <ul>
+        <li><a href="Herramientas.html">Herramientas</a></li>
+        <li><a href="Kits_Educativos.html">Kits educativos</a></li>
+        <li><a href="Cables.html">Cables</a></li>
+        <li><a href="sensores.html">Sensores</a></li>
+        <li><a href="promociones.html">Promociones</a></li>
+    </ul>
+</div>

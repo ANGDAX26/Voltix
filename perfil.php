@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de usuario</title>
+
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/auth.css">
+    <link rel="stylesheet" href="../CSS/perfil.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <script>
+        fetch("header.html")
+            .then(response => {
+                if (!response.ok) throw new Error("HTTP " + response.status);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById("header-placeholder").innerHTML = data;
+            })
+            .catch(e => {
+                console.error("Error cargando header:", e);
+            });
+    </script>
+
+    <div class="auth-page">
+
+        <main class="login-container">
+
+            <h1>Perfil de usuario</h1>
+
+            <p class="descripcion">
+                Información general de la cuenta del usuario.
+            </p>
+
+            <section class="perfil">
+
+                <div class="foto">
+                    <img
+                        src="https://via.placeholder.com/180"
+                        alt="Foto de perfil">
+                </div>
+
+                <!-- INFORMACIÓN -->
+                <div class="datos" id="vistaPerfil">
+
+                    <p>
+                        <strong>Nombre:</strong>
+                        <span id="nombreTexto">Usuario de ejemplo</span>
+                    </p>
+
+                    <p>
+                        <strong>Apellidos:</strong>
+                        <span id="apellidosTexto">Apellidos de ejemplo</span>
+                    </p>
+
+                    <p>
+                        <strong>Correo:</strong>
+                        <span id="correoTexto">usuario@correo.com</span>
+                    </p>
+
+                    <p>
+                        <strong>Nombre de usuario:</strong>
+                        <span id="usuarioTexto">usuario123</span>
+                    </p>
+
+                </div>
+
+                <!-- FORMULARIO -->
+                <div
+                    class="datos"
+                    id="formularioPerfil"
+                    style="display:none;">
+
+                    <label>Nombre</label>
+                    <input type="text" id="nombreInput">
+
+                    <label>Apellidos</label>
+                    <input type="text" id="apellidosInput">
+
+                    <label>Correo</label>
+                    <input type="email" id="correoInput">
+
+                    <label>Nombre de usuario</label>
+                    <input type="text" id="usuarioInput">
+
+                </div>
+
+            </section>
+
+            <div class="perfil-acciones">
+
+                <button
+                    type="button"
+                    id="btnEditar"
+                    onclick="editarPerfil()">
+                    Editar perfil
+                </button>
+
+                <button
+                    type="button"
+                    id="btnGuardar"
+                    onclick="guardarPerfil()"
+                    style="display:none;">
+                    Guardar cambios
+                </button>
+
+                <a href="#" class="btn-secundario">
+                    Cambiar contraseña
+                </a>
+
+            </div>
+
+            <section class="seccion">
+
+                <h2>Dirección registrada</h2>
+
+                <!-- VISTA -->
+                <div
+                    class="direccion-info"
+                    id="vistaDireccion">
+
+                    <p><strong>Dirección principal</strong></p>
+
+                    <p>
+
+                        <span id="calleTexto">
+                            Calle de ejemplo #123
+                        </span>,
+
+                        <span id="coloniaTexto">
+                            Colonia Centro
+                        </span>
+
+                    </p>
+
+                    <p>
+
+                        <span id="ciudadTexto">
+                            Cuernavaca
+                        </span>,
+
+                        <span id="estadoTexto">
+                            Morelos
+                        </span>,
+
+                        C.P.
+
+                        <span id="cpTexto">
+                            62000
+                        </span>
+
+                    </p>
+
+                    <p>
+
+                        <strong>Teléfono:</strong>
+
+                        <span id="telefonoTexto">
+                            1234567890
+                        </span>
+
+                    </p>
+
+                </div>
+
+                <!-- FORMULARIO -->
+
+                <div
+                    class="direccion-info"
+                    id="formularioDireccion"
+                    style="display:none;">
+
+                    <label>Calle</label>
+                    <input
+                        type="text"
+                        id="calleInput">
+
+                    <label>Colonia</label>
+                    <input
+                        type="text"
+                        id="coloniaInput">
+
+                    <label>Ciudad</label>
+                    <input
+                        type="text"
+                        id="ciudadInput">
+
+                    <label>Estado</label>
+                    <input
+                        type="text"
+                        id="estadoInput">
+
+                    <label>Código postal</label>
+                    <input
+                        type="text"
+                        id="cpInput">
+
+                    <label>Teléfono</label>
+                    <input
+                        type="text"
+                        id="telefonoInput">
+
+                </div>
+
+            </section>
+
+            <section class="seccion">
+
+                <h2>Historial de compras</h2>
+
+                <div class="pedidos-lista">
+
+                    <div class="pedido">
+
+                        <p>Pedido #001</p>
+
+                        <p>Producto de ejemplo</p>
+
+                        <p>
+                            <strong>Total:</strong>
+                            $000.00
+                        </p>
+
+                        <p>
+                            <strong>Fecha:</strong>
+                            15 de junio, 2026
+                        </p>
+
+                        <span class="estado entregado">
+                            Entregado
+                        </span>
+
+                    </div>
+
+                    <div class="pedido">
+
+                        <p>Pedido #002</p>
+
+                        <p>
+                            Producto de ejemplo - Cantidad: 2
+                        </p>
+
+                        <p>
+                            <strong>Total:</strong>
+                            $000.00
+                        </p>
+
+                        <p>
+                            <strong>Fecha:</strong>
+                            10 de julio, 2026
+                        </p>
+
+                        <span class="estado en-proceso">
+                            En proceso
+                        </span>
+
+                    </div>
+
+                    <div class="pedido">
+
+                        <p>Pedido #003</p>
+
+                        <p>
+                            Producto de ejemplo - Pack completo
+                        </p>
+
+                        <p>
+                            <strong>Total:</strong>
+                            $000.00
+                        </p>
+
+                        <p>
+                            <strong>Fecha:</strong>
+                            5 de julio, 2026
+                        </p>
+
+                        <span class="estado entregado">
+                            Entregado
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="seccion-acciones">
+                    <a href="carrito.html">
+                        Ver mis pedidos
+                    </a>
+                </div>
+
+            </section>
+
+            <div class="login-footer">
+
+                <p>
+                    <a href="Voltix.html">
+                        Volver a productos
+                    </a>
+                </p>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <footer>
+
+        <p>
+            &copy; 2026 Voltix. Todos los derechos reservados.
+        </p>
+
+    </footer>
+
+<<<<<<< HEAD
+    <script src="../JS/perfil.js"></script>
+     <script src="../JS/buscador.js"></script>
+=======
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+>>>>>>> desarrollo-AngelD
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de compras</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/auth.css">
+    <link rel="stylesheet" href="../CSS/carrito.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <main class="login-container">
+
+        <h1>Carrito de compras</h1>
+
+        
+
+        <section class="carrito-items">
+            <section class="producto-carrito">
+                <img src="https://via.placeholder.com/120" alt="Producto">
+                <div class="producto-info">
+                    <h3>Producto de ejemplo</h3>
+                    <p>Descripción breve del producto.</p>
+                    <p>En stock</p>
+                </div>
+                <div class="producto-controls">
+                    <input class="cantidad" type="number" value="1" min="1">
+                    <p class="precio">$000.00</p>
+                    <button class="eliminar-btn">Eliminar</button>
+                </div>
+            </section>
+
+            <section class="producto-carrito">
+                <img src="https://via.placeholder.com/120" alt="Producto">
+                <div class="producto-info">
+                    <h3>Producto de ejemplo 2</h3>
+                    <p>Descripción breve del producto.</p>
+                    <p>En stock</p>
+                </div>
+                <div class="producto-controls">
+                    <input class="cantidad" type="number" value="1" min="1">
+                    <p class="precio">$000.00</p>
+                    <button class="eliminar-btn">Eliminar</button>
+                </div>
+            </section>
+        </section>
+
+        <section class="resumen">
+            <h2>Resumen del pedido</h2>
+            <p><span>Subtotal:</span> <span>$000.00</span></p>
+            <p><span>Envío:</span> <span>$000.00</span></p>
+            <p class="total"><span>Total:</span> <span>$000.00</span></p>
+        </section>
+
+        <section class="direccion-envio">
+            <h2>Dirección de envío</h2>
+
+            <label for="calle">Calle y número</label>
+            <input type="text" id="calle" name="calle" placeholder="Ejemplo: Av. Principal #123">
+
+            <label for="colonia">Colonia</label>
+            <input type="text" id="colonia" name="colonia" placeholder="Ejemplo: Centro">
+
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" placeholder="Ejemplo: Cuernavaca">
+
+            <label for="estado">Estado</label>
+            <input type="text" id="estado" name="estado" placeholder="Ejemplo: Morelos">
+
+            <label for="cp">Código postal</label>
+            <input type="text" id="cp" name="cp" placeholder="Ejemplo: 62000">
+
+            <label for="referencias">Referencias de entrega</label>
+            <textarea id="referencias" name="referencias" placeholder="Ejemplo: Casa color blanco, cerca de la tienda"></textarea>
+        </section>
+
+        <section class="metodo-pago">
+            <h2>Método de pago</h2>
+
+            <label>
+                <input type="radio" name="pago">
+                Tarjeta de crédito o débito
+            </label>
+
+            <label>
+                <input type="radio" name="pago">
+                Transferencia bancaria
+            </label>
+
+            <label>
+                <input type="radio" name="pago">
+                Pago en efectivo al recibir
+            </label>
+        </section>
+
+        <div class="login-footer">
+            <button>Proceder al pago</button>
+            <p><a href="Voltix.html">Seguir comprando</a></p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Voltix. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="../JS/carrito.js"></script>
+
+</body>
+</html>

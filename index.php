@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voltix - Ofertas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/style.css?v=2">
+</head>
+
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <script>
+        fetch('header.html')
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(e => {
+                console.error('Error cargando header:', e);
+                document.getElementById('header-placeholder').innerHTML = '<!-- header no cargado -->';
+            });
+    </script>
+
+    <section class="hero">
+
+        <div class="slide active">
+            <a class="slide-link" href="producto.html?id=2" aria-label="Ver Kit Arduino para principiantes">
+                <img src="https://ibb.co/rRrvYxmf" alt="Arduino">
+                <div class="texto">
+                    <h2>Kits Arduino para Principiantes</h2>
+                    <p>Hasta 30% de descuento</p>
+                    <span class="hero-cta">Ver producto</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="slide">
+            <a class="slide-link" href="producto.html?id=12" aria-label="Ver kit ESP32 y proyectos IoT">
+                <img src="https://ibb.co/bjpJDgbJ" alt="ESP32">
+                <div class="texto">
+                    <h2>ESP32 y Proyectos IoT</h2>
+                    <p>WiFi y Bluetooth Integrados</p>
+                    <span class="hero-cta">Ver producto</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="slide">
+            <a class="slide-link" href="producto.html?id=1" aria-label="Ver sensor de proximidad infrarrojo">
+                <img src="https://ibb.co/99nDdxJn" alt="Sensores">
+                <div class="texto">
+                    <h2>Gran Variedad de Sensores</h2>
+                    <p>Para Arduino, Raspberry y ESP32</p>
+                    <span class="hero-cta">Ver producto</span>
+                </div>
+            </a>
+        </div>
+
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+
+    </section>
+
+    <h1>ÚLTIMAS OFERTAS Y LO ÚLTIMO EN PRODUCTOS</h1>
+
+    <main>
+        <div class="productos" id="productos"></div>
+
+        <h1 class="section-title">LLÉVATE UN DESCUENTO EN TU PRIMER PEDIDO AL REGISTRAR TU CUENTA</h1>
+
+        <div class="por-que">
+            <h2>¿Por qué elegir Voltix?</h2>
+            <ul>
+                <li>Kits con instrucciones</li>
+                <li>Precios accesibles</li>
+                <li>Envíos a todo México</li>
+                <li>Quejas y sugerencias disponibles</li>
+            </ul>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        fetch('footer.html')
+            .then(response => {
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(e => {
+                console.error('Error cargando footer:', e);
+                document.getElementById('footer-placeholder').innerHTML = '<!-- footer no cargado -->';
+            });
+    </script>
+    <script src="../JS/producto.js?v=2"></script>
+    <script src="../JS/carrito.js"></script>
+
+    <script src="../JS/buscador.js"></script>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        let index = 0;
+
+        function mostrarSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+        }
+
+        document.querySelector('.next').addEventListener('click', () => {
+            index = (index + 1) % slides.length;
+            mostrarSlide(index);
+        });
+
+        document.querySelector('.prev').addEventListener('click', () => {
+            index = (index - 1 + slides.length) % slides.length;
+            mostrarSlide(index);
+        });
+
+        setInterval(() => {
+            index = (index + 1) % slides.length;
+            mostrarSlide(index);
+        }, 5000);
+    </script>
+
+</body>
+
+</html>
