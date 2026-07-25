@@ -1,7 +1,15 @@
 const API_PRODUCTOS = '../PHP/admin_productos.php';
+const API_HERO = '../PHP/admin_hero.php';
 
 let productos = [];
 let editandoId = null;
+
+let heroSlides = [];
+let editandoHeroId = null;
+
+/* =========================================================
+   PRODUCTOS
+   ========================================================= */
 
 /* ---------- Carga inicial (desde la base de datos) ---------- */
 async function iniciar() {
@@ -109,9 +117,188 @@ async function eliminarProducto(id) {
     }
 }
 
+
+
+async function iniciarHero() {
+    try {
+        const respuesta = await fetch(API_HERO);
+
+        if (!respuesta.ok) {
+            const resultado = await respuesta.json().catch(() => ({}));
+            throw new Error(resultado.error || 'HTTP ' + respuesta.status);
+        }
+
+        heroSlides = await respuesta.json();
+    } catch (e) {
+        console.error('Error cargando Hero:', e);
+        heroSlides = [];
+        mostrarAviso(e.message || 'No se pudo cargar el Hero.', true);
+    }
+
+    renderizarHeroAdmin();
+}
+
+function renderizarHeroAdmin() {
+    const tbody = document.getElementById('tabla-hero-body');
+    const contador = document.getElementById('contador-hero');
+
+    if (contador) contador.textContent = heroSlides.length;
+
+    if (heroSlides.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="admin-vacio">No hay elementos en el Hero. Agrega el primero con el formulario de arriba.</td></tr>`;
+        return;
+    }
+
+    tbody.innerHTML = heroSlides.map(slide => `
+        <tr>
+            <td class="admin-col-img">
+                <img src="${escapeHtml(slide.imagen)}"
+                     alt="${escapeHtml(slide.titulo)}"
+                     onerror="this.src='https://placehold.co/60x60?text=%3F'">
+            </td>
+            <td>${escapeHtml(slide.titulo)}</td>
+            <td>${escapeHtml(slide.subtitulo || '')}</td>
+            <td>${slide.orden}</td>
+            <td class="admin-col-acciones">
+                <button class="btn-editar" onclick="editarHero(${slide.id})">Editar</button>
+                <button class="btn-eliminar" onclick="eliminarHero(${slide.id})">Eliminar</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function limpiarFormularioHero() {
+    editandoHeroId = null;
+
+    const form = document.getElementById('form-hero');
+    form.reset();
+
+    document.getElementById('hero-form-titulo').textContent = 'Administrar Hero';
+    document.getElementById('hero-texto-boton').value = 'Ver producto';
+    document.getElementById('hero-orden').value = heroSlides.length + 1;
+    document.getElementById('btn-cancelar-hero').style.display = 'none';
+}
+
+function editarHero(id) {
+    const slide = heroSlides.find(item => item.id === id);
+    if (!slide) return;
+
+    editandoHeroId = id;
+
+    document.getElementById('hero-form-titulo').textContent = `Editando Hero: ${slide.titulo}`;
+    document.getElementById('hero-titulo').value = slide.titulo;
+    document.getElementById('hero-subtitulo').value = slide.subtitulo || '';
+    document.getElementById('hero-imagen').value = slide.imagen;
+    document.getElementById('hero-enlace').value = slide.enlace || '';
+    document.getElementById('hero-texto-boton').value = slide.texto_boton || 'Ver producto';
+    document.getElementById('hero-orden').value = slide.orden || 1;
+    document.getElementById('btn-cancelar-hero').style.display = 'inline-block';
+
+    document.getElementById('form-hero').scrollIntoView({ behavior: 'smooth' });
+}
+
+async function eliminarHero(id) {
+    const slide = heroSlides.find(item => item.id === id);
+    if (!slide) return;
+
+    const confirmado = confirm(`¿Eliminar del Hero "${slide.titulo}"?`);
+    if (!confirmado) return;
+
+    try {
+        const respuesta = await fetch(API_HERO, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accion: 'eliminar', id })
+        });
+
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok) {
+            mostrarAviso(resultado.error || 'No se pudo eliminar el elemento del Hero.', true);
+            return;
+        }
+
+        await iniciarHero();
+        limpiarFormularioHero();
+        mostrarAviso(`"${slide.titulo}" fue eliminado del Hero.`);
+    } catch (e) {
+        console.error('Error eliminando Hero:', e);
+        mostrarAviso('Error de conexión al eliminar el elemento del Hero.', true);
+    }
+}
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
     iniciar();
+    iniciarHero().then(() => {
+        if (editandoHeroId === null) {
+            document.getElementById('hero-orden').value = heroSlides.length + 1;
+        }
+    });
 
+    /* ---------- Guardar Hero ---------- */
+    document.getElementById('form-hero').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const titulo = document.getElementById('hero-titulo').value.trim();
+        const subtitulo = document.getElementById('hero-subtitulo').value.trim();
+        const imagen = document.getElementById('hero-imagen').value.trim();
+        const enlace = document.getElementById('hero-enlace').value.trim();
+        const texto_boton = document.getElementById('hero-texto-boton').value.trim();
+        const orden = parseInt(document.getElementById('hero-orden').value, 10) || 1;
+
+        if (!titulo || !imagen) {
+            mostrarAviso('Completa al menos el título y la imagen del Hero.', true);
+            return;
+        }
+
+        const payload = {
+            titulo,
+            subtitulo,
+            imagen,
+            enlace,
+            texto_boton,
+            orden
+        };
+
+        try {
+            const accion = editandoHeroId !== null ? 'actualizar' : 'crear';
+
+            const respuesta = await fetch(API_HERO, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    accion,
+                    ...(editandoHeroId !== null ? { id: editandoHeroId } : {}),
+                    ...payload
+                })
+            });
+
+            const resultado = await respuesta.json();
+
+            if (!respuesta.ok) {
+                mostrarAviso(resultado.error || 'No se pudo guardar el Hero.', true);
+                return;
+            }
+
+            const mensaje = editandoHeroId !== null
+                ? `Elemento "${titulo}" actualizado en el Hero.`
+                : `Elemento "${titulo}" agregado al Hero.`;
+
+            await iniciarHero();
+            limpiarFormularioHero();
+            mostrarAviso(mensaje);
+
+        } catch (e) {
+            console.error('Error guardando Hero:', e);
+            mostrarAviso('Error de conexión al guardar el Hero.', true);
+        }
+    });
+
+    document.getElementById('btn-cancelar-hero').addEventListener('click', limpiarFormularioHero);
+
+    /* ---------- Guardar producto ---------- */
     document.getElementById('form-producto').addEventListener('submit', async (e) => {
         e.preventDefault();
 

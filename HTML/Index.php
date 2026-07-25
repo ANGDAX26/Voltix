@@ -14,6 +14,35 @@
     <div id="header-placeholder"></div>
 
     <script>
+        async function configurarNavegacionAdmin() {
+            try {
+                const respuesta = await fetch('../PHP/estado_sesion.php');
+                if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
+
+                const sesion = await respuesta.json();
+
+                if (!sesion.es_admin) return;
+
+                const listaMenu = document.querySelector('#header-placeholder .nav ul');
+                if (!listaMenu) return;
+
+                // Evita agregar el botón dos veces.
+                if (document.getElementById('enlace-panel-admin')) return;
+
+                const itemAdmin = document.createElement('li');
+                itemAdmin.innerHTML = `
+                    <a href="admin.php" id="enlace-panel-admin" aria-label="Panel de administración" title="Panel de administración">
+                        ⚙️
+                    </a>
+                `;
+
+                listaMenu.appendChild(itemAdmin);
+
+            } catch (error) {
+                console.error('No se pudo comprobar la sesión del administrador:', error);
+            }
+        }
+
         fetch('header.html')
             .then(response => {
                 if (!response.ok) throw new Error('HTTP ' + response.status);
@@ -21,6 +50,7 @@
             })
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
+                configurarNavegacionAdmin();
             })
             .catch(e => {
                 console.error('Error cargando header:', e);
@@ -28,11 +58,13 @@
             });
     </script>
 
-    <section class="hero">
+    <!-- El contenido de este Hero se reemplaza con los datos guardados en la BD. -->
+    <section class="hero" id="hero-principal">
 
+        <!-- Contenido de respaldo por si la API no puede cargar. -->
         <div class="slide active">
             <a class="slide-link" href="producto.html?id=2" aria-label="Ver Kit Arduino para principiantes">
-                <img src="https://ibb.co/rRrvYxmf" alt="Arduino">
+                <img src="https://ibb.co/rRrvYxmf" alt="Kits Arduino para Principiantes">
                 <div class="texto">
                     <h2>Kits Arduino para Principiantes</h2>
                     <p>Hasta 30% de descuento</p>
@@ -42,8 +74,8 @@
         </div>
 
         <div class="slide">
-            <a class="slide-link" href="producto.html?id=12" aria-label="Ver kit ESP32 y proyectos IoT">
-                <img src="https://ibb.co/bjpJDgbJ" alt="ESP32">
+            <a class="slide-link" href="producto.html?id=12" aria-label="Ver ESP32 y Proyectos IoT">
+                <img src="https://ibb.co/bjpJDgbJ" alt="ESP32 y Proyectos IoT">
                 <div class="texto">
                     <h2>ESP32 y Proyectos IoT</h2>
                     <p>WiFi y Bluetooth Integrados</p>
@@ -53,8 +85,8 @@
         </div>
 
         <div class="slide">
-            <a class="slide-link" href="producto.html?id=1" aria-label="Ver sensor de proximidad infrarrojo">
-                <img src="https://ibb.co/99nDdxJn" alt="Sensores">
+            <a class="slide-link" href="producto.html?id=1" aria-label="Ver Gran Variedad de Sensores">
+                <img src="https://ibb.co/99nDdxJn" alt="Gran Variedad de Sensores">
                 <div class="texto">
                     <h2>Gran Variedad de Sensores</h2>
                     <p>Para Arduino, Raspberry y ESP32</p>
@@ -63,8 +95,8 @@
             </a>
         </div>
 
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
+        <button class="prev" type="button" aria-label="Banner anterior">&#10094;</button>
+        <button class="next" type="button" aria-label="Banner siguiente">&#10095;</button>
 
     </section>
 
@@ -102,34 +134,113 @@
                 document.getElementById('footer-placeholder').innerHTML = '<!-- footer no cargado -->';
             });
     </script>
+
     <script src="../JS/producto.js?v=2"></script>
     <script src="../JS/carrito.js"></script>
-
     <script src="../JS/buscador.js"></script>
 
     <script>
-        const slides = document.querySelectorAll('.slide');
-        let index = 0;
+        const API_HERO = '../PHP/admin_hero.php';
+        let intervaloHero = null;
 
-        function mostrarSlide(n) {
-            slides.forEach(slide => slide.classList.remove('active'));
-            slides[n].classList.add('active');
+        function escaparHero(texto) {
+            const div = document.createElement('div');
+            div.textContent = texto ?? '';
+            return div.innerHTML;
         }
 
-        document.querySelector('.next').addEventListener('click', () => {
-            index = (index + 1) % slides.length;
-            mostrarSlide(index);
-        });
+        function renderizarHero(slides) {
+            const hero = document.getElementById('hero-principal');
 
-        document.querySelector('.prev').addEventListener('click', () => {
-            index = (index - 1 + slides.length) % slides.length;
-            mostrarSlide(index);
-        });
+            if (!Array.isArray(slides) || slides.length === 0) {
+                hero.style.display = 'none';
+                return;
+            }
 
-        setInterval(() => {
-            index = (index + 1) % slides.length;
-            mostrarSlide(index);
-        }, 5000);
+            hero.style.display = '';
+
+            const contenido = slides.map((slide, indice) => `
+                <div class="slide ${indice === 0 ? 'active' : ''}">
+                    <a class="slide-link"
+                       href="${escaparHero(slide.enlace || '#')}"
+                       aria-label="${escaparHero(slide.titulo)}">
+                        <img src="${escaparHero(slide.imagen)}"
+                             alt="${escaparHero(slide.titulo)}">
+                        <div class="texto">
+                            <h2>${escaparHero(slide.titulo)}</h2>
+                            ${slide.subtitulo ? `<p>${escaparHero(slide.subtitulo)}</p>` : ''}
+                            <span class="hero-cta">${escaparHero(slide.texto_boton || 'Ver producto')}</span>
+                        </div>
+                    </a>
+                </div>
+            `).join('');
+
+            const controles = slides.length > 1 ? `
+                <button class="prev" type="button" aria-label="Banner anterior">&#10094;</button>
+                <button class="next" type="button" aria-label="Banner siguiente">&#10095;</button>
+            ` : '';
+
+            hero.innerHTML = contenido + controles;
+            iniciarCarruselHero();
+        }
+
+        function iniciarCarruselHero() {
+            const hero = document.getElementById('hero-principal');
+            const slides = hero.querySelectorAll('.slide');
+            const btnSiguiente = hero.querySelector('.next');
+            const btnAnterior = hero.querySelector('.prev');
+
+            if (intervaloHero !== null) {
+                clearInterval(intervaloHero);
+                intervaloHero = null;
+            }
+
+            if (slides.length === 0) return;
+
+            let index = 0;
+
+            function mostrarSlide(n) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[n].classList.add('active');
+            }
+
+            if (slides.length === 1) {
+                mostrarSlide(0);
+                return;
+            }
+
+            btnSiguiente.addEventListener('click', () => {
+                index = (index + 1) % slides.length;
+                mostrarSlide(index);
+            });
+
+            btnAnterior.addEventListener('click', () => {
+                index = (index - 1 + slides.length) % slides.length;
+                mostrarSlide(index);
+            });
+
+            intervaloHero = setInterval(() => {
+                index = (index + 1) % slides.length;
+                mostrarSlide(index);
+            }, 5000);
+        }
+
+        async function cargarHero() {
+            try {
+                const respuesta = await fetch(API_HERO);
+                if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
+
+                const slides = await respuesta.json();
+                renderizarHero(slides);
+            } catch (error) {
+                console.error('No se pudo cargar el Hero desde la base de datos:', error);
+
+                // Si falla la API, se mantiene el contenido de respaldo escrito en HTML.
+                iniciarCarruselHero();
+            }
+        }
+
+        cargarHero();
     </script>
 
 </body>

@@ -16,20 +16,84 @@ requerirAdminPagina('formu.php');
 
 <body>
 
-   
-
-
     <main class="admin-main">
 
         <h1>PANEL DE ADMINISTRACIÓN</h1>
 
         <div class="admin-nota">
-            <strong>Nota:</strong> <strong>"Descargar productos.json"</strong>
-            
+            Desde este panel puedes administrar el <strong>Hero de la página de inicio</strong> y los <strong>productos de Voltix</strong>.
         </div>
 
         <div id="admin-aviso" class="admin-aviso" style="display:none;"></div>
 
+        <section class="admin-panel">
+            <h2 id="hero-form-titulo">Administrar Hero</h2>
+
+            <p class="admin-ayuda">
+                Cada elemento corresponde a un banner del carrusel principal de la página de inicio.
+                Puedes agregar, editar o eliminar banners sin modificar el código de Index.php.
+            </p>
+
+            <form id="form-hero" class="admin-form">
+                <div class="admin-form-grid">
+                    <label>
+                        Título
+                        <input type="text" id="hero-titulo" required placeholder="Ej. Kits Arduino para Principiantes">
+                    </label>
+
+                    <label>
+                        Subtítulo
+                        <input type="text" id="hero-subtitulo" placeholder="Ej. Hasta 30% de descuento">
+                    </label>
+
+                    <label>
+                        URL de imagen
+                        <input type="text" id="hero-imagen" required placeholder="https://... o ../IMG/banner.jpg">
+                    </label>
+
+                    <label>
+                        Enlace del botón
+                        <input type="text" id="hero-enlace" placeholder="producto.html?id=2">
+                    </label>
+
+                    <label>
+                        Texto del botón
+                        <input type="text" id="hero-texto-boton" value="Ver producto" placeholder="Ver producto">
+                    </label>
+
+                    <label>
+                        Orden
+                        <input type="number" id="hero-orden" min="1" value="1" required>
+                    </label>
+                </div>
+
+                <div class="admin-form-botones">
+                    <button type="submit" class="btn-guardar">Guardar en Hero</button>
+                    <button type="button" id="btn-cancelar-hero" style="display:none;" class="btn-cancelar">Cancelar edición</button>
+                </div>
+            </form>
+
+            <div class="admin-tabla-header" style="margin-top: 1.5rem;">
+                <h2>Elementos del Hero (<span id="contador-hero"></span>)</h2>
+            </div>
+
+            <div class="admin-tabla-wrap">
+                <table class="admin-tabla">
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Título</th>
+                            <th>Subtítulo</th>
+                            <th>Orden</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-hero-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== PRODUCTOS ==================== -->
         <section class="admin-panel">
             <h2 id="form-titulo">Agregar producto</h2>
 
@@ -137,7 +201,7 @@ requerirAdminPagina('formu.php');
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="../JS/admin.js"></script>
+    <script src="../JS/admin.js?v=3"></script>
 
 </body>
 
