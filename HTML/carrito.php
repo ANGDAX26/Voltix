@@ -81,24 +81,26 @@
             <h2>Método de pago</h2>
 
             <label>
-                <input type="radio" name="pago">
+                <input type="radio" name="pago" value="tarjeta">
                 Tarjeta de crédito o débito
             </label>
 
             <label>
-                <input type="radio" name="pago">
+                <input type="radio" name="pago" value="transferencia">
                 Transferencia bancaria
             </label>
 
             <label>
-                <input type="radio" name="pago">
+                <input type="radio" name="pago" value="efectivo">
                 Pago en efectivo al recibir
             </label>
         </section>
 
+        <div id="checkout-mensaje" class="checkout-mensaje" style="display:none;"></div>
+
         <div class="login-footer">
-            <button>Proceder al pago</button>
-            <p><a href="Voltix.html">Seguir comprando</a></p>
+            <button id="btnCheckout" type="button">Proceder al pago</button>
+            <p><a href="Index.php">Seguir comprando</a></p>
         </div>
 
     </main>

@@ -86,7 +86,7 @@ class Carrito {
             carritoItems.innerHTML = `
                 <div style="text-align: center; padding: 3rem 1rem; color: var(--gris-texto);">
                     <p style="font-size: 18px; font-weight: 600;">Tu carrito está vacío</p>
-                    <p><a href="Voltix.html" style="color: var(--naranja); text-decoration: underline;">Continuar comprando</a></p>
+                    <p><a href="Index.php" style="color: var(--naranja); text-decoration: underline;">Continuar comprando</a></p>
                 </div>
             `;
             if (resumen) {
@@ -280,7 +280,92 @@ class Carrito {
 // Inicializar el carrito cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
     window.carrito = new Carrito();
+    conectarCheckout();
 });
+
+function conectarCheckout() {
+    const btn = document.getElementById('btnCheckout');
+    if (!btn) return; // esta página no es carrito.php
+
+    btn.addEventListener('click', procesarCheckout);
+}
+
+function mostrarMensajeCheckout(texto, esError = false) {
+    const caja = document.getElementById('checkout-mensaje');
+    if (!caja) return;
+    caja.textContent = texto;
+    caja.style.display = 'block';
+    caja.style.color = esError ? '#c0392b' : '#1e7e34';
+}
+
+async function procesarCheckout() {
+    const carrito = window.carrito;
+
+    if (!carrito || carrito.items.length === 0) {
+        mostrarMensajeCheckout('Tu carrito está vacío.', true);
+        return;
+    }
+
+    const metodoPagoInput = document.querySelector('input[name="pago"]:checked');
+    if (!metodoPagoInput) {
+        mostrarMensajeCheckout('Selecciona un método de pago.', true);
+        return;
+    }
+
+    const direccion = document.getElementById('calle').value.trim();
+    const colonia = document.getElementById('colonia').value.trim();
+    const ciudad = document.getElementById('ciudad').value.trim();
+    const estado = document.getElementById('estado').value.trim();
+    const cp = document.getElementById('cp').value.trim();
+
+    if (!direccion || !ciudad || !estado || !cp) {
+        mostrarMensajeCheckout('Completa la dirección de envío (calle, ciudad, estado y código postal).', true);
+        return;
+    }
+
+    const payload = {
+        items: carrito.items.map(item => ({ id: item.id, cantidad: item.cantidad })),
+        direccion,
+        colonia,
+        ciudad,
+        estado,
+        cp,
+        metodo_pago: metodoPagoInput.value,
+    };
+
+    try {
+        const respuesta = await fetch('../PHP/checkout.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (respuesta.status === 401) {
+            mostrarMensajeCheckout('Debes iniciar sesión para completar tu compra. Redirigiendo...', true);
+            setTimeout(() => { window.location.href = 'formu.php'; }, 1500);
+            return;
+        }
+
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok) {
+            mostrarMensajeCheckout(resultado.error || 'No se pudo procesar el pedido.', true);
+            return;
+        }
+
+        // Pedido creado: vaciar carrito y avisar
+        carrito.items = [];
+        carrito.guardarEnLocal();
+        carrito.actualizarCarrito();
+
+        mostrarMensajeCheckout(`¡Pedido #${resultado.id_pedido} realizado! Total: $${resultado.total.toFixed(2)}. Redirigiendo a tu perfil...`);
+        setTimeout(() => { window.location.href = 'perfil.php'; }, 1800);
+
+    } catch (e) {
+        console.error('Error en el checkout:', e);
+        mostrarMensajeCheckout('Error de conexión al procesar el pedido.', true);
+    }
+}
 
 // Agregar estilos para la animación
 const style = document.createElement('style');

@@ -1,6 +1,6 @@
-/* ============ Voltix — estilo "Steren" ============ */
+/* ============ Voltix ============ */
 :root{
-  --naranja: #F26E22;       /* naranja principal Steren */
+  --naranja: #F26E22;     
   --naranja-oscuro: #D85A12;
   --naranja-claro: #FFF1E6;
 
@@ -13,7 +13,7 @@
 
   --texto: #262626;
 
-  --oferta: #E30613;        /* rojo para ofertas/descuentos */
+  --oferta: #E30613;        
 
   --radius: 6px;
 }

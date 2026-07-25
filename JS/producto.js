@@ -8,14 +8,14 @@ async function cargarProductos() {
     const categoria = contenedor.dataset.categoria;
 
     try {
-        const respuesta = await fetch('../JSON/productos.json');
+        const url = categoria
+            ? `../PHP/productos.php?categoria=${encodeURIComponent(categoria)}`
+            : '../PHP/productos.php';
+
+        const respuesta = await fetch(url);
         if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
 
-        const productos = await respuesta.json();
-
-        const listaAMostrar = categoria
-            ? productos.filter(p => p.categoria === categoria)
-            : productos;
+        const listaAMostrar = await respuesta.json();
 
         if (listaAMostrar.length === 0) {
             contenedor.innerHTML = '<p>No hay productos disponibles en esta categoría.</p>';

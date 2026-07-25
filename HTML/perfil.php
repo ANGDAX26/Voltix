@@ -1,3 +1,7 @@
+<?php
+require_once '../PHP/sesion.php';
+requerirLoginPagina('formu.php');
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -111,8 +115,8 @@
                     Guardar cambios
                 </button>
 
-                <a href="#" class="btn-secundario">
-                    Cambiar contraseña
+                <a href="../PHP/cerrar.php" class="btn-secundario">
+                    Cerrar sesión
                 </a>
 
             </div>
@@ -215,84 +219,8 @@
 
                 <h2>Historial de compras</h2>
 
-                <div class="pedidos-lista">
-
-                    <div class="pedido">
-
-                        <p>Pedido #001</p>
-
-                        <p>Producto de ejemplo</p>
-
-                        <p>
-                            <strong>Total:</strong>
-                            $000.00
-                        </p>
-
-                        <p>
-                            <strong>Fecha:</strong>
-                            15 de junio, 2026
-                        </p>
-
-                        <span class="estado entregado">
-                            Entregado
-                        </span>
-
-                    </div>
-
-                    <div class="pedido">
-
-                        <p>Pedido #002</p>
-
-                        <p>
-                            Producto de ejemplo - Cantidad: 2
-                        </p>
-
-                        <p>
-                            <strong>Total:</strong>
-                            $000.00
-                        </p>
-
-                        <p>
-                            <strong>Fecha:</strong>
-                            10 de julio, 2026
-                        </p>
-
-                        <span class="estado en-proceso">
-                            En proceso
-                        </span>
-
-                    </div>
-
-                    <div class="pedido">
-
-                        <p>Pedido #003</p>
-
-                        <p>
-                            Producto de ejemplo - Pack completo
-                        </p>
-
-                        <p>
-                            <strong>Total:</strong>
-                            $000.00
-                        </p>
-
-                        <p>
-                            <strong>Fecha:</strong>
-                            5 de julio, 2026
-                        </p>
-
-                        <span class="estado entregado">
-                            Entregado
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <div class="seccion-acciones">
-                    <a href="carrito.html">
-                        Ver mis pedidos
-                    </a>
+                <div class="pedidos-lista" id="pedidosLista">
+                    <p>Cargando pedidos...</p>
                 </div>
 
             </section>
@@ -300,7 +228,7 @@
             <div class="login-footer">
 
                 <p>
-                    <a href="Voltix.html">
+                    <a href="Index.php">
                         Volver a productos
                     </a>
                 </p>
@@ -319,12 +247,9 @@
 
     </footer>
 
-<<<<<<< HEAD
-    <script src="../JS/perfil.js"></script>
-     <script src="../JS/buscador.js"></script>
-=======
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
->>>>>>> desarrollo-AngelD
+    <script src="../JS/perfil.js"></script>
+    <script src="../JS/buscador.js"></script>
 
 </body>
 </html>

@@ -1,33 +1,25 @@
-const STORAGE_KEY = 'voltix_productos_admin';
-const PRODUCTOS_JSON_PATH = '../JSON/productos.json';
+const API_PRODUCTOS = '../PHP/admin_productos.php';
 
 let productos = [];
 let editandoId = null;
 
-/* ---------- Carga inicial ---------- */
+/* ---------- Carga inicial (desde la base de datos) ---------- */
 async function iniciar() {
-    const guardado = localStorage.getItem(STORAGE_KEY);
-
-    if (guardado) {
-        productos = JSON.parse(guardado);
-        mostrarAviso('Mostrando productos guardados en el navegador');
-    } else {
-        try {
-            const respuesta = await fetch(PRODUCTOS_JSON_PATH);
-            if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
-            productos = await respuesta.json();
-        } catch (e) {
-            console.error('Error cargando productos.json:', e);
-            productos = [];
-            mostrarAviso('No se pudo cargar productos.json. Empezando con una lista vacía.', true);
+    try {
+        const respuesta = await fetch(API_PRODUCTOS);
+        if (respuesta.status === 401 || respuesta.status === 403) {
+            window.location.href = 'formu.php';
+            return;
         }
+        if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
+        productos = await respuesta.json();
+    } catch (e) {
+        console.error('Error cargando productos:', e);
+        productos = [];
+        mostrarAviso('No se pudieron cargar los productos desde el servidor.', true);
     }
 
     renderizarTabla();
-}
-
-function guardarEnLocalStorage() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(productos));
 }
 
 /* ---------- Render de la tabla ---------- */
@@ -86,29 +78,41 @@ function editarProducto(id) {
     document.getElementById('form-producto').scrollIntoView({ behavior: 'smooth' });
 }
 
-function eliminarProducto(id) {
+async function eliminarProducto(id) {
     const producto = productos.find(p => p.id === id);
     if (!producto) return;
 
     const confirmado = confirm(`¿Eliminar "${producto.nombre}"? Esta acción no se puede deshacer.`);
     if (!confirmado) return;
 
-    productos = productos.filter(p => p.id !== id);
-    guardarEnLocalStorage();
-    renderizarTabla();
+    try {
+        const respuesta = await fetch(API_PRODUCTOS, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ accion: 'eliminar', id })
+        });
+        const resultado = await respuesta.json();
 
-    if (editandoId === id) limpiarFormulario();
-}
+        if (!respuesta.ok) {
+            mostrarAviso(resultado.error || 'No se pudo eliminar el producto.', true);
+            return;
+        }
 
-function siguienteId() {
-    if (productos.length === 0) return 1;
-    return Math.max(...productos.map(p => p.id)) + 1;
+        productos = productos.filter(p => p.id !== id);
+        renderizarTabla();
+        mostrarAviso(`"${producto.nombre}" eliminado.`);
+
+        if (editandoId === id) limpiarFormulario();
+    } catch (e) {
+        console.error('Error eliminando producto:', e);
+        mostrarAviso('Error de conexión al eliminar el producto.', true);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     iniciar();
 
-    document.getElementById('form-producto').addEventListener('submit', (e) => {
+    document.getElementById('form-producto').addEventListener('submit', async (e) => {
         e.preventDefault();
 
         const nombre = document.getElementById('input-nombre').value.trim();
@@ -122,18 +126,47 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (editandoId !== null) {
-            const producto = productos.find(p => p.id === editandoId);
-            Object.assign(producto, { nombre, precio, categoria, imagen, descripcion });
-            mostrarAviso(`Producto "${nombre}" actualizado.`);
-        } else {
-            productos.push({ id: siguienteId(), nombre, precio, categoria, imagen, descripcion });
-            mostrarAviso(`Producto "${nombre}" agregado.`);
-        }
+        const payload = { nombre, precio, categoria, imagen, descripcion };
 
-        guardarEnLocalStorage();
-        renderizarTabla();
-        limpiarFormulario();
+        try {
+            let respuesta;
+            if (editandoId !== null) {
+                respuesta = await fetch(API_PRODUCTOS, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ accion: 'actualizar', id: editandoId, ...payload })
+                });
+            } else {
+                respuesta = await fetch(API_PRODUCTOS, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ accion: 'crear', ...payload })
+                });
+            }
+
+            const resultado = await respuesta.json();
+
+            if (!respuesta.ok) {
+                mostrarAviso(resultado.error || 'No se pudo guardar el producto.', true);
+                return;
+            }
+
+            if (editandoId !== null) {
+                const producto = productos.find(p => p.id === editandoId);
+                Object.assign(producto, payload);
+                mostrarAviso(`Producto "${nombre}" actualizado.`);
+            } else {
+                productos.unshift({ id: resultado.id, ...payload });
+                mostrarAviso(`Producto "${nombre}" agregado.`);
+            }
+
+            renderizarTabla();
+            limpiarFormulario();
+
+        } catch (e) {
+            console.error('Error guardando producto:', e);
+            mostrarAviso('Error de conexión al guardar el producto.', true);
+        }
     });
 
     document.getElementById('btn-cancelar-edicion').addEventListener('click', limpiarFormulario);
@@ -146,10 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
         a.download = 'productos.json';
         a.click();
         URL.revokeObjectURL(url);
-        mostrarAviso('Descargado. Reemplaza el archivo productos.json de tu proyecto con este para publicar los cambios.');
+        mostrarAviso('Respaldo de productos.json descargado.');
     });
 
     document.getElementById('btn-descargar-reporte').addEventListener('click', descargarReporteCSV);
+
     document.getElementById('btn-importar-excel').addEventListener('click', async () => {
         const input = document.getElementById('input-archivo-excel');
         if (!input.files || input.files.length === 0) {
@@ -160,20 +194,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.getElementById('btn-restablecer').addEventListener('click', async () => {
-        const confirmado = confirm('Esto descarta los cambios guardados en este navegador y vuelve a cargar productos.json original. ¿Continuar?');
+        const confirmado = confirm('Esto vuelve a cargar la lista de productos desde el servidor, descartando cualquier cambio sin guardar. ¿Continuar?');
         if (!confirmado) return;
-
-        localStorage.removeItem(STORAGE_KEY);
-        try {
-            const respuesta = await fetch(PRODUCTOS_JSON_PATH);
-            productos = await respuesta.json();
-            mostrarAviso('Restablecido a productos.json original.');
-        } catch (e) {
-            productos = [];
-            mostrarAviso('No se pudo recargar productos.json.', true);
-        }
-        renderizarTabla();
+        await iniciar();
         limpiarFormulario();
+        mostrarAviso('Lista de productos recargada desde el servidor.');
     });
 });
 
@@ -194,6 +219,7 @@ function descargarReporteCSV() {
     mostrarAviso('Reporte CSV descargado.');
 }
 
+/* ---------- Importar productos desde Excel/CSV ---------- */
 async function importarProductosDesdeArchivo(archivo) {
     try {
         if (!archivo.name.match(/\.(xlsx|xls|csv)$/i)) {
@@ -214,47 +240,36 @@ async function importarProductosDesdeArchivo(archivo) {
             throw new Error('El archivo está vacío o no contiene datos válidos.');
         }
 
-        productos = filas.map(fila => {
+        const nuevosProductos = filas.map(fila => {
             const nombre = String(fila.nombre ?? fila.Nombre ?? fila.name ?? fila.Name ?? '').trim();
             const precio = Number(fila.precio ?? fila.Precio ?? fila.price ?? fila.Price ?? 0);
             const categoria = String(fila.categoria ?? fila.Categoria ?? fila.category ?? fila.Category ?? '').trim();
             const imagen = String(fila.imagen ?? fila.Imagen ?? fila.image ?? fila.Image ?? '').trim();
             const descripcion = String(fila.descripcion ?? fila.Descripcion ?? fila.description ?? fila.Description ?? '').trim();
-            const idBruto = fila.id ?? fila.ID ?? fila.Id ?? null;
-            const id = idBruto !== null && idBruto !== undefined && String(idBruto).trim() !== '' ? Number(idBruto) : null;
-            return { id, nombre, precio, categoria, imagen, descripcion };
-        }).filter(producto => producto.nombre && !isNaN(producto.precio) && producto.categoria && producto.imagen);
+            return { nombre, precio, categoria, imagen, descripcion };
+        }).filter(p => p.nombre && !isNaN(p.precio) && p.categoria && p.imagen);
 
-        if (!productos.length) {
+        if (!nuevosProductos.length) {
             throw new Error('No se encontró ninguna fila válida con nombre, precio, categoría e imagen.');
         }
 
-        asignarIdsUnicas();
-        guardarEnLocalStorage();
-        renderizarTabla();
+        let importados = 0;
+        for (const producto of nuevosProductos) {
+            const respuesta = await fetch(API_PRODUCTOS, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ accion: 'crear', ...producto })
+            });
+            if (respuesta.ok) importados++;
+        }
+
+        await iniciar();
         limpiarFormulario();
-        mostrarAviso(`Importados ${productos.length} productos desde ${archivo.name}.`);
+        mostrarAviso(`Importados ${importados} de ${nuevosProductos.length} productos desde ${archivo.name}.`);
     } catch (error) {
         console.error('Error importando archivo:', error);
         mostrarAviso(error.message || 'Error al importar archivo.', true);
     }
-}
-
-function asignarIdsUnicas() {
-    let siguiente = productos.reduce((max, producto) => {
-        const id = typeof producto.id === 'number' && !isNaN(producto.id) ? producto.id : 0;
-        return Math.max(max, id);
-    }, 0);
-
-    const usados = new Set();
-    productos = productos.map(producto => {
-        if (!producto.id || isNaN(producto.id) || usados.has(producto.id)) {
-            siguiente += 1;
-            producto.id = siguiente;
-        }
-        usados.add(producto.id);
-        return producto;
-    });
 }
 
 function mostrarAviso(mensaje, esError = false) {

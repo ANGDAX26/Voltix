@@ -17,7 +17,7 @@
     function cargarProductos() {
         if (productosPromesa) return productosPromesa;
 
-        productosPromesa = fetch('../JSON/productos.json')
+        productosPromesa = fetch('../PHP/productos.php')
             .then(res => {
                 if (!res.ok) throw new Error('HTTP ' + res.status);
                 return res.json();

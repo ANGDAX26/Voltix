@@ -15,7 +15,13 @@
 
         <h1 align="center">Crear cuenta</h1>
 
-        <form action="#" method="post">
+        <?php if (isset($_GET['error'])): ?>
+            <p style="color:#c0392b; text-align:center; font-weight:600;">
+                <?php echo htmlspecialchars($_GET['error']); ?>
+            </p>
+        <?php endif; ?>
+
+        <form action="../PHP/registro.php" method="post">
 
             <label for="nombre">Nombre completo</label>
             <input type="text" id="nombre" name="nombre" placeholder="Ingresa tu nombre completo" required>
@@ -38,7 +44,7 @@
 
         <div class="register-footer">
             <p>Completa tus datos para crear una cuenta.</p>
-            ¿Ya tienes cuenta? <a href="iniciosesion.html">Inicia sesión</a>
+            ¿Ya tienes cuenta? <a href="formu.php">Inicia sesión</a>
         </div>
 
     </main>

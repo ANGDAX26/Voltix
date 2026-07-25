@@ -5,17 +5,26 @@ async function cargarDetalle() {
     const id = Number(params.get('id'));
 
     try {
-        const respuesta = await fetch('../JSON/productos.json');
+        const respuesta = await fetch('../PHP/productos.php?id=' + encodeURIComponent(id));
+
+        if (respuesta.status === 404) {
+            document.getElementById('detalle-producto').innerHTML = `
+                <div class="detalle">
+                    <h1>Producto no encontrado</h1>
+                    <p><a href="Index.php">&larr; Volver a la tienda</a></p>
+                </div>
+            `;
+            return;
+        }
         if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
 
-        const productos = await respuesta.json();
-        const producto = productos.find(p => p.id === id);
+        const producto = await respuesta.json();
 
-        if (!producto) {
+        if (!producto || !producto.id) {
             contenedor.innerHTML = `
                 <div class="detalle">
                     <h1>Producto no encontrado</h1>
-                    <p><a href="Voltix.html">&larr; Volver a la tienda</a></p>
+                    <p><a href="Index.php">&larr; Volver a la tienda</a></p>
                 </div>
             `;
             return;
@@ -34,7 +43,7 @@ async function cargarDetalle() {
                     <p class="precio">$${producto.precio.toFixed(2)} MXN</p>
                     <p class="detalle-descripcion">${producto.descripcion}</p>
                     <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-img="${producto.imagen}">Agregar al carrito</button>
-                    <p><a href="Voltix.html">&larr; Volver a la tienda</a></p>
+                    <p><a href="Index.php">&larr; Volver a la tienda</a></p>
                 </div>
 
             </div>
