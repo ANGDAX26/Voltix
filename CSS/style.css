@@ -160,29 +160,32 @@ img{ max-width: 100%; display: block; }
 
 .site-header .nav ul{
   display: flex;
-    gap: 1rem;
-    align-items: center;
-  }
-  .site-header .nav a{
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: var(--negro);
-    padding: .5rem;
-    min-width: 2.4rem;
-    width: auto;
-    height: auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    text-decoration: none;
-    transition: background .2s, transform .2s, color .2s;
-  }
-  .site-header .nav a:hover{
-    color: var(--naranja);
-    background: rgba(242,110,34,.12);
-    transform: translateY(-1px);
-  }
+  gap: .8rem;
+  align-items: center;
+}
+
+.site-header .nav a{
+  font-weight: 600;
+  font-size: 1.55rem;
+  color: var(--negro);
+  padding: .55rem;
+  min-width: 2.8rem;
+  min-height: 2.8rem;
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background .2s, transform .2s, color .2s;
+}
+
+.site-header .nav a:hover{
+  color: var(--naranja);
+  background: rgba(242,110,34,.12);
+  transform: translateY(-2px);
+}
 
 /* Categorías bar */
 .categorias-bar{
@@ -543,10 +546,10 @@ footer{
     padding-top: .6rem;
   }
   .site-header .nav a{
-    font-size: 1rem;
+    font-size: 1.35rem;
     width: auto;
     height: auto;
-    padding: .45rem .7rem;
+    padding: .45rem .65rem;
   }
   .categorias-bar ul{
     padding: .7rem 1rem;
