@@ -66,7 +66,7 @@
             <a class="slide-link" href="producto.html?id=2" aria-label="Ver Kit Arduino para principiantes">
                 <img src="https://ibb.co/rRrvYxmf" alt="Kits Arduino para Principiantes">
                 <div class="texto">
-                    <h2>Kits Arduino para Principiantes</h2>
+                    <h2>Kits Arduino para Principiantesxdxdxdxd</h2>
                     <p>Hasta 30% de descuento</p>
                     <span class="hero-cta">Ver producto</span>
                 </div>
