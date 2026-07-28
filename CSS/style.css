@@ -40,6 +40,10 @@ img{ max-width: 100%; display: block; }
   top: 0;
   z-index: 50;
 }
+.logo-header{
+  width: 180px;
+  object-fit: contain;
+}
 
 .site-header{
   display: flex;
