@@ -63,7 +63,7 @@
 
         <!-- Contenido de respaldo por si la API no puede cargar. -->
         <div class="slide active">
-            <a class="slide-link" href="producto.html?id=2" aria-label="Ver Kit Arduino para principiantes">
+            <a class="slide-link" href="producto.php?id=2" aria-label="Ver Kit Arduino para principiantes">
                 <img src="https://ibb.co/rRrvYxmf" alt="Kits Arduino para Principiantes">
                 <div class="texto">
                     <h2>Kits Arduino para Principiantesxdxdxdxd</h2>
@@ -74,7 +74,7 @@
         </div>
 
         <div class="slide">
-            <a class="slide-link" href="producto.html?id=12" aria-label="Ver ESP32 y Proyectos IoT">
+            <a class="slide-link" href="producto.php?id=12" aria-label="Ver ESP32 y Proyectos IoT">
                 <img src="https://ibb.co/bjpJDgbJ" alt="ESP32 y Proyectos IoT">
                 <div class="texto">
                     <h2>ESP32 y Proyectos IoT</h2>
@@ -85,7 +85,7 @@
         </div>
 
         <div class="slide">
-            <a class="slide-link" href="producto.html?id=1" aria-label="Ver Gran Variedad de Sensores">
+            <a class="slide-link" href="producto.php?id=1" aria-label="Ver Gran Variedad de Sensores">
                 <img src="https://ibb.co/99nDdxJn" alt="Gran Variedad de Sensores">
                 <div class="texto">
                     <h2>Gran Variedad de Sensores</h2>
@@ -121,7 +121,7 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        fetch('footer.html')
+        fetch('footer.php')
             .then(response => {
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 return response.text();

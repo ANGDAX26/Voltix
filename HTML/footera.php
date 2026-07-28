@@ -10,6 +10,6 @@
         <p>&copy; 2026 Voltix. Todos los derechos reservados.</p>
         <p>Correo: contacto@voltix.com</p>
         <p>Teléfono: 222-123-4567</p>
-        <p><a href="admin.html">Administración</a></p>
+        <p><a href="admin.php">Administración</a></p>
     </footer>
 </div>

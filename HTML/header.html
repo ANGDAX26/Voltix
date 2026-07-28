@@ -15,17 +15,17 @@
                 </a>
             </li>
             <li>
-                <a href="Index.php" aria-label="Productos">
-                 🛍️
+                <a href="promociones.php" aria-label="Productos">
+                 🏷️
                 </a>
             </li>
             <li>
-                <a href="preguntasvol.html" aria-label="Preguntas frecuentes">
+                <a href="preguntasvol.php" aria-label="Preguntas frecuentes">
                  ❓
                 </a>
             </li>
             <li>
-                <a href="formu.php" aria-label="Iniciar sesión">
+                <a href="formu.php" aria-label="Iniciar sesión" id="enlace-login">
                  🔑
                 </a>
             </li>
@@ -39,6 +39,11 @@
                    👤
                 </a>
             </li>
+            <li id="nav-cerrar-sesion" style="display:none;">
+                <a href="../PHP/cerrar.php" aria-label="Cerrar sesión" title="Cerrar sesión" class="btn-cerrar-sesion">
+                   🚪
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
@@ -46,12 +51,30 @@
 <div class="categorias-bar">
     <h2>Categorías</h2>
     <ul>
-        <li><a href="Herramientas.html">Herramientas</a></li>
-        <li><a href="Kits_Educativos.html">Kits educativos</a></li>
-        <li><a href="Cables.html">Cables</a></li>
-        <li><a href="sensores.html">Sensores</a></li>
+        <li><a href="Herramientas.php">Herramientas</a></li>
+        <li><a href="Kits_Educativos.php">Kits educativos</a></li>
+        <li><a href="Cables.php">Cables</a></li>
+        <li><a href="sensores.php">Sensores</a></li>
         <li><a href="hogar.php">Hogar</a></li>
         <li><a href="telefonia.php">Telefonia,Celulares y Tablets</a></li>
-        <li><a href="promociones.html">Promociones</a></li>
+        <li><a href="computacion.php">Computación</a></li>
+        <li><a href="audio.php">Audio</a></li>
+        <li><a href="promociones.php">Promociones</a></li>
     </ul>
 </div>
+
+<script>
+(function() {
+    fetch('../PHP/estado_sesion.php')
+        .then(function(r) { return r.ok ? r.json() : Promise.reject(r); })
+        .then(function(sesion) {
+            var cerrarLi = document.getElementById('nav-cerrar-sesion');
+            var loginLi = document.getElementById('enlace-login');
+            if (sesion.logueado) {
+                if (cerrarLi) cerrarLi.style.display = '';
+                if (loginLi) loginLi.style.display = 'none';
+            }
+        })
+        .catch(function() { /* silencioso: si no hay sesión, no mostramos el botón */ });
+})();
+</script>

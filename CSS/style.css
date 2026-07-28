@@ -931,3 +931,14 @@ footer{
     height: 160px;
   }
 }
+
+/* ============ Logout Button in Header ============ */
+.btn-cerrar-sesion{
+  color: var(--negro) !important;
+  transition: background .2s, color .2s, transform .2s !important;
+}
+.btn-cerrar-sesion:hover{
+  background: rgba(227, 6, 19, 0.12) !important;
+  color: #c0392b !important;
+  transform: translateY(-2px) !important;
+}

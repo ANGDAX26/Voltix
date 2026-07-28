@@ -50,7 +50,7 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        fetch('footer.html')
+        fetch('footer.php')
             .then(response => {
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 return response.text();
@@ -66,12 +66,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="../JS/producto.js?v=2"></script>
-<<<<<<< HEAD
- <script src="../JS/buscador.js"></script>
-=======
     <script src="../JS/carrito.js"></script>
+    <script src="../JS/buscador.js"></script>
 
->>>>>>> desarrollo-AngelD
 </body>
 
 </html>

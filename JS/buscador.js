@@ -84,7 +84,7 @@
     }
 
     function irAProducto(id) {
-        window.location.href = 'producto.html?id=' + encodeURIComponent(id);
+        window.location.href = 'producto.php?id=' + encodeURIComponent(id);
     }
 
     function cerrarResultados(contenedor) {

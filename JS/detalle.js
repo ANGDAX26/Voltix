@@ -4,11 +4,21 @@ async function cargarDetalle() {
     const params = new URLSearchParams(window.location.search);
     const id = Number(params.get('id'));
 
+    if (!id || isNaN(id)) {
+        contenedor.innerHTML = `
+            <div class="detalle">
+                <h1>Producto no encontrado</h1>
+                <p><a href="Index.php">&larr; Volver a la tienda</a></p>
+            </div>
+        `;
+        return;
+    }
+
     try {
         const respuesta = await fetch('../PHP/productos.php?id=' + encodeURIComponent(id));
 
         if (respuesta.status === 404) {
-            document.getElementById('detalle-producto').innerHTML = `
+            contenedor.innerHTML = `
                 <div class="detalle">
                     <h1>Producto no encontrado</h1>
                     <p><a href="Index.php">&larr; Volver a la tienda</a></p>
@@ -30,6 +40,9 @@ async function cargarDetalle() {
             return;
         }
 
+        // Ensure precio is a number
+        const precio = Number(producto.precio) || 0;
+
         document.title = `${producto.nombre} — Voltix`;
 
         contenedor.innerHTML = `
@@ -40,9 +53,9 @@ async function cargarDetalle() {
                 <div class="detalle-info">
                     <p class="detalle-categoria">${producto.categoria}</p>
                     <h1>${producto.nombre}</h1>
-                    <p class="precio">$${producto.precio.toFixed(2)} MXN</p>
+                    <p class="precio">$${precio.toFixed(2)} MXN</p>
                     <p class="detalle-descripcion">${producto.descripcion}</p>
-                    <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-img="${producto.imagen}">Agregar al carrito</button>
+                    <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${precio}" data-img="${producto.imagen}">Agregar al carrito</button>
                     <p><a href="Index.php">&larr; Volver a la tienda</a></p>
                 </div>
 
@@ -51,7 +64,12 @@ async function cargarDetalle() {
 
     } catch (e) {
         console.error('Error cargando el producto:', e);
-        contenedor.innerHTML = `<h1>No se pudo cargar el producto.</h1><p style="color:red;font-size:12px;">${e.name}: ${e.message}</p><pre style="font-size:10px;text-align:left;">${e.stack}</pre>`;
+        contenedor.innerHTML = `
+            <div class="detalle">
+                <h1>No se pudo cargar el producto.</h1>
+                <p><a href="Index.php">&larr; Volver a la tienda</a></p>
+            </div>
+        `;
     }
 }
 

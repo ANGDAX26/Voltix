@@ -261,7 +261,7 @@ productos[numeroProducto].descripcion;
     <div id="footer-placeholder"></div>
 
     <script>
-        fetch('footer.html')
+        fetch('footer.php')
             .then(response => {
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 return response.text();

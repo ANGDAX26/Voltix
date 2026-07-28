@@ -53,7 +53,7 @@ requerirAdminPagina('formu.php');
 
                     <label>
                         Enlace del botón
-                        <input type="text" id="hero-enlace" placeholder="producto.html?id=2">
+                        <input type="text" id="hero-enlace" placeholder="producto.php?id=2">
                     </label>
 
                     <label>
@@ -181,11 +181,17 @@ requerirAdminPagina('formu.php');
         </section>
 
     </main>
+    <button type="button" id="btn-guardar" onclick="location.href='../PHP/cerrar.php'" class="btn-guardar" style="margin-left:48%; margin-bottom: 5%;">
+        Cerrar sesión
+    </button>
+
+
+
 
     <div id="footer-placeholder"></div>
 
     <script>
-        fetch('footera.html')
+        fetch('footera.php')
             .then(response => {
                 if (!response.ok) throw new Error('HTTP ' + response.status);
                 return response.text();

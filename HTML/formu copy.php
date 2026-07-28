@@ -22,7 +22,7 @@
         </form>
         <div class="login-footer">
             <p class="description" align="center">Accede a tu cuenta introduciendo tu usuario y contraseña.</p>
-            ¿No tienes cuenta? <a href="registro.html">Regístrate</a>
+            ¿No tienes cuenta? <a href="registro.php">Regístrate</a>
         </div>
 
     </main>
