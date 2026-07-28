@@ -26,11 +26,12 @@ body{
   color: var(--texto);
   background: var(--paper);
   line-height: 1.5;
+  user-select: none;
 }
 
 a{ text-decoration: none; color: inherit; }
 ul{ list-style: none; margin: 0; padding: 0; }
-img{ max-width: 100%; display: block; }
+img{ max-width: 100%; display: block; -webkit-user-drag: none; }
 
 /* ============ Header ============ */
 #header-placeholder{
@@ -39,6 +40,10 @@ img{ max-width: 100%; display: block; }
   position: sticky;
   top: 0;
   z-index: 50;
+}
+.logo-header{
+  width: 180px;
+  object-fit: contain;
 }
 
 .site-header{
@@ -931,14 +936,3 @@ footer{
     height: 160px;
   }
 }
-
-/* ============ Logout Button in Header ============ */
-.btn-cerrar-sesion{
-  color: var(--negro) !important;
-  transition: background .2s, color .2s, transform .2s !important;
-}
-.btn-cerrar-sesion:hover{
-  background: rgba(227, 6, 19, 0.12) !important;
-  color: #c0392b !important;
-  transform: translateY(-2px) !important;
-}

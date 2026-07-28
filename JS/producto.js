@@ -10,7 +10,7 @@ async function cargarProductos() {
     try {
         const url = categoria
             ? `../PHP/productos.php?categoria=${encodeURIComponent(categoria)}`
-            : '../PHP/productos.php';
+            : '../PHP/producto.php';
 
         const respuesta = await fetch(url);
         if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
@@ -22,10 +22,8 @@ async function cargarProductos() {
             return;
         }
 
-        contenedor.innerHTML = listaAMostrar.map(producto => {
-            const precio = Number(producto.precio) || 0;
-            return `
-            <div class="producto-card" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${precio}" data-img="${producto.imagen}">
+        contenedor.innerHTML = listaAMostrar.map(producto => `
+            <div class="producto-card" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-img="${producto.imagen}">
 
                 <a href="producto.php?id=${producto.id}">
                     <img src="${producto.imagen}"
@@ -34,13 +32,12 @@ async function cargarProductos() {
 
                 <h3><a href="producto.php?id=${producto.id}">${producto.nombre}</a></h3>
 
-                <p class="precio">$${precio.toFixed(2)} MXN</p>
+                <p class="precio">$${producto.precio.toFixed(2)} MXN</p>
 
-                <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${precio}" data-img="${producto.imagen}">Agregar al carrito</button>
+                <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-img="${producto.imagen}">Agregar al carrito</button>
 
             </div>
-        `;
-        }).join('');
+        `).join('');
 
     } catch (e) {
         console.error('Error cargando productos:', e);

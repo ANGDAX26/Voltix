@@ -1,47 +1,49 @@
 <header class="site-header">
     <div class="logo">
-        <a href="Index.php"><img src="https://i.ibb.co/HfFjJhnh/voltix.jpg" alt="Logo Voltix"></a>
+        <a href="Index.php"><img class="logo-header"
+                src="https://res.cloudinary.com/ty7o3lam/image/upload/v1785210490/imagen_2026-07-27_214853268_jmkgqu.png"
+                alt="Logo Voltix"></a>
     </div>
-<div class="buscador-contenedor">
-    <input type="search" id="buscador-input" placeholder="🔎 Buscar" autocomplete="off">
-    <div id="buscador-resultados" class="buscador-resultados"></div>
-</div>
+    <div class="buscador-contenedor">
+        <input type="search" id="buscador-input" placeholder="🔎 Buscar" autocomplete="off">
+        <div id="buscador-resultados" class="buscador-resultados"></div>
+    </div>
 
     <nav class="nav">
         <ul>
             <li>
                 <a href="Index.php" aria-label="Inicio">
-                 🏠
+                    🏠
                 </a>
             </li>
             <li>
                 <a href="promociones.php" aria-label="Productos">
-                 🏷️
+                    🏷️
                 </a>
             </li>
             <li>
                 <a href="preguntasvol.php" aria-label="Preguntas frecuentes">
-                 ❓
+                    ❓
                 </a>
             </li>
             <li>
                 <a href="formu.php" aria-label="Iniciar sesión" id="enlace-login">
-                 🔑
+                    🔑
                 </a>
             </li>
             <li>
-              <a href="carrito.php" class="carrito-link" aria-label="Ver carrito">
-                 🛒 <span data-carrito-count class="badge bg-danger" style="display:none;">0</span>
-              </a>
+                <a href="carrito.php" class="carrito-link" aria-label="Ver carrito">
+                    🛒 <span data-carrito-count class="badge bg-danger" style="display:none;">0</span>
+                </a>
             </li>
             <li>
                 <a href="perfil.php" aria-label="Perfil">
-                   👤
+                    👤
                 </a>
             </li>
             <li id="nav-cerrar-sesion" style="display:none;">
                 <a href="../PHP/cerrar.php" aria-label="Cerrar sesión" title="Cerrar sesión" class="btn-cerrar-sesion">
-                   🚪
+                    🚪
                 </a>
             </li>
         </ul>
@@ -57,24 +59,22 @@
         <li><a href="sensores.php">Sensores</a></li>
         <li><a href="hogar.php">Hogar</a></li>
         <li><a href="telefonia.php">Telefonia,Celulares y Tablets</a></li>
-        <li><a href="computacion.php">Computación</a></li>
-        <li><a href="audio.php">Audio</a></li>
-        <li><a href="promociones.php">Promociones</a></li>
+        <li><a href="promociones.html">Promociones</a></li>
     </ul>
 </div>
 
 <script>
-(function() {
-    fetch('../PHP/estado_sesion.php')
-        .then(function(r) { return r.ok ? r.json() : Promise.reject(r); })
-        .then(function(sesion) {
-            var cerrarLi = document.getElementById('nav-cerrar-sesion');
-            var loginLi = document.getElementById('enlace-login');
-            if (sesion.logueado) {
-                if (cerrarLi) cerrarLi.style.display = '';
-                if (loginLi) loginLi.style.display = 'none';
-            }
-        })
-        .catch(function() { /* silencioso: si no hay sesión, no mostramos el botón */ });
-})();
+    (function () {
+        fetch('../PHP/estado_sesion.php')
+            .then(function (r) { return r.ok ? r.json() : Promise.reject(r); })
+            .then(function (sesion) {
+                var cerrarLi = document.getElementById('nav-cerrar-sesion');
+                var loginLi = document.getElementById('enlace-login');
+                if (sesion.logueado) {
+                    if (cerrarLi) cerrarLi.style.display = '';
+                    if (loginLi) loginLi.style.display = 'none';
+                }
+            })
+            .catch(function () { /* silencioso: si no hay sesión, no mostramos el botón */ });
+    })();
 </script>
