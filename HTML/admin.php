@@ -9,12 +9,45 @@ requerirAdminPagina('formu.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voltix - Panel de Administración</title>
-    <link rel="stylesheet" href="../CSS/style.css">
-    <link rel="stylesheet" href="../CSS/admin.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../CSS/style.css?v=4">
+    <link rel="stylesheet" href="../CSS/admin.css?v=4">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous">
 </head>
 
 <body>
+
+    <header class="admin-header">
+        <div class="admin-header-inner">
+
+            <a href="Index.php" class="admin-header-logo" aria-label="Ir al inicio de Voltix">
+                <img
+                    src="https://res.cloudinary.com/ty7o3lam/image/upload/v1785210490/imagen_2026-07-27_214853268_jmkgqu.png"
+                    alt="Logo Voltix">
+            </a>
+
+            <div class="admin-header-titulo">
+                Panel de administración
+            </div>
+
+            <nav class="admin-header-nav" aria-label="Navegación del administrador">
+                <a href="Index.php" class="admin-header-link">
+                    <span class="admin-header-icono">🏠</span>
+                    <span>Inicio</span>
+                </a>
+
+                <a href="../PHP/cerrar.php" class="admin-header-link admin-header-cerrar">
+                    <span class="admin-header-icono">🚪</span>
+                    <span>Cerrar sesión</span>
+                </a>
+            </nav>
+
+        </div>
+    </header>
 
     <main class="admin-main">
 
@@ -93,7 +126,6 @@ requerirAdminPagina('formu.php');
             </div>
         </section>
 
-        <!-- ==================== PRODUCTOS ==================== -->
         <section class="admin-panel">
             <h2 id="form-titulo">Agregar producto</h2>
 
@@ -141,22 +173,30 @@ requerirAdminPagina('formu.php');
 
         <section class="admin-panel">
             <h2>Importar y reportar</h2>
+
             <div class="admin-form-grid">
                 <label>
                     Subir archivo Excel / CSV
                     <input type="file" id="input-archivo-excel" accept=".xlsx,.xls,.csv">
                 </label>
             </div>
+
             <div class="admin-form-botones">
                 <button type="button" id="btn-importar-excel" class="btn-guardar">Importar desde archivo</button>
                 <button type="button" id="btn-descargar-reporte" class="btn-descargar">Descargar reporte CSV</button>
             </div>
-            <p class="admin-ayuda">El archivo debe contener columnas: <strong>nombre</strong>, <strong>precio</strong>, <strong>categoria</strong>, <strong>imagen</strong>, <strong>descripcion</strong> e <strong>id</strong> (opcional).</p>
+
+            <p class="admin-ayuda">
+                El archivo debe contener columnas:
+                <strong>nombre</strong>, <strong>precio</strong>, <strong>categoria</strong>,
+                <strong>imagen</strong>, <strong>descripcion</strong> e <strong>id</strong> (opcional).
+            </p>
         </section>
 
         <section class="admin-panel">
             <div class="admin-tabla-header">
                 <h2>Productos (<span id="contador-productos"></span>)</h2>
+
                 <div class="admin-tabla-botones">
                     <button id="btn-descargar" class="btn-descargar">Descargar productos.json</button>
                     <button id="btn-restablecer" class="btn-restablecer">Restablecer original</button>
@@ -181,15 +221,7 @@ requerirAdminPagina('formu.php');
         </section>
 
     </main>
-    <div class="admin-form-botones" style="justify-content:center; margin-bottom: 5%;">
-        <button type="button" onclick="location.href='Index.php'" class="btn-cancelar">
-            &larr; Volver a la tienda
-        </button>
-        <button type="button" id="btn-guardar" onclick="location.href='../PHP/cerrar.php'" class="btn-guardar">
-            Cerrar sesión
-        </button>
-    </div>
-
+   
 
 
 
@@ -210,10 +242,12 @@ requerirAdminPagina('formu.php');
             });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="../JS/admin.js?v=3"></script>
+    <script src="../JS/admin.js?v=4"></script>
 
 </body>
-
 </html>
