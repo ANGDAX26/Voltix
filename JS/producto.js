@@ -10,7 +10,7 @@ async function cargarProductos() {
     try {
         const url = categoria
             ? `../PHP/productos.php?categoria=${encodeURIComponent(categoria)}`
-            : '../PHP/producto.php';
+            : '../PHP/productos.php';
 
         const respuesta = await fetch(url);
         if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);

@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="../CSS/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
+
+<body>
+
+<div id="header-placeholder"></div>
+<script src="../JS/header.js"></script>
 <script>
         fetch('header.html')
             .then(response => {
@@ -14,16 +19,13 @@
             })
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
+                inicializarHeader();
             })
             .catch(e => {
                 console.error('Error cargando header:', e);
                 document.getElementById('header-placeholder').innerHTML = '<!-- header no cargado -->';
             });
     </script>
-
-<body>
-
-<div id="header-placeholder"></div>
 
 <main class="preguntas-main">
     <div class="preguntas-header">

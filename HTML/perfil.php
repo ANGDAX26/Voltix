@@ -18,6 +18,7 @@ requerirLoginPagina('formu.php');
 <body>
 
     <div id="header-placeholder"></div>
+    <script src="../JS/header.js"></script>
 
     <script>
         fetch("header.html")
@@ -27,6 +28,7 @@ requerirLoginPagina('formu.php');
             })
             .then(data => {
                 document.getElementById("header-placeholder").innerHTML = data;
+                inicializarHeader();
             })
             .catch(e => {
                 console.error("Error cargando header:", e);
