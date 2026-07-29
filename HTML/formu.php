@@ -17,7 +17,6 @@
 <body>
 
     <div id="header-placeholder"></div>
-    <script src="../JS/header.js"></script>
 
     <script>
         fetch('header.html')
@@ -27,7 +26,6 @@
             })
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
-                inicializarHeader();
             })
             .catch(error => {
                 console.error('Error cargando header:', error);
@@ -91,6 +89,7 @@
     </div>
 
     <script src="../JS/carrito.js"></script>
+    <script src="../JS/header.js?v=3"></script>
     <script src="../JS/buscador.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

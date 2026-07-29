@@ -1,5 +1,3 @@
-
-
 class Carrito {
     constructor() {
         this.items = this.cargarDelLocal();
@@ -7,114 +5,123 @@ class Carrito {
     }
 
     cargarDelLocal() {
-        const datos = localStorage.getItem('voltix_carrito');
-        return datos ? JSON.parse(datos) : [];
+        try {
+            const datos = JSON.parse(localStorage.getItem('voltix_carrito') || '[]');
+            if (!Array.isArray(datos)) return [];
+
+            return datos
+                .map(item => ({
+                    id: Number(item.id),
+                    nombre: String(item.nombre || 'Producto'),
+                    precio: Number(item.precio) || 0,
+                    imagen: String(item.imagen || ''),
+                    cantidad: Math.max(1, Number.parseInt(item.cantidad, 10) || 1)
+                }))
+                .filter(item => Number.isFinite(item.id) && item.id > 0);
+        } catch (error) {
+            console.warn('No se pudo leer el carrito guardado:', error);
+            return [];
+        }
     }
 
     guardarEnLocal() {
         localStorage.setItem('voltix_carrito', JSON.stringify(this.items));
+        document.dispatchEvent(new CustomEvent('voltix:carrito-actualizado'));
     }
 
     agregarProducto(producto) {
-        // Buscar si el producto ya existe en el carrito
-        const itemExistente = this.items.find(item => item.id === producto.id);
+        const id = Number(producto.id);
+        if (!Number.isFinite(id) || id <= 0) return;
+
+        const itemExistente = this.items.find(item => item.id === id);
 
         if (itemExistente) {
             itemExistente.cantidad += 1;
         } else {
             this.items.push({
-                id: producto.id,
-                nombre: producto.nombre,
-                precio: producto.precio,
-                imagen: producto.imagen,
+                id,
+                nombre: String(producto.nombre || 'Producto'),
+                precio: Number(producto.precio) || 0,
+                imagen: String(producto.imagen || ''),
                 cantidad: 1
             });
         }
 
         this.guardarEnLocal();
-        this.mostrarNotificacion(`${producto.nombre} agregado al carrito`);
+        this.mostrarNotificacion(`${producto.nombre || 'Producto'} agregado al carrito`);
         this.actualizarCarrito();
     }
 
     eliminarProducto(id) {
-        this.items = this.items.filter(item => item.id !== id);
+        this.items = this.items.filter(item => item.id !== Number(id));
         this.guardarEnLocal();
         this.actualizarCarrito();
     }
 
     actualizarCantidad(id, cantidad) {
-        const item = this.items.find(item => item.id === id);
-        if (item) {
-            item.cantidad = Math.max(1, cantidad);
-            this.guardarEnLocal();
-            this.actualizarCarrito();
-        }
-    }
+        const item = this.items.find(producto => producto.id === Number(id));
+        if (!item) return;
 
-    obtenerTotal() {
-        return this.items.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+        item.cantidad = Math.max(1, Number.parseInt(cantidad, 10) || 1);
+        this.guardarEnLocal();
+        this.actualizarCarrito();
     }
 
     obtenerSubtotal() {
-        return this.items.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+        return this.items.reduce((total, item) => total + item.precio * item.cantidad, 0);
     }
 
     obtenerEnvio() {
-        // Envío gratis si el total es mayor a $500
         const subtotal = this.obtenerSubtotal();
-        return subtotal > 500 ? 0 : 50;
+        return subtotal > 500 || subtotal === 0 ? 0 : 50;
+    }
+
+    obtenerTotal() {
+        return this.obtenerSubtotal() + this.obtenerEnvio();
     }
 
     actualizarCarrito() {
-        // Renderizar en la página del carrito si existe
-        const carritoItems = document.querySelector('.carrito-items');
-        if (carritoItems) {
+        if (document.querySelector('.carrito-items')) {
             this.renderizarCarrito();
         }
-
-        // Actualizar cualquier indicador de cantidad
         this.actualizarIndicadores();
     }
 
     renderizarCarrito() {
         const carritoItems = document.querySelector('.carrito-items');
-        const resumen = document.querySelector('.resumen');
-
         if (!carritoItems) return;
 
         if (this.items.length === 0) {
             carritoItems.innerHTML = `
-                <div style="text-align: center; padding: 3rem 1rem; color: var(--gris-texto);">
-                    <p style="font-size: 18px; font-weight: 600;">Tu carrito está vacío</p>
-                    <p><a href="Index.php" style="color: var(--naranja); text-decoration: underline;">Continuar comprando</a></p>
+                <div class="carrito-vacio">
+                    <span class="vacio-icono" aria-hidden="true">🛒</span>
+                    <p><strong>Tu carrito está vacío</strong></p>
+                    <p><a href="Index.php">Explorar productos</a></p>
                 </div>
             `;
-            if (resumen) {
-                resumen.querySelector('.total span:last-child').textContent = '$0.00';
-            }
+            this.actualizarResumen();
+            this.bloquearCheckoutVacio();
             return;
         }
 
         carritoItems.innerHTML = this.items.map(item => `
             <section class="producto-carrito" data-id="${item.id}">
-                <img src="${item.imagen}" alt="${item.nombre}">
+                <img src="${this.escaparAtributo(item.imagen)}" alt="${this.escaparAtributo(item.nombre)}">
                 <div class="producto-info">
-                    <h3>${item.nombre}</h3>
-                    <p>En stock</p>
+                    <h3>${this.escaparHTML(item.nombre)}</h3>
+                    <p>Disponible</p>
                 </div>
                 <div class="producto-controls">
-                    <input class="cantidad" type="number" value="${item.cantidad}" min="1" data-id="${item.id}">
+                    <input class="cantidad" type="number" value="${item.cantidad}" min="1" max="99"
+                           inputmode="numeric" data-id="${item.id}" aria-label="Cantidad de ${this.escaparAtributo(item.nombre)}">
                     <p class="precio">$${(item.precio * item.cantidad).toFixed(2)}</p>
-                    <button class="eliminar-btn" data-id="${item.id}">Eliminar</button>
+                    <button class="eliminar-btn" type="button" data-id="${item.id}">Eliminar</button>
                 </div>
             </section>
         `).join('');
 
-        // Actualizar resumen
         this.actualizarResumen();
-
-        // Agregar event listeners
-        this.agregarEventListeners();
+        this.habilitarCheckout();
     }
 
     actualizarResumen() {
@@ -124,213 +131,369 @@ class Carrito {
         const subtotal = this.obtenerSubtotal();
         const envio = this.obtenerEnvio();
         const total = subtotal + envio;
+        const lineas = resumen.querySelectorAll('p');
 
-        resumen.querySelectorAll('p')[0].innerHTML = `<span>Subtotal:</span> <span>$${subtotal.toFixed(2)}</span>`;
-        resumen.querySelectorAll('p')[1].innerHTML = `<span>Envío:</span> <span>$${envio.toFixed(2)}</span>`;
-        resumen.querySelector('.total').innerHTML = `<span>Total:</span> <span>$${total.toFixed(2)}</span>`;
+        if (lineas[0]) lineas[0].innerHTML = `<span>Subtotal:</span> <span>$${subtotal.toFixed(2)}</span>`;
+        if (lineas[1]) lineas[1].innerHTML = `<span>Envío:</span> <span>${envio === 0 ? '$0.00' : '$' + envio.toFixed(2)}</span>`;
+
+        const totalEl = resumen.querySelector('.total');
+        if (totalEl) totalEl.innerHTML = `<span>Total:</span> <span>$${total.toFixed(2)}</span>`;
     }
 
-    agregarEventListeners() {
-        // Botones eliminar
-        document.querySelectorAll('.eliminar-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const id = Number(e.target.dataset.id);
-                this.eliminarProducto(id);
-            });
-        });
+    bloquearCheckoutVacio() {
+        const boton = document.getElementById('btnCheckout');
+        const panel = document.getElementById('checkout-panel');
 
-        // Inputs de cantidad
-        document.querySelectorAll('input.cantidad').forEach(input => {
-            input.addEventListener('change', (e) => {
-                const id = Number(e.target.dataset.id);
-                const cantidad = Math.max(1, parseInt(e.target.value) || 1);
-                this.actualizarCantidad(id, cantidad);
-            });
-        });
+        if (boton) {
+            boton.disabled = true;
+            boton.textContent = 'Carrito vacío';
+            boton.dataset.checkoutAbierto = 'false';
+        }
+
+        if (panel) {
+            panel.classList.remove('abierto');
+            panel.setAttribute('aria-hidden', 'true');
+        }
+    }
+
+    habilitarCheckout() {
+        const boton = document.getElementById('btnCheckout');
+        if (!boton) return;
+
+        boton.disabled = false;
+        if (boton.dataset.checkoutAbierto !== 'true') {
+            boton.textContent = 'Proceder al pago';
+        }
     }
 
     actualizarIndicadores() {
-        // Actualizar badge del carrito en el header si existe
         const totalItems = this.items.reduce((sum, item) => sum + item.cantidad, 0);
         const badges = document.querySelectorAll('[data-carrito-count]');
+
         badges.forEach(badge => {
             badge.textContent = totalItems;
-            badge.style.display = totalItems > 0 ? 'inline-block' : 'none';
+            badge.style.display = totalItems > 0 ? 'inline-flex' : 'none';
         });
     }
 
     mostrarNotificacion(mensaje) {
-        // Crear notificación temporal
         const notif = document.createElement('div');
-        notif.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--naranja);
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: var(--radius);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 9999;
-            animation: slideIn 0.3s ease-out;
-            font-weight: 600;
-        `;
+        notif.className = 'voltix-notificacion';
         notif.textContent = mensaje;
-
         document.body.appendChild(notif);
-        setTimeout(() => notif.remove(), 2000);
+        window.setTimeout(() => notif.remove(), 2200);
     }
 
     inicializar() {
-        // Si estamos en la página del carrito, renderizar
-        if (document.querySelector('.carrito-items')) {
-            this.renderizarCarrito();
-        }
-
-        // Agregar event listeners a los botones "Agregar al carrito" existentes
-        this.conectarBotones();
-
-        // Actualizar indicadores
-        this.actualizarIndicadores();
+        this.conectarBotonesProductos();
+        this.conectarControlesCarrito();
+        this.actualizarCarrito();
     }
 
-    conectarBotones() {
-        document.addEventListener('click', async (e) => {
-            const isAddBtn = e.target.matches('.add-to-cart') || e.target.textContent.trim() === 'Agregar al carrito';
-            if (!isAddBtn) return;
+    conectarControlesCarrito() {
+        document.addEventListener('click', e => {
+            const eliminar = e.target.closest('.eliminar-btn');
+            if (!eliminar) return;
+            this.eliminarProducto(eliminar.dataset.id);
+        });
 
-            e.preventDefault();
-
-            // Si es desde la página de detalle, el producto ya está disponible
-            const detalleInfo = document.querySelector('.detalle-info');
-            if (detalleInfo && e.target.matches('.add-to-cart') === false) {
-                const producto = this.obtenerProductoDelDetalle();
-                if (producto) {
-                    this.agregarProducto(producto);
-                    return;
-                }
-            }
-
-            // Priorizar data- atributos si vienen en el botón
-            const btn = e.target.closest('button');
-            if (btn) {
-                const did = btn.dataset.id;
-                if (did) {
-                    const producto = {
-                        id: Number(did),
-                        nombre: btn.dataset.nombre || btn.dataset.name || btn.getAttribute('data-nombre') || '' ,
-                        precio: parseFloat(btn.dataset.precio) || parseFloat(btn.getAttribute('data-precio')) || 0,
-                        imagen: btn.dataset.img || btn.getAttribute('data-img') || ''
-                    };
-
-                    this.agregarProducto(producto);
-                    return;
-                }
-            }
-
-            // Si es desde la lista de productos, obtener datos del card
-            const card = e.target.closest('.producto-card');
-            if (card) {
-                const nombreEl = card.querySelector('h3 a');
-                const nombre = nombreEl ? nombreEl.textContent : (card.dataset.nombre || '');
-                const precioText = card.querySelector('.precio') ? card.querySelector('.precio').textContent : (card.dataset.precio || '0');
-                const precio = parseFloat(String(precioText).replace('$', '').replace(' MXN', '')) || Number(card.dataset.precio) || 0;
-                const imagen = card.querySelector('img') ? card.querySelector('img').src : (card.dataset.img || '');
-                const id = Number(card.dataset.id) || (function(){
-                    const a = card.querySelector('a');
-                    if (!a) return NaN;
-                    try { return Number(new URL(a.href, window.location.origin).searchParams.get('id')) } catch { return NaN }
-                })();
-
-                const producto = {
-                    id,
-                    nombre,
-                    precio,
-                    imagen
-                };
-
-                this.agregarProducto(producto);
-            }
+        document.addEventListener('change', e => {
+            if (!e.target.matches('input.cantidad')) return;
+            const cantidad = Math.max(1, Number.parseInt(e.target.value, 10) || 1);
+            e.target.value = cantidad;
+            this.actualizarCantidad(e.target.dataset.id, cantidad);
         });
     }
 
-    obtenerProductoDelDetalle() {
-        const detalleInfo = document.querySelector('.detalle-info');
-        const detalleImg = document.querySelector('.detalle img');
+    conectarBotonesProductos() {
+        document.addEventListener('click', e => {
+            const objetivo = e.target instanceof Element ? e.target : e.target.parentElement;
+            if (!objetivo) return;
 
-        if (!detalleInfo || !detalleImg) return null;
+            const boton = objetivo.closest('.add-to-cart');
+            if (!boton) return;
 
-        const nombre = detalleInfo.querySelector('h1').textContent;
-        const precio = parseFloat(detalleInfo.querySelector('.precio').textContent.replace('$', '').replace(' MXN', ''));
-        const imagen = detalleImg.src;
+            e.preventDefault();
 
-        // Extraer ID de la URL
-        const params = new URLSearchParams(window.location.search);
-        const id = Number(params.get('id'));
+            const producto = {
+                id: Number(boton.dataset.id),
+                nombre: boton.dataset.nombre || boton.dataset.name || '',
+                precio: Number.parseFloat(boton.dataset.precio) || 0,
+                imagen: boton.dataset.img || ''
+            };
 
-        return {
-            id,
-            nombre,
-            precio,
-            imagen
-        };
+            // Respaldo para botones de detalle que no tengan data-*.
+            if (!producto.id) {
+                const detalle = objetivo.closest('.detalle') || document.querySelector('.detalle');
+                const params = new URLSearchParams(window.location.search);
+
+                if (detalle) {
+                    producto.id = Number(params.get('id'));
+                    producto.nombre = detalle.querySelector('h1')?.textContent.trim() || 'Producto';
+                    producto.precio = Number.parseFloat(
+                        (detalle.querySelector('.precio')?.textContent || '0').replace(/[^\d.]/g, '')
+                    ) || 0;
+                    producto.imagen = detalle.querySelector('img')?.src || '';
+                }
+            }
+
+            this.agregarProducto(producto);
+        });
+    }
+
+    escaparHTML(texto) {
+        const div = document.createElement('div');
+        div.textContent = String(texto ?? '');
+        return div.innerHTML;
+    }
+
+    escaparAtributo(texto) {
+        return this.escaparHTML(texto).replace(/"/g, '&quot;');
     }
 }
 
-// Inicializar el carrito cuando el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
     window.carrito = new Carrito();
-    conectarCheckout();
+    inicializarCheckout();
 });
 
-function conectarCheckout() {
-    const btn = document.getElementById('btnCheckout');
-    if (!btn) return; // esta página no es carrito.php
+function inicializarCheckout() {
+    const boton = document.getElementById('btnCheckout');
+    if (!boton) return;
 
-    btn.addEventListener('click', procesarCheckout);
+    boton.dataset.checkoutAbierto = 'false';
+    boton.addEventListener('click', manejarBotonCheckout);
+
+    document.addEventListener('change', e => {
+        if (e.target.matches('input[name="pago"]')) {
+            actualizarMetodoPago();
+            limpiarMensajeCheckout();
+        }
+    });
+
+    const numero = document.getElementById('numero-tarjeta');
+    const vencimiento = document.getElementById('vencimiento-tarjeta');
+    const cvv = document.getElementById('cvv-tarjeta');
+    const cp = document.getElementById('cp');
+
+    numero?.addEventListener('input', formatearNumeroTarjeta);
+    vencimiento?.addEventListener('input', formatearVencimiento);
+    cvv?.addEventListener('input', soloDigitos);
+    cp?.addEventListener('input', soloDigitos);
 }
 
-function mostrarMensajeCheckout(texto, esError = false) {
-    const caja = document.getElementById('checkout-mensaje');
-    if (!caja) return;
-    caja.textContent = texto;
-    caja.style.display = 'block';
-    caja.style.color = esError ? '#c0392b' : '#1e7e34';
-}
-
-async function procesarCheckout() {
+function manejarBotonCheckout() {
     const carrito = window.carrito;
+    const boton = document.getElementById('btnCheckout');
 
     if (!carrito || carrito.items.length === 0) {
         mostrarMensajeCheckout('Tu carrito está vacío.', true);
         return;
     }
 
-    const metodoPagoInput = document.querySelector('input[name="pago"]:checked');
-    if (!metodoPagoInput) {
-        mostrarMensajeCheckout('Selecciona un método de pago.', true);
+    if (boton.dataset.checkoutAbierto !== 'true') {
+        abrirCheckout();
         return;
     }
 
-    const direccion = document.getElementById('calle').value.trim();
-    const colonia = document.getElementById('colonia').value.trim();
-    const ciudad = document.getElementById('ciudad').value.trim();
-    const estado = document.getElementById('estado').value.trim();
-    const cp = document.getElementById('cp').value.trim();
+    procesarCheckout();
+}
+
+function abrirCheckout() {
+    const panel = document.getElementById('checkout-panel');
+    const boton = document.getElementById('btnCheckout');
+    if (!panel || !boton) return;
+
+    panel.classList.add('abierto');
+    panel.setAttribute('aria-hidden', 'false');
+    boton.dataset.checkoutAbierto = 'true';
+    boton.textContent = 'Confirmar compra';
+
+    window.setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('calle')?.focus({ preventScroll: true });
+    }, 80);
+}
+
+function actualizarMetodoPago() {
+    const seleccionado = document.querySelector('input[name="pago"]:checked');
+    const datosTarjeta = document.getElementById('datos-tarjeta');
+    if (!datosTarjeta) return;
+
+    const mostrarTarjeta = seleccionado?.value === 'tarjeta';
+    datosTarjeta.classList.toggle('visible', mostrarTarjeta);
+    datosTarjeta.setAttribute('aria-hidden', String(!mostrarTarjeta));
+}
+
+function mostrarMensajeCheckout(texto, esError = false) {
+    const caja = document.getElementById('checkout-mensaje');
+    if (!caja) return;
+
+    caja.textContent = texto;
+    caja.hidden = false;
+    caja.classList.toggle('error', esError);
+    caja.classList.toggle('exito', !esError);
+}
+
+function limpiarMensajeCheckout() {
+    const caja = document.getElementById('checkout-mensaje');
+    if (!caja) return;
+
+    caja.hidden = true;
+    caja.textContent = '';
+    caja.classList.remove('error', 'exito');
+}
+
+function formatearNumeroTarjeta(e) {
+    const input = e.target;
+    const digitos = input.value.replace(/\D/g, '').slice(0, 16);
+    input.value = digitos.replace(/(\d{4})(?=\d)/g, '$1 ');
+    actualizarMarcaTarjeta(digitos);
+}
+
+function formatearVencimiento(e) {
+    const input = e.target;
+    const digitos = input.value.replace(/\D/g, '').slice(0, 4);
+
+    if (digitos.length <= 2) {
+        input.value = digitos;
+    } else {
+        input.value = `${digitos.slice(0, 2)}/${digitos.slice(2)}`;
+    }
+}
+
+function soloDigitos(e) {
+    const input = e.target;
+    input.value = input.value.replace(/\D/g, '').slice(0, Number(input.maxLength) > 0 ? Number(input.maxLength) : undefined);
+}
+
+function actualizarMarcaTarjeta(numero) {
+    const marca = document.getElementById('marca-tarjeta');
+    if (!marca) return;
+
+    if (/^4/.test(numero)) marca.textContent = 'VISA';
+    else if (/^(5[1-5]|2[2-7])/.test(numero)) marca.textContent = 'MASTERCARD';
+    else if (/^3[47]/.test(numero)) marca.textContent = 'AMEX';
+    else marca.textContent = 'Tarjeta';
+}
+
+function validarLuhn(numero) {
+    const digitos = numero.replace(/\D/g, '');
+    if (digitos.length < 13 || digitos.length > 19) return false;
+
+    let suma = 0;
+    let duplicar = false;
+
+    for (let i = digitos.length - 1; i >= 0; i--) {
+        let valor = Number(digitos[i]);
+
+        if (duplicar) {
+            valor *= 2;
+            if (valor > 9) valor -= 9;
+        }
+
+        suma += valor;
+        duplicar = !duplicar;
+    }
+
+    return suma % 10 === 0;
+}
+
+function validarVencimiento(valor) {
+    const coincidencia = /^(\d{2})\/(\d{2})$/.exec(valor);
+    if (!coincidencia) return false;
+
+    const mes = Number(coincidencia[1]);
+    const anio = 2000 + Number(coincidencia[2]);
+    if (mes < 1 || mes > 12) return false;
+
+    const ahora = new Date();
+    const vencimiento = new Date(anio, mes, 0, 23, 59, 59);
+    return vencimiento >= ahora;
+}
+
+function validarFormularioCheckout() {
+    const direccion = document.getElementById('calle')?.value.trim() || '';
+    const colonia = document.getElementById('colonia')?.value.trim() || '';
+    const ciudad = document.getElementById('ciudad')?.value.trim() || '';
+    const estado = document.getElementById('estado')?.value.trim() || '';
+    const cp = document.getElementById('cp')?.value.trim() || '';
+    const metodoPagoInput = document.querySelector('input[name="pago"]:checked');
 
     if (!direccion || !ciudad || !estado || !cp) {
-        mostrarMensajeCheckout('Completa la dirección de envío (calle, ciudad, estado y código postal).', true);
+        return { error: 'Completa calle, ciudad, estado y código postal.' };
+    }
+
+    if (!/^\d{5}$/.test(cp)) {
+        return { error: 'El código postal debe tener 5 dígitos.' };
+    }
+
+    if (!metodoPagoInput) {
+        return { error: 'Selecciona un método de pago.' };
+    }
+
+    if (metodoPagoInput.value === 'tarjeta') {
+        const titular = document.getElementById('titular-tarjeta')?.value.trim() || '';
+        const numero = document.getElementById('numero-tarjeta')?.value || '';
+        const vencimiento = document.getElementById('vencimiento-tarjeta')?.value || '';
+        const cvv = document.getElementById('cvv-tarjeta')?.value || '';
+
+        if (titular.length < 3) {
+            return { error: 'Ingresa el nombre del titular de la tarjeta.' };
+        }
+
+        if (!validarLuhn(numero)) {
+            return { error: 'El número de tarjeta no es válido.' };
+        }
+
+        if (!validarVencimiento(vencimiento)) {
+            return { error: 'La fecha de vencimiento no es válida o ya venció.' };
+        }
+
+        if (!/^\d{3,4}$/.test(cvv)) {
+            return { error: 'El CVV debe tener 3 o 4 dígitos.' };
+        }
+    }
+
+    return {
+        datos: {
+            direccion,
+            colonia,
+            ciudad,
+            estado,
+            cp,
+            metodo_pago: metodoPagoInput.value
+        }
+    };
+}
+
+async function procesarCheckout() {
+    const carrito = window.carrito;
+    if (!carrito || carrito.items.length === 0) {
+        mostrarMensajeCheckout('Tu carrito está vacío.', true);
         return;
+    }
+
+    limpiarMensajeCheckout();
+
+    const validacion = validarFormularioCheckout();
+    if (validacion.error) {
+        mostrarMensajeCheckout(validacion.error, true);
+        return;
+    }
+
+    const boton = document.getElementById('btnCheckout');
+    const textoOriginal = boton?.textContent || 'Confirmar compra';
+
+    if (boton) {
+        boton.disabled = true;
+        boton.textContent = 'Procesando...';
     }
 
     const payload = {
         items: carrito.items.map(item => ({ id: item.id, cantidad: item.cantidad })),
-        direccion,
-        colonia,
-        ciudad,
-        estado,
-        cp,
-        metodo_pago: metodoPagoInput.value,
+        ...validacion.datos
+        // Deliberadamente NO se envían número de tarjeta ni CVV.
     };
 
     try {
@@ -340,45 +503,64 @@ async function procesarCheckout() {
             body: JSON.stringify(payload)
         });
 
-        if (respuesta.status === 401) {
-            mostrarMensajeCheckout('Debes iniciar sesión para completar tu compra. Redirigiendo...', true);
-            setTimeout(() => { window.location.href = 'formu.php'; }, 1500);
-            return;
+        let resultado = {};
+        try {
+            resultado = await respuesta.json();
+        } catch {
+            resultado = {};
         }
 
-        const resultado = await respuesta.json();
+        if (respuesta.status === 401) {
+            mostrarMensajeCheckout('Debes iniciar sesión para completar tu compra. Redirigiendo...', true);
+            window.setTimeout(() => { window.location.href = 'formu.php'; }, 1200);
+            return;
+        }
 
         if (!respuesta.ok) {
             mostrarMensajeCheckout(resultado.error || 'No se pudo procesar el pedido.', true);
             return;
         }
 
-        // Pedido creado: vaciar carrito y avisar
         carrito.items = [];
         carrito.guardarEnLocal();
         carrito.actualizarCarrito();
 
-        mostrarMensajeCheckout(`¡Pedido #${resultado.id_pedido} realizado! Total: $${resultado.total.toFixed(2)}. Redirigiendo a tu perfil...`);
-        setTimeout(() => { window.location.href = 'perfil.php'; }, 1800);
+        const total = Number(resultado.total) || 0;
+        mostrarMensajeCheckout(`¡Pedido #${resultado.id_pedido} realizado! Total: $${total.toFixed(2)} MXN.`);
 
-    } catch (e) {
-        console.error('Error en el checkout:', e);
-        mostrarMensajeCheckout('Error de conexión al procesar el pedido.', true);
+        window.setTimeout(() => {
+            window.location.href = 'perfil.php';
+        }, 1600);
+    } catch (error) {
+        console.error('Error en el checkout:', error);
+        mostrarMensajeCheckout('Error de conexión al procesar el pedido. Inténtalo de nuevo.', true);
+    } finally {
+        if (boton && carrito.items.length > 0) {
+            boton.disabled = false;
+            boton.textContent = textoOriginal;
+        }
     }
 }
 
-// Agregar estilos para la animación
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+const estiloNotificacion = document.createElement('style');
+estiloNotificacion.textContent = `
+    .voltix-notificacion {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        max-width: min(360px, calc(100vw - 40px));
+        z-index: 9999;
+        padding: .9rem 1.15rem;
+        border-radius: 10px;
+        background: var(--naranja);
+        color: #fff;
+        box-shadow: 0 8px 24px rgba(0,0,0,.2);
+        font-weight: 700;
+        animation: voltixSlideIn .25s ease-out;
+    }
+    @keyframes voltixSlideIn {
+        from { transform: translateX(30px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(estiloNotificacion);

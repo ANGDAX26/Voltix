@@ -12,7 +12,6 @@
 <body>
 
     <div id="header-placeholder"></div>
-    <script src="../JS/header.js"></script>
 
     <script>
         fetch('header.html')
@@ -22,7 +21,6 @@
             })
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
-                inicializarHeader();
             })
             .catch(e => {
                 console.error('Error cargando header:', e);
@@ -69,6 +67,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="../JS/producto.js?v=2"></script>
     <script src="../JS/carrito.js"></script>
+    <script src="../JS/header.js?v=3"></script>
     <script src="../JS/buscador.js"></script>
 
 </body>

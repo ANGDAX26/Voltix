@@ -1,36 +1,190 @@
-/*
- * Se ejecuta después de insertar header.html en #header-placeholder.
- * (Los <script> dentro de un HTML insertado con innerHTML NO se ejecutan
- * solos, por eso esta lógica vive en un archivo aparte y se llama a mano.)
+/**
+ * Voltix - Controlador del header dinámico.
+ * El header se inserta con fetch(), así que este archivo usa delegación de eventos
+ * y un MutationObserver para funcionar aunque el HTML llegue después del DOMContentLoaded.
  */
-async function inicializarHeader() {
-    try {
-        const respuesta = await fetch('../PHP/estado_sesion.php');
-        if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
+(function () {
+    'use strict';
 
-        const sesion = await respuesta.json();
+    let sesionConsultada = false;
 
-        const cerrarLi = document.getElementById('nav-cerrar-sesion');
-        const loginLi = document.getElementById('enlace-login');
+    function obtenerHeader() {
+        return document.querySelector('#header-placeholder .site-header');
+    }
 
-        if (sesion.logueado) {
-            if (cerrarLi) cerrarLi.style.display = '';
-            if (loginLi) loginLi.style.display = 'none';
+    function cerrarMenuPrincipal() {
+        const nav = document.getElementById('nav-principal');
+        const boton = document.getElementById('btn-menu');
+        if (!nav || !boton) return;
+
+        nav.classList.remove('open');
+        boton.classList.remove('active');
+        boton.setAttribute('aria-expanded', 'false');
+        boton.setAttribute('aria-label', 'Abrir menú de navegación');
+    }
+
+    function alternarMenuPrincipal() {
+        const nav = document.getElementById('nav-principal');
+        const boton = document.getElementById('btn-menu');
+        if (!nav || !boton) return;
+
+        const abierto = nav.classList.toggle('open');
+        boton.classList.toggle('active', abierto);
+        boton.setAttribute('aria-expanded', String(abierto));
+        boton.setAttribute('aria-label', abierto ? 'Cerrar menú de navegación' : 'Abrir menú de navegación');
+    }
+
+    function abrirCategorias() {
+        const drawer = document.getElementById('categorias-drawer');
+        const overlay = document.getElementById('categorias-overlay');
+        const boton = document.getElementById('btn-categorias');
+        if (!drawer || !overlay || !boton) return;
+
+        cerrarMenuPrincipal();
+        overlay.hidden = false;
+
+        // Permite que la transición CSS se vea después de quitar hidden.
+        requestAnimationFrame(() => {
+            drawer.classList.add('open');
+            overlay.classList.add('open');
+            document.body.classList.add('menu-lateral-abierto');
+        });
+
+        drawer.setAttribute('aria-hidden', 'false');
+        boton.setAttribute('aria-expanded', 'true');
+    }
+
+    function cerrarCategorias() {
+        const drawer = document.getElementById('categorias-drawer');
+        const overlay = document.getElementById('categorias-overlay');
+        const boton = document.getElementById('btn-categorias');
+        if (!drawer || !overlay || !boton) return;
+
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.classList.remove('menu-lateral-abierto');
+        drawer.setAttribute('aria-hidden', 'true');
+        boton.setAttribute('aria-expanded', 'false');
+
+        window.setTimeout(() => {
+            if (!overlay.classList.contains('open')) overlay.hidden = true;
+        }, 220);
+    }
+
+    function consultarSesion() {
+        if (sesionConsultada || !obtenerHeader()) return;
+        sesionConsultada = true;
+
+        fetch('../PHP/estado_sesion.php')
+            .then(r => {
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.json();
+            })
+            .then(sesion => {
+                const cerrarLi = document.getElementById('nav-cerrar-sesion');
+                const loginLi = document.getElementById('enlace-login');
+
+                if (sesion.logueado) {
+                    if (cerrarLi) cerrarLi.style.display = '';
+                    if (loginLi) loginLi.style.display = 'none';
+                } else {
+                    if (cerrarLi) cerrarLi.style.display = 'none';
+                    if (loginLi) loginLi.style.display = '';
+                }
+            })
+            .catch(error => {
+                console.warn('No se pudo comprobar la sesión:', error);
+            });
+    }
+
+    function actualizarBadgeCarrito() {
+        const badges = document.querySelectorAll('[data-carrito-count]');
+        if (!badges.length) return;
+
+        let items = [];
+        try {
+            items = JSON.parse(localStorage.getItem('voltix_carrito') || '[]');
+            if (!Array.isArray(items)) items = [];
+        } catch {
+            items = [];
         }
 
-        if (sesion.es_admin) {
-            const listaMenu = document.querySelector('#header-placeholder .nav ul');
-            if (listaMenu && !document.getElementById('enlace-panel-admin')) {
-                const itemAdmin = document.createElement('li');
-                itemAdmin.innerHTML = `
-                    <a href="admin.php" id="enlace-panel-admin" aria-label="Panel de administración" title="Panel de administración">
-                        ⚙️
-                    </a>
-                `;
-                listaMenu.appendChild(itemAdmin);
+        const total = items.reduce((suma, item) => suma + (Number(item.cantidad) || 0), 0);
+        badges.forEach(badge => {
+            badge.textContent = total;
+            badge.style.display = total > 0 ? 'inline-flex' : 'none';
+        });
+    }
+
+    function headerListo() {
+        if (!obtenerHeader()) return;
+        consultarSesion();
+        actualizarBadgeCarrito();
+    }
+
+    document.addEventListener('click', function (e) {
+        const botonMenu = e.target.closest('#btn-menu');
+        if (botonMenu) {
+            e.preventDefault();
+            alternarMenuPrincipal();
+            return;
+        }
+
+        const botonCategorias = e.target.closest('#btn-categorias');
+        if (botonCategorias) {
+            e.preventDefault();
+            const drawer = document.getElementById('categorias-drawer');
+            if (drawer && drawer.classList.contains('open')) cerrarCategorias();
+            else abrirCategorias();
+            return;
+        }
+
+        if (e.target.closest('#btn-cerrar-categorias') || e.target.id === 'categorias-overlay') {
+            cerrarCategorias();
+            return;
+        }
+
+        const enlaceCategoria = e.target.closest('#categorias-drawer a');
+        if (enlaceCategoria) {
+            cerrarCategorias();
+            return;
+        }
+
+        const nav = document.getElementById('nav-principal');
+        const header = obtenerHeader();
+
+        if (nav && nav.classList.contains('open')) {
+            if (e.target.closest('#nav-principal a')) {
+                cerrarMenuPrincipal();
+            } else if (header && !e.target.closest('.site-header')) {
+                cerrarMenuPrincipal();
             }
         }
-    } catch (error) {
-        console.error('No se pudo comprobar la sesión del usuario:', error);
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        cerrarMenuPrincipal();
+        cerrarCategorias();
+    });
+
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 992) cerrarMenuPrincipal();
+    });
+
+    window.addEventListener('storage', function (e) {
+        if (e.key === 'voltix_carrito') actualizarBadgeCarrito();
+    });
+
+    // Evento emitido por carrito.js cuando cambia la cantidad.
+    document.addEventListener('voltix:carrito-actualizado', actualizarBadgeCarrito);
+
+    const observer = new MutationObserver(headerListo);
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', headerListo);
+    } else {
+        headerListo();
     }
-}
+})();
