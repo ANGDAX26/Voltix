@@ -138,6 +138,7 @@
     <script src="../JS/producto.js?v=2"></script>
     <script src="../JS/carrito.js"></script>
     <script src="../JS/buscador.js"></script>
+    <script src="../JS/main.js"></script>
 
     <script>
         const API_HERO = '../PHP/admin_hero.php';

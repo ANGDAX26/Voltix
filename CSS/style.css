@@ -522,91 +522,119 @@ footer{
   gap: .3rem 1.6rem;
 }
 
-/*Diseño responsivo */
-@media (max-width: 1024px){
-  .site-header{
-    flex-wrap: wrap;
-    padding: .8rem 1.2rem;
+/* ============ Diseño responsivo corregido ============ */
+
+.menu-icon{
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--naranja);
+  user-select: none;
+}
+/* ============ REGLAS PARA CELULARES Y TABLETS ============ */
+@media (max-width: 992px) {
+
+  /* 1. Reordenar el Header */
+  .site-header {
+    flex-wrap: wrap !important;
+    justify-content: space-between !important;
+    padding: 0.8rem 1rem !important;
   }
-  .site-header input[type="search"]{
-    flex: 1 1 100%;
-    min-width: 0;
-    order: 2;
-    margin-top: .75rem;
+
+  .logo-header {
+    width: 130px !important;
   }
-  .menu-icon{
-    display: block;
-    margin-left: auto;
+
+  /* Mostrar botón hamburguesa */
+  .menu-icon {
+    display: block !important;
+    order: 2 !important;
   }
-  .site-header .nav{
-    flex-basis: 100%;
-    order: 3;
-    display: none;
-    width: 100%;
+
+  /* Campo de búsqueda a 100% de ancho en la segunda fila */
+  .buscador-contenedor {
+    order: 3 !important;
+    flex: 0 0 100% !important;
+    width: 100% !important;
+    margin-top: 0.6rem !important;
   }
-  .site-header .nav.open{ display: block; }
-  .site-header .nav ul{
-    flex-wrap: wrap;
-    gap: 1rem;
-    padding-top: .6rem;
+
+  /* 2. Menú de Navegación Oculto por Defecto */
+  .site-header .nav {
+    display: none !important; 
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+    padding: 1rem !important;
+    z-index: 999 !important;
+    border-top: 1px solid #E2E2E2 !important;
   }
-  .site-header .nav a{
-    font-size: 1.35rem;
-    width: auto;
-    height: auto;
-    padding: .45rem .65rem;
+
+  /* Clase que activa el JS al presionar '☰' */
+  .site-header .nav.open {
+    display: block !important;
   }
-  .categorias-bar ul{
-    padding: .7rem 1rem;
-    gap: 1rem;
+
+  .site-header .nav ul {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: space-around !important;
+    gap: 0.8rem !important;
   }
-  .categorias-bar li{
-    font-size: .82rem;
+
+  /* 3. ARREGLO DE LA BARRA NARANJA (Carrusel horizontal) */
+  .categorias-bar ul {
+    display: flex !important;
+    flex-wrap: nowrap !important;        /* Fuerza que todo esté en una sola línea */
+    overflow-x: auto !important;          /* Habilita el scroll horizontal */
+    white-space: nowrap !important;      /* Impide saltos de línea */
+    gap: 1.2rem !important;
+    padding: 0.7rem 1rem !important;
+    -webkit-overflow-scrolling: touch !important; /* Desplazamiento fluido en iOS */
+    scrollbar-width: none !important;     /* Oculta scrollbar en Firefox */
   }
-  main{
-    padding: 0 1.5rem 2.5rem;
+
+  .categorias-bar ul::-webkit-scrollbar {
+    display: none !important;            /* Oculta scrollbar en Chrome/Safari */
   }
-  .productos, .promo-grid{
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  }
-  .benefit-list{
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  }
-  .preguntas-main{
-    padding: 2.5rem 1.5rem;
-  }
-  .preguntas-header{
-    padding: 2.5rem 1.5rem;
+
+  .categorias-bar li {
+    flex: 0 0 auto !important;           /* Evita que los ítems se compriman */
   }
 }
 
-@media (max-width: 720px){
+@media (max-width: 600px){
   .site-header{
-    padding: .8rem 1rem;
+    flex-wrap: wrap;
+    gap: .5rem;
+    padding: .75rem 1rem;
   }
-  .site-header input[type="search"]{
-    width: 100%;
-    order: 2;
-    margin-top: .75rem;
+
+  .logo-header{
+    width: 130px;
   }
+
+  .buscador-contenedor{
+    order: 4;
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin: .5rem 0 0 0;
+  }
+
   .site-header .nav{
-    display: none;
-    width: 100%;
+    top: 100%;
   }
-  .site-header .nav.open{ display: block; }
+
   .site-header .nav ul{
-    flex-direction: column;
-    gap: .8rem;
-    padding-top: .75rem;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1rem;
   }
-  .categorias-bar ul{
-    flex-direction: column;
-    gap: .8rem;
-    padding: .85rem 1rem;
-  }
-  .categorias-bar li{
-    font-size: .82rem;
-  }
+
   h1{
     margin: 1.2rem auto 1rem;
     font-size: 1.35rem;
@@ -615,69 +643,8 @@ footer{
   main{
     padding: 0 1rem 2rem;
   }
-  .promo-hero{
-    padding: 2rem 1rem;
-  }
-  .promo-card,
-  .producto-card{
-    padding: 1rem;
-  }
-  .promo-card img{
-    height: 150px;
-  }
   .producto-card img{
     height: 160px;
-  }
-  .benefit-item{
-    padding: 1.2rem;
-  }
-  .por-que{
-    padding: 1.2rem;
-  }
-  .preguntas-container{
-    grid-template-columns: 1fr;
-  }
-  .pregunta-item{
-    padding: 1.25rem;
-  }
-}
-
-@media (max-width: 480px){
-  .site-header{
-    padding: .75rem .75rem;
-    gap: .75rem;
-  }
-  .menu-icon{
-    font-size: 1.4rem;
-  }
-  .site-header input[type="search"]{
-    padding: .65rem .9rem;
-  }
-  .categorias-bar ul{
-    padding: .7rem .8rem;
-    gap: .6rem;
-  }
-  .categorias-bar li{
-    font-size: .78rem;
-  }
-  .promo-hero h1{
-    font-size: 1.8rem;
-  }
-  .promo-hero p,
-  .promo-about p,
-  .por-que ul li{
-    font-size: .95rem;
-  }
-  .promo-card img,
-  .producto-card img{
-    height: 140px;
-  }
-  .benefit-item{
-    padding: 1rem;
-  }
-  .promo-grid,
-  .productos{
-    grid-template-columns: 1fr;
   }
 }
 
@@ -743,33 +710,6 @@ footer{
   margin: 0;
   line-height: 1.7;
   font-size: 0.95rem;
-}
-
-@media (max-width: 600px){
-  .preguntas-main{
-    padding: 2rem 1rem;
-  }
-  
-  .preguntas-header{
-    padding: 2rem 1.5rem;
-  }
-  
-  .preguntas-header h1{
-    font-size: 1.8rem;
-  }
-  
-  .preguntas-header .subtitle{
-    font-size: 1rem;
-  }
-  
-  .preguntas-container{
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-  
-  .pregunta-item{
-    padding: 1.5rem;
-  }
 }
 
 /* ============ Promociones ============ */
@@ -922,17 +862,10 @@ footer{
   line-height: 1.8;
   color: var(--gris-texto);
 }
-
-@media (max-width: 720px){
-  .promociones-main{
-    padding: 2rem 1rem;
-  }
-
-  .promo-hero{
-    padding: 2.5rem 1.5rem;
-  }
-
-  .promo-card img{
-    height: 160px;
-  }
+/* Ocultar barra de scroll visual en las categorías */
+.categorias-bar ul::-webkit-scrollbar {
+  display: none !important;
+}
+.categorias-bar ul {
+  scrollbar-width: none !important;
 }

@@ -1,83 +1,89 @@
 <header class="site-header">
     <div class="logo">
-        <a href="Index.php"><img class="logo-header"
-                src="https://res.cloudinary.com/ty7o3lam/image/upload/v1785210490/imagen_2026-07-27_214853268_jmkgqu.png"
-                alt="Logo Voltix"></a>
+        <a href="Index.php">
+            <img class="logo-header"
+                 src="https://res.cloudinary.com/ty7o3lam/image/upload/v1785210490/imagen_2026-07-27_214853268_jmkgqu.png"
+                 alt="Logo Voltix">
+        </a>
     </div>
+
     <div class="buscador-contenedor">
         <input type="search" id="buscador-input" placeholder="🔎 Buscar" autocomplete="off">
         <div id="buscador-resultados" class="buscador-resultados"></div>
     </div>
 
-    <nav class="nav">
-        <ul>
-           <li style="list-style: none;">
-           <a href="Index.php" aria-label="Inicio" style="display: inline-flex; flex-direction: column; align-items: center; text-decoration: none;">
-           <span style="font-size: 1.5rem;">🏠</span>
-          <span style="font-size: 0.8rem;">HOME</span>
-             </a>
-         </li>
-         <li style="list-style: none;">
-           <a href="promociones.php" aria-label="Producto" style="display: inline-flex; flex-direction: column; align-items: center; text-decoration: none;">
-           <span style="font-size: 1.5rem;">🏷️</span>
-          <span style="font-size: 0.8rem;">OFERTAS</span>
-             </a>
-         </li>
-           <li style="list-style: none;">
-           <a href="preguntasvol.php" aria-label="Producto" style="display: inline-flex; flex-direction: column; align-items: center; text-decoration: none;">
-           <span style="font-size: 1.5rem;">❓</span>
-          <span style="font-size: 0.8rem;">PREGUNTAS</span>
-             </a>
-         </li>
-           <li style="list-style: none;">
-           <a href="formu.php" aria-label="Producto" style="display: inline-flex; flex-direction: column; align-items: center; text-decoration: none;">
-           <span style="font-size: 1.5rem;">🔑</span>
-          <span style="font-size: 0.8rem;">INICIAR SESIÓN</span>
-             </a>
-         </li>
-          <li style="list-style: none;">
-           <a href="carrito.php" aria-label="Producto" style="display: inline-flex; flex-direction: column; align-items: center; text-decoration: none;">
-           <span style="font-size: 1.5rem;">🛒</span>
-          <span style="font-size: 0.8rem;">CARRITO</span>
-             </a>
-         </li>
-            <li style="list-style: none;">
-           <a href="perfil.php" aria-label="Producto" style="display: inline-flex; flex-direction: column; align-items: center; text-decoration: none;">
-           <span style="font-size: 1.5rem;">👤</span>
-          <span style="font-size: 0.8rem;">PERFIL</span>
-             </a>
-         </li>
-          <li style="list-style: none;">
-           <a href="../PHP/cerrar.php" aria-label="Producto" style="display: inline-flex; flex-direction: column; align-items: center; text-decoration: none;">
-           <span style="font-size: 1.5rem;">🚪</span>
-          <span style="font-size: 0.8rem;">CERRAR SESIÓN</span>
-             </a>
-         </li>
+    <!-- Botón Menú Hamburguesa para Celulares y Tablets -->
+    <div class="menu-icon" id="btn-menu">☰</div>
 
+    <nav class="nav" id="nav-principal">
+        <ul>
+            <li>
+                <a href="Index.php" aria-label="Inicio">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">HOME</span>
+                </a>
+            </li>
+            <li>
+                <a href="promociones.php" aria-label="Ofertas">
+                    <span class="nav-icon">🏷️</span>
+                    <span class="nav-text">OFERTAS</span>
+                </a>
+            </li>
+            <li>
+                <a href="preguntasvol.php" aria-label="Preguntas Frecuentes">
+                    <span class="nav-icon">❓</span>
+                    <span class="nav-text">PREGUNTAS</span>
+                </a>
+            </li>
+            <li id="enlace-login">
+                <a href="formu.php" aria-label="Iniciar Sesión">
+                    <span class="nav-icon">🔑</span>
+                    <span class="nav-text">INICIAR SESIÓN</span>
+                </a>
+            </li>
+            <li>
+                <a href="carrito.php" aria-label="Carrito">
+                    <span class="nav-icon">🛒</span>
+                    <span class="nav-text">CARRITO</span>
+                </a>
+            </li>
+            <li>
+                <a href="perfil.php" aria-label="Perfil">
+                    <span class="nav-icon">👤</span>
+                    <span class="nav-text">PERFIL</span>
+                </a>
+            </li>
+            <li id="nav-cerrar-sesion" style="display: none;">
+                <a href="../PHP/cerrar.php" aria-label="Cerrar Sesión">
+                    <span class="nav-icon">🚪</span>
+                    <span class="nav-text">CERRAR SESIÓN</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
-
-<div class="categorias-bar">
-    <h2>Categorías</h2>
-    <ul>
-        <li><a href="Herramientas.php">Herramientas</a></li>
-        <li><a href="Kits_Educativos.php">Kits educativos</a></li>
-        <li><a href="Cables.php">Cables</a></li>
-        <li><a href="sensores.php">Sensores</a></li>
-        <li><a href="hogar.php">Hogar</a></li>
-        <li><a href="telefonia.php">Telefonia,Celulares y Tablets</a></li>
-        <li><a href="promociones.php">Promociones</a></li>
-        <li><a href="computacion.php">Computación</a></li>
-        <li><a href="audio.php">Audio</a></li>
-        <li><a href="hogar.php">Hogar</a></li>
-        <li><a href="componentes.php"></a></li>
-
-
+<nav class="categorias-bar" style="background: #F26E22; width: 100%; overflow: hidden;">
+    <ul style="display: flex !important; flex-wrap: nowrap !important; overflow-x: auto !important; -webkit-overflow-scrolling: touch; gap: 1.2rem; padding: 0.7rem 1rem; margin: 0; list-style: none; white-space: nowrap;">
+        <li style="flex: 0 0 auto !important;"><a href="Herramientas.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Herramientas</a></li>
+        <li style="flex: 0 0 auto !important;"><a href="Kits_Educativos.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Kits educativos</a></li>
+        <li style="flex: 0 0 auto !important;"><a href="Cables.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Cables</a></li>
+        <li style="flex: 0 0 auto !important;"><a href="sensores.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Sensores</a></li>
+        <li style="flex: 0 0 auto !important;"><a href="hogar.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Hogar</a></li>
+        <li style="flex: 0 0 auto !important;"><a href="telefonia.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Telefonía</a></li>
+        <li style="flex: 0 0 auto !important;"><a href="promociones.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Promociones</a></li>
+        <li style="flex: 0 0 auto !important;"><a href="computacion.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Computación</a></li>
+        <li style="flex: 0 0 auto !important;"><a href="audio.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Audio</a></li>
+        <li style="flex: 0 0 auto !important;"><a href="componentes.php" style="color: #ffffff; text-decoration: none; font-weight: bold; font-size: 0.85rem;">Componentes</a></li>
     </ul>
-</div>
+</nav>
 
 <script>
+    // Toggle del menú hamburguesa en móviles
+    document.getElementById('btn-menu').addEventListener('click', function () {
+        document.getElementById('nav-principal').classList.toggle('open');
+    });
+
+    // Control de estado de sesión
     (function () {
         fetch('../PHP/estado_sesion.php')
             .then(function (r) { return r.ok ? r.json() : Promise.reject(r); })
@@ -85,10 +91,10 @@
                 var cerrarLi = document.getElementById('nav-cerrar-sesion');
                 var loginLi = document.getElementById('enlace-login');
                 if (sesion.logueado) {
-                    if (cerrarLi) cerrarLi.style.display = '';
+                    if (cerrarLi) cerrarLi.style.display = 'block';
                     if (loginLi) loginLi.style.display = 'none';
                 }
             })
-            .catch(function () { /* silencioso: si no hay sesión, no mostramos el botón */ });
+            .catch(function () { /* Silencioso */ });
     })();
 </script>
