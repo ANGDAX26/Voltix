@@ -38,7 +38,8 @@ if ($id !== null) {
 }
 
 if ($categoria !== null && $categoria !== '') {
-    $sql = $sqlBase . " WHERE c.nombre_categoria = ? ORDER BY p.id_productos DESC";
+    $categoria = trim($categoria);
+    $sql = $sqlBase . " WHERE TRIM(LOWER(c.nombre_categoria)) = TRIM(LOWER(?)) ORDER BY p.id_productos DESC";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param('s', $categoria);
     $stmt->execute();

@@ -12,37 +12,9 @@
 <body>
 
     <div id="header-placeholder"></div>
+    <script src="../JS/header.js"></script>
 
     <script>
-        async function configurarNavegacionAdmin() {
-            try {
-                const respuesta = await fetch('../PHP/estado_sesion.php');
-                if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
-
-                const sesion = await respuesta.json();
-
-                if (!sesion.es_admin) return;
-
-                const listaMenu = document.querySelector('#header-placeholder .nav ul');
-                if (!listaMenu) return;
-
-                // Evita agregar el botón dos veces.
-                if (document.getElementById('enlace-panel-admin')) return;
-
-                const itemAdmin = document.createElement('li');
-                itemAdmin.innerHTML = `
-                    <a href="admin.php" id="enlace-panel-admin" aria-label="Panel de administración" title="Panel de administración">
-                        ⚙️
-                    </a>
-                `;
-
-                listaMenu.appendChild(itemAdmin);
-
-            } catch (error) {
-                console.error('No se pudo comprobar la sesión del administrador:', error);
-            }
-        }
-
         fetch('header.html')
             .then(response => {
                 if (!response.ok) throw new Error('HTTP ' + response.status);
@@ -50,7 +22,7 @@
             })
             .then(data => {
                 document.getElementById('header-placeholder').innerHTML = data;
-                configurarNavegacionAdmin();
+                inicializarHeader();
             })
             .catch(e => {
                 console.error('Error cargando header:', e);
@@ -66,7 +38,7 @@
             <a class="slide-link" href="producto.php?id=2" aria-label="Ver Kit Arduino para principiantes">
                 <img src="https://ibb.co/rRrvYxmf" alt="Kits Arduino para Principiantes">
                 <div class="texto">
-                    <h2>Kits Arduino para Principiantesxdxdxdxd</h2>
+                    <h2>Kits Arduino para Principiantes</h2>
                     <p>Hasta 30% de descuento</p>
                     <span class="hero-cta">Ver producto</span>
                 </div>
