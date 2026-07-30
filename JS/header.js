@@ -87,6 +87,16 @@
                 if (sesion.logueado) {
                     if (cerrarLi) cerrarLi.style.display = '';
                     if (loginLi) loginLi.style.display = 'none';
+
+                    // Agregar enlace al panel admin si es administrador
+                    if (sesion.es_admin) {
+                        const nav = document.getElementById('nav-principal');
+                        if (nav && !document.getElementById('enlace-panel-admin')) {
+                            const liAdmin = document.createElement('li');
+                            liAdmin.innerHTML = '<a href="admin.php" id="enlace-panel-admin" aria-label="Panel de administración" title="Panel de administración"><span class=\"nav-icon\">⚙️</span><span class=\"nav-text\">Admin</span></a>';
+                            nav.querySelector('ul').appendChild(liAdmin);
+                        }
+                    }
                 } else {
                     if (cerrarLi) cerrarLi.style.display = 'none';
                     if (loginLi) loginLi.style.display = '';

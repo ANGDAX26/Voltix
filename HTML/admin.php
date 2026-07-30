@@ -222,22 +222,7 @@ requerirAdminPagina('formu.php');
 
     </main>
 
-    <div id="footer-placeholder"></div>
-
-    <script>
-        fetch('footera.php')
-            .then(response => {
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            })
-            .catch(e => {
-                console.error('Error cargando footer:', e);
-                document.getElementById('footer-placeholder').innerHTML = '<!-- footer no cargado -->';
-            });
-    </script>
+    <?php include 'footera.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

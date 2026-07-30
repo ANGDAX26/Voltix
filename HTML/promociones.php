@@ -8,22 +8,7 @@
     <link rel="stylesheet" href="../CSS/style.css?v=2">
 </head>
 <body>
-    <div id="header-placeholder"></div>
-
-    <script>
-        fetch('header.html')
-            .then(response => {
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            })
-            .catch(e => {
-                console.error('Error cargando header:', e);
-                document.getElementById('header-placeholder').innerHTML = '<!-- header no cargado -->';
-            });
-    </script>
+    <?php include 'header.php'; ?>
 
     <h1>PROMOCIONES DE VERANO</h1>
 <div style="text-align:center; border:2px solid #f0ad4e; border-radius:10px; padding:20px; margin:20px auto; width:80%; background:#fff8e6;">
@@ -258,23 +243,10 @@ productos[numeroProducto].descripcion;
         </div>
     </main>
 
-    <div id="footer-placeholder"></div>
-
-    <script>
-        fetch('footer.php')
-            .then(response => {
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            })
-            .catch(e => {
-                console.error('Error cargando footer:', e);
-                document.getElementById('footer-placeholder').innerHTML = '<!-- footer no cargado -->';
-            });
-    </script>
+    <?php include 'footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
     <script src="../JS/header.js?v=3"></script>
+
 </body>
 </html>

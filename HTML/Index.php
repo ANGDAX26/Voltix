@@ -11,52 +11,7 @@
 
 <body>
 
-    <div id="header-placeholder"></div>
-
-    <script>
-        async function configurarNavegacionAdmin() {
-            try {
-                const respuesta = await fetch('../PHP/estado_sesion.php');
-                if (!respuesta.ok) throw new Error('HTTP ' + respuesta.status);
-
-                const sesion = await respuesta.json();
-
-                if (!sesion.es_admin) return;
-
-                const listaMenu = document.querySelector('#header-placeholder .nav ul');
-                if (!listaMenu) return;
-
-                // Evita agregar el botón dos veces.
-                if (document.getElementById('enlace-panel-admin')) return;
-
-                const itemAdmin = document.createElement('li');
-                itemAdmin.innerHTML = `
-                    <a href="admin.php" id="enlace-panel-admin" aria-label="Panel de administración" title="Panel de administración">
-                        ⚙️
-                    </a>
-                `;
-
-                listaMenu.appendChild(itemAdmin);
-
-            } catch (error) {
-                console.error('No se pudo comprobar la sesión del administrador:', error);
-            }
-        }
-
-        fetch('header.html')
-            .then(response => {
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-                configurarNavegacionAdmin();
-            })
-            .catch(e => {
-                console.error('Error cargando header:', e);
-                document.getElementById('header-placeholder').innerHTML = '<!-- header no cargado -->';
-            });
-    </script>
+    <?php include 'header.php'; ?>
 
     <!-- El contenido de este Hero se reemplaza con los datos guardados en la BD. -->
     <section class="hero" id="hero-principal">
@@ -118,28 +73,7 @@
         </div>
     </main>
 
-    <div id="footer-placeholder"></div>
-
-    <script>
-        fetch('footer.php')
-            .then(response => {
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            })
-            .catch(e => {
-                console.error('Error cargando footer:', e);
-                document.getElementById('footer-placeholder').innerHTML = '<!-- footer no cargado -->';
-            });
-    </script>
-
-    <script src="../JS/producto.js?v=2"></script>
-    <script src="../JS/carrito.js"></script>
-    <script src="../JS/header.js?v=3"></script>
-    <script src="../JS/buscador.js"></script>
-    <script src="../JS/main.js"></script>
+    <?php include 'footer.php'; ?>
 
     <script>
         const API_HERO = '../PHP/admin_hero.php';
@@ -244,6 +178,13 @@
 
         cargarHero();
     </script>
+
+
+    <script src="../JS/header.js?v=3"></script>
+    <script src="../JS/producto.js?v=2"></script>
+    <script src="../JS/carrito.js?v=3"></script>
+    <script src="../JS/buscador.js?v=3"></script>
+    <script src="../JS/main.js?v=2"></script>
 
 </body>
 

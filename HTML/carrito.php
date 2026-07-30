@@ -11,22 +11,7 @@
 </head>
 
 <body>
-    <div id="header-placeholder"></div>
-
-    <script>
-        fetch('header.html')
-            .then(response => {
-                if (!response.ok) throw new Error('HTTP ' + response.status);
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('header-placeholder').innerHTML = data;
-            })
-            .catch(error => {
-                console.error('Error cargando header:', error);
-                document.getElementById('header-placeholder').innerHTML = '<!-- header no cargado -->';
-            });
-    </script>
+    <?php include 'header.php'; ?>
 
     <main class="login-container carrito-page">
         <h1>Carrito de compras</h1>

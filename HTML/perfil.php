@@ -17,21 +17,7 @@ requerirLoginPagina('formu.php');
 
 <body>
 
-    <div id="header-placeholder"></div>
-
-    <script>
-        fetch("header.html")
-            .then(response => {
-                if (!response.ok) throw new Error("HTTP " + response.status);
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById("header-placeholder").innerHTML = data;
-            })
-            .catch(e => {
-                console.error("Error cargando header:", e);
-            });
-    </script>
+    <?php include 'header.php'; ?>
 
     <div class="auth-page">
 
@@ -248,9 +234,11 @@ requerirLoginPagina('formu.php');
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <script src="../JS/perfil.js"></script>
+
+
     <script src="../JS/header.js?v=3"></script>
-    <script src="../JS/buscador.js"></script>
+    <script src="../JS/buscador.js?v=3"></script>
+    <script src="../JS/perfil.js?v=2"></script>
 
 </body>
 </html>
