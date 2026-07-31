@@ -502,13 +502,13 @@ main{
   padding: 2.5rem 2rem 1.5rem;
 }
 .footer-inner h2{
-  color: #fff;
+   color: #000;
   font-size: 1.15rem;
   margin-bottom: .6rem;
 }
 .footer-inner p{
   font-size: .9rem;
-  color: #C9C9C9;
+  color: #000;
   max-width: 640px;
 }
 footer{
@@ -516,7 +516,7 @@ footer{
   margin-top: 1.6rem;
   padding-top: 1.2rem;
   font-size: .82rem;
-  color: #B0B0B0;
+  color: #000;
   display: flex;
   flex-wrap: wrap;
   gap: .3rem 1.6rem;
