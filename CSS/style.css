@@ -1197,3 +1197,126 @@ body.menu-lateral-abierto {
     display: none;
   }
 }
+
+
+/* ── Stock indicators ──────────────────────────────── */
+.stock-indicator {
+    font-size: .82rem;
+    font-weight: 600;
+    margin: .35rem 0 .6rem;
+    padding: .25rem .55rem;
+    border-radius: 6px;
+    display: inline-block;
+}
+.stock-indicator.disponible { background: #e6f9ee; color: #1a7a3c; }
+.stock-indicator.bajo       { background: #fff4e0; color: #a05c00; }
+.stock-indicator.agotado    { background: #fde8e8; color: #c0392b; }
+
+.add-to-cart:disabled {
+    background: #ccc !important;
+    cursor: not-allowed;
+    opacity: .7;
+}
+
+/* Stock badges in admin table */
+.stock-badge {
+    display: inline-block;
+    padding: .2rem .55rem;
+    border-radius: 20px;
+    font-size: .78rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.stock-ok     { background: #e6f9ee; color: #1a7a3c; }
+.stock-bajo   { background: #fff4e0; color: #a05c00; }
+.stock-agotado{ background: #fde8e8; color: #c0392b; }
+
+/* ── Reseñas ───────────────────────────────────────── */
+.seccion-resenas {
+    margin-top: 2.5rem;
+    border-top: 2px solid var(--naranja, #ff6600);
+    padding-top: 1.5rem;
+}
+.seccion-resenas h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+.resenas-promedio {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    margin-bottom: 1.2rem;
+}
+.promedio-numero {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--naranja, #ff6600);
+}
+.estrellas-display {
+    color: #f5a623;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+.resenas-cantidad { color: #666; font-size: .85rem; }
+
+.resena-item {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: .9rem 1.1rem;
+    margin-bottom: .9rem;
+    background: #fafafa;
+}
+.resena-header {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    flex-wrap: wrap;
+    margin-bottom: .4rem;
+}
+.resena-header strong { font-size: .95rem; }
+.resena-fecha { color: #999; font-size: .78rem; margin-left: auto; }
+.resena-texto { margin: 0; font-size: .9rem; color: #333; }
+.sin-resenas  { color: #888; font-style: italic; }
+.cargando-resenas { color: #888; }
+
+/* Formulario de reseña */
+.seccion-resenas h3 {
+    font-size: 1rem;
+    margin: 1.4rem 0 .6rem;
+}
+#texto-resena {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: .7rem;
+    font-size: .9rem;
+    resize: vertical;
+    margin-bottom: .7rem;
+    font-family: inherit;
+}
+.estrellas-selector {
+    display: flex;
+    gap: .3rem;
+    margin-bottom: .6rem;
+    cursor: pointer;
+}
+.estrellas-selector .estrella {
+    font-size: 2rem;
+    color: #ddd;
+    transition: color .15s;
+    user-select: none;
+}
+.estrellas-selector .estrella.activa { color: #f5a623; }
+#resena-mensaje {
+    margin-top: .5rem;
+    font-size: .88rem;
+    font-weight: 600;
+}
+#aviso-login-resena {
+    margin-top: 1rem;
+    padding: .8rem 1rem;
+    background: #f0f4ff;
+    border-radius: 8px;
+    font-size: .9rem;
+}
+#aviso-login-resena a { color: var(--naranja, #ff6600); font-weight: 600; }

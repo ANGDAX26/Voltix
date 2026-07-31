@@ -41,19 +41,24 @@ function renderizarTabla() {
         return;
     }
 
-    tbody.innerHTML = productos.map(p => `
+    tbody.innerHTML = productos.map(p => {
+        const stockNum = Number(p.stock) || 0;
+        const stockClass = stockNum === 0 ? 'stock-agotado' : stockNum <= 5 ? 'stock-bajo' : 'stock-ok';
+        return `
         <tr>
             <td class="admin-col-img"><img src="${escapeHtml(p.imagen)}" alt="${escapeHtml(p.nombre)}" onerror="this.src='https://placehold.co/60x60?text=%3F'"></td>
             <td>${escapeHtml(p.nombre)}</td>
             <td>${escapeHtml(p.categoria)}</td>
             <td>$${Number(p.precio).toFixed(2)} MXN</td>
+            <td><span class="stock-badge ${stockClass}">${stockNum === 0 ? 'Agotado' : stockNum + ' uds.'}</span></td>
             <td>${p.id}</td>
             <td class="admin-col-acciones">
                 <button class="btn-editar" onclick="editarProducto(${p.id})">Editar</button>
                 <button class="btn-eliminar" onclick="eliminarProducto(${p.id})">Eliminar</button>
             </td>
         </tr>
-    `).join('');
+        `;
+    }).join('');
 }
 
 function escapeHtml(texto) {
@@ -66,6 +71,7 @@ function escapeHtml(texto) {
 function limpiarFormulario() {
     editandoId = null;
     document.getElementById('form-producto').reset();
+    document.getElementById('input-stock').value = 0;
     document.getElementById('form-titulo').textContent = 'Agregar producto';
     document.getElementById('btn-cancelar-edicion').style.display = 'none';
 }
@@ -78,6 +84,7 @@ function editarProducto(id) {
     document.getElementById('form-titulo').textContent = `Editando: ${producto.nombre}`;
     document.getElementById('input-nombre').value = producto.nombre;
     document.getElementById('input-precio').value = producto.precio;
+    document.getElementById('input-stock').value = producto.stock || 0;
     document.getElementById('input-categoria').value = producto.categoria;
     document.getElementById('input-imagen').value = producto.imagen;
     document.getElementById('input-descripcion').value = producto.descripcion;
@@ -304,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const nombre = document.getElementById('input-nombre').value.trim();
         const precio = parseFloat(document.getElementById('input-precio').value);
+        const stock = parseInt(document.getElementById('input-stock').value, 10) || 0;
         const categoria = document.getElementById('input-categoria').value.trim();
         const imagen = document.getElementById('input-imagen').value.trim();
         const descripcion = document.getElementById('input-descripcion').value.trim();
@@ -313,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const payload = { nombre, precio, categoria, imagen, descripcion };
+        const payload = { nombre, precio, stock, categoria, imagen, descripcion };
 
         try {
             let respuesta;

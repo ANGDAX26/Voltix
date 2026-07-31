@@ -68,41 +68,47 @@ if ($metodo === 'POST' && in_array($accion, ['crear', 'actualizar'], true)) {
         exit();
     }
 
-    if ($accion === 'crear') {
-        $sql = "INSERT INTO hero_slides
-                (titulo, subtitulo, imagen, enlace, texto_boton, orden)
-                VALUES (?, ?, ?, ?, ?, ?)";
+    try {
+        if ($accion === 'crear') {
+            $sql = "INSERT INTO hero_slides
+                    (titulo, subtitulo, imagen, enlace, texto_boton, orden)
+                    VALUES (?, ?, ?, ?, ?, ?)";
 
-        $stmt = $conexion->prepare($sql);
-        $stmt->bind_param('sssssi', $titulo, $subtitulo, $imagen, $enlace, $textoBoton, $orden);
-    }
-
-    if ($accion === 'actualizar') {
-        $id = (int) ($datos['id'] ?? 0);
-
-        if ($id <= 0) {
-            http_response_code(400);
-            echo json_encode(['error' => 'ID del elemento del Hero inválido.']);
-            exit();
+            $stmt = $conexion->prepare($sql);
+            $stmt->bind_param('sssssi', $titulo, $subtitulo, $imagen, $enlace, $textoBoton, $orden);
         }
 
-        $sql = "UPDATE hero_slides
-                SET titulo = ?, subtitulo = ?, imagen = ?, enlace = ?, texto_boton = ?, orden = ?
-                WHERE id_hero = ?";
+        if ($accion === 'actualizar') {
+            $id = (int) ($datos['id'] ?? 0);
 
-        $stmt = $conexion->prepare($sql);
-        $stmt->bind_param('sssssii', $titulo, $subtitulo, $imagen, $enlace, $textoBoton, $orden, $id);
-    }
+            if ($id <= 0) {
+                http_response_code(400);
+                echo json_encode(['error' => 'ID del elemento del Hero inválido.']);
+                exit();
+            }
 
-    if ($stmt->execute()) {
-        $idResultado = $accion === 'crear' ? $conexion->insert_id : $id;
-        echo json_encode(['ok' => true, 'id' => (int) $idResultado]);
-    } else {
+            $sql = "UPDATE hero_slides
+                    SET titulo = ?, subtitulo = ?, imagen = ?, enlace = ?, texto_boton = ?, orden = ?
+                    WHERE id_hero = ?";
+
+            $stmt = $conexion->prepare($sql);
+            $stmt->bind_param('sssssii', $titulo, $subtitulo, $imagen, $enlace, $textoBoton, $orden, $id);
+        }
+
+        if ($stmt->execute()) {
+            $idResultado = $accion === 'crear' ? $conexion->insert_id : $id;
+            echo json_encode(['ok' => true, 'id' => (int) $idResultado]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'Error al guardar el Hero: ' . $stmt->error]);
+        }
+
+        $stmt->close();
+    } catch (mysqli_sql_exception $e) {
         http_response_code(500);
-        echo json_encode(['error' => 'Error al guardar el Hero: ' . $stmt->error]);
+        echo json_encode(['error' => 'Error al guardar el Hero. Verifica que exista la tabla hero_slides.']);
     }
 
-    $stmt->close();
     $conexion->close();
     exit();
 }
@@ -116,17 +122,23 @@ if ($metodo === 'POST' && $accion === 'eliminar') {
         exit();
     }
 
-    $stmt = $conexion->prepare("DELETE FROM hero_slides WHERE id_hero = ?");
-    $stmt->bind_param('i', $id);
+    try {
+        $stmt = $conexion->prepare("DELETE FROM hero_slides WHERE id_hero = ?");
+        $stmt->bind_param('i', $id);
 
-    if ($stmt->execute()) {
-        echo json_encode(['ok' => true]);
-    } else {
+        if ($stmt->execute()) {
+            echo json_encode(['ok' => true]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => 'No se pudo eliminar el elemento del Hero.']);
+        }
+
+        $stmt->close();
+    } catch (mysqli_sql_exception $e) {
         http_response_code(500);
         echo json_encode(['error' => 'No se pudo eliminar el elemento del Hero.']);
     }
 
-    $stmt->close();
     $conexion->close();
     exit();
 }

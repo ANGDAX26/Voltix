@@ -142,6 +142,11 @@ requerirAdminPagina('formu.php');
                     </label>
 
                     <label>
+                        Stock (unidades disponibles)
+                        <input type="number" id="input-stock" min="0" value="0" required>
+                    </label>
+
+                    <label>
                         Categoría
                         <input type="text" id="input-categoria" list="lista-categorias" required placeholder="Ej. Sensores">
                         <datalist id="lista-categorias">
@@ -150,12 +155,16 @@ requerirAdminPagina('formu.php');
                             <option value="Componentes electrónicos">
                             <option value="Herramientas">
                             <option value="Cables">
+                            <option value="Telefonía">
+                            <option value="Audio">
+                            <option value="Computación">
+                            <option value="Hogar">
                         </datalist>
                     </label>
 
                     <label>
                         URL de imagen
-                        <input type="url" id="input-imagen" required placeholder="https://...">
+                        <input type="text" id="input-imagen" required placeholder="https://... o ../MEDIA/producto.jpg">
                     </label>
                 </div>
 
@@ -211,6 +220,7 @@ requerirAdminPagina('formu.php');
                             <th>Nombre</th>
                             <th>Categoría</th>
                             <th>Precio</th>
+                            <th>Stock</th>
                             <th>ID</th>
                             <th>Acciones</th>
                         </tr>

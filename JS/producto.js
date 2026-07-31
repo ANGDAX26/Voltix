@@ -34,7 +34,14 @@ async function cargarProductos() {
 
                 <p class="precio">$${producto.precio.toFixed(2)} MXN</p>
 
-                <button class="add-to-cart" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-img="${producto.imagen}">Agregar al carrito</button>
+                ${producto.stock === 0
+                    ? '<p class="stock-indicator agotado">❌ Agotado</p>'
+                    : producto.stock <= 5
+                        ? `<p class="stock-indicator bajo">⚠️ Últimas ${producto.stock} unidades</p>`
+                        : `<p class="stock-indicator disponible">✅ En stock (${producto.stock})</p>`
+                }
+
+                <button class="add-to-cart" ${producto.stock === 0 ? 'disabled title="Sin stock"' : ''} data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}" data-img="${producto.imagen}">Agregar al carrito</button>
 
             </div>
         `).join('');

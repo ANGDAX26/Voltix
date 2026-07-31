@@ -1,7 +1,8 @@
 /**
- * Voltix - Controlador del header dinámico.
- * El header se inserta con fetch(), así que este archivo usa delegación de eventos
- * y un MutationObserver para funcionar aunque el HTML llegue después del DOMContentLoaded.
+ * Voltix - Controlador del header.
+ * El header ahora se incluye del lado del servidor con <?php include 'header.php'; ?>,
+ * así que ya está presente en el DOM desde el primer render (ya no se inyecta con
+ * fetch()+innerHTML dentro de un #header-placeholder).
  */
 (function () {
     'use strict';
@@ -9,7 +10,7 @@
     let sesionConsultada = false;
 
     function obtenerHeader() {
-        return document.querySelector('#header-placeholder .site-header');
+        return document.querySelector('.site-header');
     }
 
     function cerrarMenuPrincipal() {
@@ -93,7 +94,20 @@
                         const nav = document.getElementById('nav-principal');
                         if (nav && !document.getElementById('enlace-panel-admin')) {
                             const liAdmin = document.createElement('li');
-                            liAdmin.innerHTML = '<a href="admin.php" id="enlace-panel-admin" aria-label="Panel de administración" title="Panel de administración"><span class=\"nav-icon\">⚙️</span><span class=\"nav-text\">Admin</span></a>';
+                            const aAdmin = document.createElement('a');
+                            aAdmin.id = 'enlace-panel-admin';
+                            aAdmin.href = 'admin.php';
+                            aAdmin.setAttribute('aria-label', 'Panel de administración');
+                            aAdmin.title = 'Panel de administración';
+                            const iconSpan = document.createElement('span');
+                            iconSpan.className = 'nav-icon';
+                            iconSpan.textContent = '⚙️';
+                            const textSpan = document.createElement('span');
+                            textSpan.className = 'nav-text';
+                            textSpan.textContent = 'Admin';
+                            aAdmin.appendChild(iconSpan);
+                            aAdmin.appendChild(textSpan);
+                            liAdmin.appendChild(aAdmin);
                             nav.querySelector('ul').appendChild(liAdmin);
                         }
                     }
@@ -189,9 +203,7 @@
     // Evento emitido por carrito.js cuando cambia la cantidad.
     document.addEventListener('voltix:carrito-actualizado', actualizarBadgeCarrito);
 
-    const observer = new MutationObserver(headerListo);
-    observer.observe(document.documentElement, { childList: true, subtree: true });
-
+    // El header ya está en el DOM (PHP include), no necesitamos MutationObserver.
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', headerListo);
     } else {

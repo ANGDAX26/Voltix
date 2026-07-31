@@ -16,39 +16,6 @@
     <!-- El contenido de este Hero se reemplaza con los datos guardados en la BD. -->
     <section class="hero" id="hero-principal">
 
-        <!-- Contenido de respaldo por si la API no puede cargar. -->
-        <div class="slide active">
-            <a class="slide-link" href="producto.php?id=2" aria-label="Ver Kit Arduino para principiantes">
-                <img src="https://ibb.co/rRrvYxmf" alt="Kits Arduino para Principiantes">
-                <div class="texto">
-                    <h2>Kits Arduino para Principiantesxdxdxdxd</h2>
-                    <p>Hasta 30% de descuento</p>
-                    <span class="hero-cta">Ver producto</span>
-                </div>
-            </a>
-        </div>
-
-        <div class="slide">
-            <a class="slide-link" href="producto.php?id=12" aria-label="Ver ESP32 y Proyectos IoT">
-                <img src="https://ibb.co/bjpJDgbJ" alt="ESP32 y Proyectos IoT">
-                <div class="texto">
-                    <h2>ESP32 y Proyectos IoT</h2>
-                    <p>WiFi y Bluetooth Integrados</p>
-                    <span class="hero-cta">Ver producto</span>
-                </div>
-            </a>
-        </div>
-
-        <div class="slide">
-            <a class="slide-link" href="producto.php?id=1" aria-label="Ver Gran Variedad de Sensores">
-                <img src="https://ibb.co/99nDdxJn" alt="Gran Variedad de Sensores">
-                <div class="texto">
-                    <h2>Gran Variedad de Sensores</h2>
-                    <p>Para Arduino, Raspberry y ESP32</p>
-                    <span class="hero-cta">Ver producto</span>
-                </div>
-            </a>
-        </div>
 
         <button class="prev" type="button" aria-label="Banner anterior">&#10094;</button>
         <button class="next" type="button" aria-label="Banner siguiente">&#10095;</button>
