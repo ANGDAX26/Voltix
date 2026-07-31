@@ -26,7 +26,6 @@ body{
   color: var(--texto);
   background: var(--paper);
   line-height: 1.5;
-  user-select: none;
 }
 
 a{ text-decoration: none; color: inherit; }
@@ -492,37 +491,54 @@ main{
 }
 
 /*  Footer  */
-#footer-placeholder{
-  background: var(--negro);
-  border-top: 3px solid var(--naranja);
-}
+/* ===== Footer ===== */
+
 .footer-inner{
-  max-width: 1200px;
-  margin: 0 auto;
+  background: #000;
+  border-top: 3px solid var(--naranja);
+  width: 100%;
+  max-width: none;
   padding: 2.5rem 2rem 1.5rem;
 }
+.footer-inner{
+    background:black !important;
+}
 .footer-inner h2{
-   color: #000;
+  color: #fff;
   font-size: 1.15rem;
   margin-bottom: .6rem;
 }
+
 .footer-inner p{
   font-size: .9rem;
-  color: #000;
+  color: rgba(255,255,255,.75);
   max-width: 640px;
 }
-footer{
-  border-top: 1px solid #333333;
+
+.footer-info{
+  border-top: 1px solid rgba(255,255,255,.15);
   margin-top: 1.6rem;
   padding-top: 1.2rem;
-  font-size: .82rem;
-  color: #000;
+
   display: flex;
   flex-wrap: wrap;
   gap: .3rem 1.6rem;
 }
 
-/* ============ Diseño responsivo corregido ============ */
+.footer-info p{
+  color: rgba(255,255,255,.75);
+}
+
+.footer-info a{
+  color: #fff;
+  font-weight: 600;
+}
+
+.footer-info a:hover{
+  color: var(--naranja);
+  text-decoration: underline;
+}
+
 
 .menu-icon{
   display: none;
@@ -797,7 +813,7 @@ footer{
 .promo-card h2{
   margin: 0;
   font-size: 1.2rem;
-  color: white;
+  color: var(--texto);
 }
 
 .price-old{

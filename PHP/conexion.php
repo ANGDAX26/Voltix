@@ -3,7 +3,7 @@
 $servidor   = "localhost";
 // Conexión a la base de datos "voltix"
 $servidor = "localhost";
-$puerto = "cambiele a su puerto"; 
+$puerto = "3306";
 $usuario_db = "root";
 $password_db = "";
 $base_datos = "voltix";
